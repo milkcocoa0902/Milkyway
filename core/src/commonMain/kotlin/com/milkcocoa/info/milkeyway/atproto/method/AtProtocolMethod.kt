@@ -5,4 +5,5 @@ import com.milkcocoa.info.milkeyway.atproto.models.AtProtocolRequest
 
 interface AtProtocolMethod<in I: AtProtocolRequest , out R: AtProtocolModel>{
     suspend fun execute(request: I): R
+    suspend fun execute(request: I, accessJwt: String): R
 }

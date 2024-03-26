@@ -25,10 +25,20 @@ abstract class AtProtocolPost<in I: AtProtocolRequest, out R: AtProtocolModel>(
 ): AtProtocolMethod<I, R> {
     @OptIn(InternalSerializationApi::class)
     override suspend fun execute(request: I): R {
+        return execute(request, "")
+    }
+
+    @OptIn(InternalSerializationApi::class)
+    override suspend fun execute(request: I, accessJwt: String): R {
         return withContext(Dispatchers.IO){
             return@withContext HttpClient(CIO).post(
                 urlString = "${domain.url}/xrpc/${action.action}"
             ){
+                headers {
+                    if(accessJwt.isNotBlank()){
+                        header(HttpHeaders.Authorization, "Bearer $accessJwt")
+                    }
+                }
                 contentType(ContentType.Application.Json)
                 setBody(Json.encodeToString(requestClass.serializer(), request))
             }.let {
