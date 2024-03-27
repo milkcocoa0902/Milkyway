@@ -5,7 +5,7 @@ plugins {
 
 
 allprojects {
-    group = "com.milkcocoa.info.milkeyway"
+    group = "com.milkcocoa.info.milkyway"
     version = "1.0-SNAPSHOT"
 
     repositories {
