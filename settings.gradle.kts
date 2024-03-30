@@ -3,3 +3,4 @@ plugins {
 }
 rootProject.name = "Milkyway"
 include("core")
+include("bsky")
