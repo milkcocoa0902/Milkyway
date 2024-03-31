@@ -1,14 +1,14 @@
-package com.milkcocoa.info.milkyway.models.bsky.embed
+package com.milkcocoa.info.milkyway.models.bsky.embed.view
 
-import com.milkcocoa.info.milkyway.types.RecordEmbedViewRecordType
+import com.milkcocoa.info.milkyway.types.EmbedViewType
 import kotlinx.serialization.Serializable
 
 @Serializable
 data class ExternalEmbedView(
     val external: External
 ): EmbedView() {
-    override val type: RecordEmbedViewRecordType
-        get() = RecordEmbedViewRecordType.EmbedExternalView
+    override val type: EmbedViewType
+        get() = EmbedViewType.EmbedExternalView
     @Serializable
     data class External(
         val uri: String,

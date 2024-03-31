@@ -1,6 +1,6 @@
-package com.milkcocoa.info.milkyway.models.bsky.embed
+package com.milkcocoa.info.milkyway.models.bsky.embed.viewRecord
 
-import com.milkcocoa.info.milkyway.types.EmbedRecordViewType
+import com.milkcocoa.info.milkyway.types.EmbedViewRecordType
 import kotlinx.serialization.DeserializationStrategy
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -14,19 +14,19 @@ import kotlinx.serialization.json.jsonPrimitive
 abstract class RecordEmbedViewRecord {
 
     @SerialName("\$type")
-    abstract val type: EmbedRecordViewType
+    abstract val type: EmbedViewRecordType
 
     companion object : JsonContentPolymorphicSerializer<RecordEmbedViewRecord>(RecordEmbedViewRecord::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RecordEmbedViewRecord> {
-            return when (EmbedRecordViewType.getByIdentifier(element.jsonObject["\$type"]?.jsonPrimitive?.contentOrNull)) {
-                EmbedRecordViewType.ViewRecord -> RecordEmbedViewViewRecord.serializer()
+            return when (EmbedViewRecordType.getByIdentifier(element.jsonObject["\$type"]?.jsonPrimitive?.contentOrNull)) {
+                EmbedViewRecordType.ViewRecord -> RecordEmbedViewViewRecord.serializer()
                 else -> Unknown.serializer()
             }
         }
 
         @Serializable
         class Unknown : RecordEmbedViewRecord() {
-            override var type = EmbedRecordViewType.UnknownEmbed
+            override var type = EmbedViewRecordType.UnknownEmbed
         }
     }
 }
