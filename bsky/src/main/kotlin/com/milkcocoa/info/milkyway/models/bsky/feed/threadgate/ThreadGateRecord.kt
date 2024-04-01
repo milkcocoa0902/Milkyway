@@ -1,24 +1,23 @@
-package com.milkcocoa.info.milkyway.models.bsky.feed
+package com.milkcocoa.info.milkyway.models.bsky.feed.threadgate
 
-import com.milkcocoa.info.milkyway.models.bsky.embed.Embed
+import com.milkcocoa.info.milkyway.models.bsky.feed.FeedPostRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
-import com.milkcocoa.info.milkyway.models.bsky.textdecor.Facet
+import com.milkcocoa.info.milkyway.types.GateRuleType
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
 @Serializable
-data class FeedPostRecord(
+data class ThreadGateRecord(
+    val allow: List<GateRule>,
     @Serializable(with = CreatedAtSerializer::class)
     val createdAt: LocalDateTime,
-    val embed: Embed? = null,
-    val facets: List<Facet> = emptyList(),
-    val langs: List<String> = emptyList(),
-    val text: String
-): BskyRecord() {
+    val post: String,
+): BskyRecord(){
     override val type: RecordType
-        get() = RecordType.FeedPostRecord
+        get() = RecordType.ThreadGateRecord
+
 
     companion object {
         object CreatedAtSerializer: DateTimeSerializer("createdAt")

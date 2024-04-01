@@ -5,7 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable(with = EmbedViewRecordType.Companion.Serializer::class)
 enum class EmbedViewRecordType(override val identifier: String) : SerializableEnum{
-    ViewRecord("app.bsky.embed.record.viewRecord#viewRecord"),
+    ViewRecord("app.bsky.embed.record#viewRecord"),
+    ViewNotFound("app.bsky.embed.record#viewNotFound"),
     UnknownEmbed("unknown");
 
     companion object{

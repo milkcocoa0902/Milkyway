@@ -6,6 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable(with = RecordType.Companion.Serializer::class)
 enum class RecordType(override val identifier: String) : SerializableEnum{
     FeedPostRecord("app.bsky.feed.post"),
+    ThreadGateRecord("app.bsky.feed.threadgate"),
     UnknownEmbed("unknown");
 
     companion object{

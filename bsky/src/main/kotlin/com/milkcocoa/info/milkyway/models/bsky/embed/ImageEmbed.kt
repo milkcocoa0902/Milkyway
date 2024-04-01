@@ -1,6 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.embed
 
-import com.milkcocoa.info.milkyway.models.Blob
+import com.milkcocoa.info.milkyway.models.entity.Blob
 import com.milkcocoa.info.milkyway.types.EmbedType
 import kotlinx.serialization.Serializable
 

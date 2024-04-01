@@ -12,7 +12,7 @@ import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 import kotlin.reflect.KClass
 
-open class DateTimeSerializer(val serialName: String): KSerializer<LocalDateTime> {
+open class DateTimeSerializer(private val serialName: String): KSerializer<LocalDateTime> {
     override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
     override fun deserialize(decoder: Decoder): LocalDateTime {
         return LocalDateTime.parse(decoder.decodeString(), DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]'Z'"))

@@ -1,6 +1,9 @@
 package com.milkcocoa.info.milkyway.models.bsky.embed.viewRecord
 
-import com.milkcocoa.info.milkyway.models.bsky.feed.Author
+import com.milkcocoa.info.milkyway.models.bsky.embed.view.EmbedView
+import com.milkcocoa.info.milkyway.models.bsky.actor.ActorProfileView
+import com.milkcocoa.info.milkyway.models.entity.Label
+import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.types.EmbedViewRecordType
 import kotlinx.serialization.Serializable
 
@@ -9,10 +12,10 @@ import kotlinx.serialization.Serializable
 class RecordEmbedViewViewRecord(
     val uri: String,
     val cid: String,
-    val author: Author,
-    val value: String,
-//    val labels: String,
-//    val embeds: String
+    val author: ActorProfileView,
+    val value: BskyRecord,
+    val labels: List<Label> = emptyList(),
+    val embeds: List<EmbedView> = emptyList(),
     val indexedAt: String
 
 

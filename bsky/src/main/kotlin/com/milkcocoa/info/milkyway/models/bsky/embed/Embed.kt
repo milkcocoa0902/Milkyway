@@ -23,6 +23,8 @@ abstract class Embed{
             return when(EmbedType.getByIdentifier(element.type)){
                 EmbedType.EmbedImages -> ImageEmbed.serializer()
                 EmbedType.EmbedExternal -> ExternalEmbed.serializer()
+                EmbedType.EmbedRecord -> RecordEmbed.serializer()
+                EmbedType.EmbedRecordWithMedia -> RecordWithMediaEmbed.serializer()
                 else -> Unknown.serializer()
             }
         }

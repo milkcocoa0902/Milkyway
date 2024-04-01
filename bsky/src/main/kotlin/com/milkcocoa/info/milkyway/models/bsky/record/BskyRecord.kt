@@ -2,6 +2,7 @@ package com.milkcocoa.info.milkyway.models.bsky.record
 
 import com.milkcocoa.info.milkyway.models.Record
 import com.milkcocoa.info.milkyway.models.bsky.feed.FeedPostRecord
+import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.ThreadGateRecord
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
 import kotlinx.serialization.DeserializationStrategy
@@ -16,6 +17,7 @@ abstract class BskyRecord(): Record<RecordType>(){
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<BskyRecord> {
             return when(RecordType.getByIdentifier(element.type)){
                 RecordType.FeedPostRecord -> FeedPostRecord.serializer()
+                RecordType.ThreadGateRecord -> ThreadGateRecord.serializer()
                 else -> Unknown.serializer()
             }
         }

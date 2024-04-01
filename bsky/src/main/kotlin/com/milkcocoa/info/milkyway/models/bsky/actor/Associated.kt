@@ -1,4 +1,4 @@
-package com.milkcocoa.info.milkyway.models.bsky.feed
+package com.milkcocoa.info.milkyway.models.bsky.actor
 
 import kotlinx.serialization.Serializable
 
