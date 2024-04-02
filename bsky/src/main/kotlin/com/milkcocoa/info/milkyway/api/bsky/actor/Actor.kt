@@ -7,4 +7,5 @@ class Actor(
     private val domain: Domain
 ) {
     suspend fun getProfile(request: GetProfile.GetProfileRequest) = GetProfile(domain).execute(request)
+    suspend fun getPReferences(request: GetPreferences.GetPreferencesRequest) = GetPreferences(domain).execute(request)
 }
