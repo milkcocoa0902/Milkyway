@@ -4,6 +4,10 @@ import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
+/**
+ * post author
+ */
+
 @Serializable
 data class ActorProfileView(
     val did: String,
