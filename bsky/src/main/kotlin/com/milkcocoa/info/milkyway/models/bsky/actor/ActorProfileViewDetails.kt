@@ -24,10 +24,9 @@ data class ActorProfileViewDetails(
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime? = null,
     val viewer: Viewer? = null,
-    val labels: List<String> = emptyList(),
-): AtProtocolModel{
-
+    val labels: List<String> = emptyList()
+) : AtProtocolModel {
     companion object {
-        object IndexedAtSerializer: DateTimeSerializer("indexedAt")
+        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
     }
 }

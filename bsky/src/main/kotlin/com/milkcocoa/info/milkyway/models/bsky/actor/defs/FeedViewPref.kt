@@ -11,7 +11,7 @@ data class FeedViewPref(
     val hideRepliesByLikeCount: Int? = null,
     val hideReposts: Boolean? = null,
     val hideQuotedPosts: Boolean? = null
-): ActorPreferenceDef(){
+) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.FeedViewPref
 }

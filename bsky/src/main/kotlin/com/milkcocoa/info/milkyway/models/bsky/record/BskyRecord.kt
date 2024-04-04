@@ -11,16 +11,16 @@ import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 
 @Serializable(with = BskyRecord.Companion::class)
-abstract class BskyRecord(): Record<RecordType>(){
-
-    companion object : JsonContentPolymorphicSerializer<BskyRecord>(BskyRecord::class){
+abstract class BskyRecord() : Record<RecordType>() {
+    companion object : JsonContentPolymorphicSerializer<BskyRecord>(BskyRecord::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<BskyRecord> {
-            return when(RecordType.getByIdentifier(element.type)){
+            return when (RecordType.getByIdentifier(element.type)) {
                 RecordType.FeedPostRecord -> FeedPostRecord.serializer()
                 RecordType.ThreadGateRecord -> ThreadGateRecord.serializer()
                 else -> Unknown.serializer()
             }
         }
+
         @Serializable
         class Unknown : BskyRecord() {
             override var type = RecordType.UnknownEmbed

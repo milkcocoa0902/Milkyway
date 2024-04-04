@@ -14,7 +14,7 @@ kotlin {
     jvmToolchain(11)
 }
 
-dependencies{
+dependencies {
     implementation(libs.ktor.core)
     implementation(libs.ktor.cio)
     implementation(libs.coroutines.core)

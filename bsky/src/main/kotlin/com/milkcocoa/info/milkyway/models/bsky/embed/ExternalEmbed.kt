@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ExternalEmbed(
     val external: External
-) : Embed(){
+) : Embed() {
     override val type: EmbedType
         get() = EmbedType.EmbedExternal
 

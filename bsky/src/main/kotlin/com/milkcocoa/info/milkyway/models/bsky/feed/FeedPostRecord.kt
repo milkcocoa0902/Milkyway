@@ -16,11 +16,11 @@ data class FeedPostRecord(
     val facets: List<Facet> = emptyList(),
     val langs: List<String> = emptyList(),
     val text: String
-): BskyRecord() {
+) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.FeedPostRecord
 
     companion object {
-        object CreatedAtSerializer: DateTimeSerializer("createdAt")
+        object CreatedAtSerializer : DateTimeSerializer("createdAt")
     }
 }

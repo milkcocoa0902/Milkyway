@@ -8,7 +8,5 @@ data class ThreadGate(
     val uri: String,
     val cid: String,
     val record: BskyRecord,
-    val lists: List<ActorListElement>,
-){
-
-}
+    val lists: List<ActorListElement>
+)

@@ -13,7 +13,7 @@ data class ActorListElement(
     val labels: List<Label> = emptyList(),
     val viewer: Viewer,
     val indexedAt: String
-){
+) {
     @Serializable
     data class Viewer(
         val muted: Boolean? = null,

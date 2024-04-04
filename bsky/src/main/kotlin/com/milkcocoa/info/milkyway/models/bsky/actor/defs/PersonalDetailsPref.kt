@@ -14,6 +14,6 @@ data class PersonalDetailsPref(
         get() = ActorPreferenceType.PersonalDetailsPref
 
     companion object {
-        object BirthDataSerializer: DateTimeSerializer("birthDate")
+        object BirthDataSerializer : DateTimeSerializer("birthDate")
     }
 }

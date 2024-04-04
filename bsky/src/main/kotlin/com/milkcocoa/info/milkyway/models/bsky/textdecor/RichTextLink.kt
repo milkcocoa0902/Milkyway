@@ -5,8 +5,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RichTextLink(
-    val uri: String,
-): RichTextFeature() {
+    val uri: String
+) : RichTextFeature() {
     override val type: RichTextType
         get() = RichTextType.RichTextTypeLink
 }

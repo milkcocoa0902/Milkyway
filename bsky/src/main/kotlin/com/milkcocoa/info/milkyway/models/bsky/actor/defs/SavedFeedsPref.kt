@@ -8,7 +8,7 @@ data class SavedFeedsPref(
     val pinned: List<String>,
     val saved: List<String>,
     val timelineIndex: Int? = null
-): ActorPreferenceDef() {
+) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.SavedFeedsPref
 }

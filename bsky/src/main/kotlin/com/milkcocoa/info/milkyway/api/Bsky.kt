@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 
 class Bsky(private val domain: Domain) {
     fun feed() = Feed(domain)
+
     fun actor() = Actor(domain)
 }
 

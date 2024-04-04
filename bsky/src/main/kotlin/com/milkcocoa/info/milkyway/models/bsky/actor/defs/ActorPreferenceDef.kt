@@ -13,10 +13,9 @@ abstract class ActorPreferenceDef {
     @SerialName("\$type")
     abstract val type: ActorPreferenceType
 
-
-    companion object : JsonContentPolymorphicSerializer<ActorPreferenceDef>(ActorPreferenceDef::class){
+    companion object : JsonContentPolymorphicSerializer<ActorPreferenceDef>(ActorPreferenceDef::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ActorPreferenceDef> {
-            return when(ActorPreferenceType.getByIdentifier(element.type)){
+            return when (ActorPreferenceType.getByIdentifier(element.type)) {
                 ActorPreferenceType.AdultContentPref -> AdultContentPref.serializer()
                 ActorPreferenceType.ContentsLabelPref -> ContentsLabelPref.serializer()
                 ActorPreferenceType.SavedFeedsPref -> SavedFeedsPref.serializer()
@@ -28,6 +27,7 @@ abstract class ActorPreferenceDef {
                 else -> Unknown.serializer()
             }
         }
+
         @Serializable
         class Unknown : ActorPreferenceDef() {
             override var type = ActorPreferenceType.Unknown

@@ -11,26 +11,29 @@ import kotlin.test.Test
 
 class ActorCategoryTest {
     @Test
-    fun getProfile(){
+    fun getProfile() {
         runBlocking {
-            val session = Milkyway.instance(domain = Domain("https://bsky.social"))
-                .atProtocol()
-                .server()
-                .createSession(
-                    CreateSession.CreateSessionRequest(
-                        identifier = System.getenv("BSKY_IDENTIFIER"),
-                        password = System.getenv("BSKY_PASSWORD")
+            val session =
+                Milkyway.instance(domain = Domain("https://bsky.social"))
+                    .atProtocol()
+                    .server()
+                    .createSession(
+                        CreateSession.CreateSessionRequest(
+                            identifier = System.getenv("BSKY_IDENTIFIER"),
+                            password = System.getenv("BSKY_PASSWORD")
+                        )
                     )
-                )
-
 
             Milkyway.instance(domain = Domain("https://bsky.social"))
                 .bsky()
                 .actor()
-                .getProfile(request = GetProfile.GetProfileRequest(
-                    accessJwt = session.accessJwt,
-                    actor = session.didDoc.id
-                ))
+                .getProfile(
+                    request =
+                        GetProfile.GetProfileRequest(
+                            accessJwt = session.accessJwt,
+                            actor = session.didDoc.id
+                        )
+                )
                 .let {
                     println(it)
                 }
@@ -38,24 +41,28 @@ class ActorCategoryTest {
     }
 
     @Test
-    fun getPreferences(){
+    fun getPreferences() {
         runBlocking {
-            val session = Milkyway.instance(domain = Domain("https://bsky.social"))
-                .atProtocol()
-                .server()
-                .createSession(
-                    CreateSession.CreateSessionRequest(
-                        identifier = System.getenv("BSKY_IDENTIFIER"),
-                        password = System.getenv("BSKY_PASSWORD")
+            val session =
+                Milkyway.instance(domain = Domain("https://bsky.social"))
+                    .atProtocol()
+                    .server()
+                    .createSession(
+                        CreateSession.CreateSessionRequest(
+                            identifier = System.getenv("BSKY_IDENTIFIER"),
+                            password = System.getenv("BSKY_PASSWORD")
+                        )
                     )
-                )
 
             Milkyway.instance(domain = Domain("https://bsky.social"))
                 .bsky()
                 .actor()
-                .getPReferences(request = GetPreferences.GetPreferencesRequest(
-                    accessJwt = session.accessJwt
-                ))
+                .getPReferences(
+                    request =
+                        GetPreferences.GetPreferencesRequest(
+                            accessJwt = session.accessJwt
+                        )
+                )
                 .let {
                     println(it)
                 }

@@ -1,9 +1,9 @@
 package com.milkcocoa.info.milkyway.models.bsky.embed.viewRecord
 
-import com.milkcocoa.info.milkyway.models.bsky.embed.view.EmbedView
 import com.milkcocoa.info.milkyway.models.bsky.actor.ActorProfileView
-import com.milkcocoa.info.milkyway.models.entity.Label
+import com.milkcocoa.info.milkyway.models.bsky.embed.view.EmbedView
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
+import com.milkcocoa.info.milkyway.models.entity.Label
 import com.milkcocoa.info.milkyway.types.EmbedViewRecordType
 import kotlinx.serialization.Serializable
 
@@ -17,9 +17,7 @@ class RecordEmbedViewViewRecord(
     val labels: List<Label> = emptyList(),
     val embeds: List<EmbedView> = emptyList(),
     val indexedAt: String
-
-
-): RecordEmbedViewRecord(){
+) : RecordEmbedViewRecord() {
     override val type: EmbedViewRecordType
         get() = EmbedViewRecordType.ViewRecord
 }

@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RecordEmbed(
     val record: RecordRef
-) : Embed(){
+) : Embed() {
     override val type: EmbedType
         get() = EmbedType.EmbedRecord
 

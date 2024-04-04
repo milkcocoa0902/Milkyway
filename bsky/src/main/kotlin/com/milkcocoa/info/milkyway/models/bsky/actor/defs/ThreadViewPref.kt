@@ -13,10 +13,9 @@ import kotlinx.serialization.encoding.Encoder
 data class ThreadViewPref(
     val sort: ThreadSortBy? = null,
     val prioritizeFollowedUsers: Boolean? = null
-): ActorPreferenceDef(){
+) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.ThreadViewPref
-
 
     @Serializable(with = ThreadSortBy.Companion.Serializer::class)
     enum class ThreadSortBy(val identifier: String) {
@@ -24,21 +23,29 @@ data class ThreadViewPref(
         SortedByNewest("newest"),
         SortedByMostLikes("most-likes"),
         SortedByRandom("random"),
-        Unknown("unknown");
+        Unknown("unknown")
+        ;
 
-        companion object{
-            fun getByIdentifier(identifier: String?) =
-                entries.find { it.identifier == identifier } ?: Unknown
+        companion object {
+            fun getByIdentifier(identifier: String?) = entries.find { it.identifier == identifier } ?: Unknown
 
-            object Serializer: KSerializer<ThreadSortBy> {
-                override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("sort", PrimitiveKind.STRING)
+            object Serializer : KSerializer<ThreadSortBy> {
+                override val descriptor: SerialDescriptor get() =
+                    PrimitiveSerialDescriptor(
+                        "sort",
+                        PrimitiveKind.STRING
+                    )
+
                 override fun deserialize(decoder: Decoder): ThreadSortBy {
                     val value = decoder.decodeString()
                     return ThreadSortBy.entries
                         .firstOrNull { it.identifier == value } ?: throw NoSuchElementException()
                 }
 
-                override fun serialize(encoder: Encoder, value: ThreadSortBy) {
+                override fun serialize(
+                    encoder: Encoder,
+                    value: ThreadSortBy
+                ) {
                     encoder.encodeString(value.identifier)
                 }
             }

@@ -12,9 +12,8 @@ import kotlinx.serialization.json.JsonElement
 data class RecordWithMediaEmbedView(
     val record: RecordWrap,
     @Serializable(with = RecordWithMediaEmbedView.Companion::class)
-    val media: EmbedView,
-): EmbedView() {
-
+    val media: EmbedView
+) : EmbedView() {
     @Serializable
     data class RecordWrap(
         val record: RecordEmbedViewRecord
@@ -23,15 +22,15 @@ data class RecordWithMediaEmbedView(
     override val type: EmbedViewType
         get() = EmbedViewType.EmbedRecordWithMediaView
 
-
-    companion object : JsonContentPolymorphicSerializer<EmbedView>(EmbedView::class){
+    companion object : JsonContentPolymorphicSerializer<EmbedView>(EmbedView::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<EmbedView> {
-            return when(EmbedViewType.getByIdentifier(element.type)){
+            return when (EmbedViewType.getByIdentifier(element.type)) {
                 EmbedViewType.EmbedImagesView -> ImageEmbedView.serializer()
                 EmbedViewType.EmbedExternalView -> ExternalEmbedView.serializer()
                 else -> Unknown.serializer()
             }
         }
+
         @Serializable
         class Unknown : EmbedView() {
             override var type = EmbedViewType.UnknownEmbed

@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ImageEmbed(
     val images: List<Image>
-) : Embed(){
+) : Embed() {
     override val type: EmbedType
         get() = EmbedType.EmbedImages
 
@@ -16,7 +16,7 @@ data class ImageEmbed(
         val alt: String,
         val aspectRatio: AspectRatio,
         val image: Blob
-    ){
+    ) {
         @Serializable
         data class AspectRatio(
             val width: Int,

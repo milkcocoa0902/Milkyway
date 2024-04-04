@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class InterestsPref(
     val tags: List<String>
-): ActorPreferenceDef(){
+) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.InterestsPref
 }

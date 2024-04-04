@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 class RecordEmbedViewNotFound(
     val uri: String,
     val notFound: Boolean = true
-): RecordEmbedViewRecord(){
+) : RecordEmbedViewRecord() {
     override val type: EmbedViewRecordType
         get() = EmbedViewRecordType.ViewRecord
 }

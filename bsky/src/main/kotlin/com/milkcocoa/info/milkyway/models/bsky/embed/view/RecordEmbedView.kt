@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class RecordEmbedView(
     val record: RecordEmbedViewRecord
-): EmbedView() {
+) : EmbedView() {
     override val type: EmbedViewType
         get() = EmbedViewType.EmbedRecordView
 }

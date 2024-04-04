@@ -13,12 +13,10 @@ import kotlinx.serialization.encoding.Encoder
 data class ContentsLabelPref(
     val labelerDid: String? = null,
     val label: String,
-    val visibility: ContentLabelVisibility,
-): ActorPreferenceDef() {
+    val visibility: ContentLabelVisibility
+) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.ContentsLabelPref
-
-
 
     @Serializable(with = ContentLabelVisibility.Companion.Serializer::class)
     enum class ContentLabelVisibility(val identifier: String) {
@@ -26,26 +24,32 @@ data class ContentsLabelPref(
         LabelVisibilityShow("show"),
         LabelVisibilityWarn("warn"),
         LabelVisibilityHide("hide"),
-        Unknown("unknown");
+        Unknown("unknown")
+        ;
 
-        companion object{
-            fun getByIdentifier(identifier: String?) =
-                entries.find { it.identifier == identifier } ?: Unknown
+        companion object {
+            fun getByIdentifier(identifier: String?) = entries.find { it.identifier == identifier } ?: Unknown
 
-            object Serializer: KSerializer<ContentLabelVisibility> {
-                override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("visibility", PrimitiveKind.STRING)
+            object Serializer : KSerializer<ContentLabelVisibility> {
+                override val descriptor: SerialDescriptor get() =
+                    PrimitiveSerialDescriptor(
+                        "visibility",
+                        PrimitiveKind.STRING
+                    )
+
                 override fun deserialize(decoder: Decoder): ContentLabelVisibility {
                     val value = decoder.decodeString()
                     return ContentLabelVisibility.entries
                         .firstOrNull { it.identifier == value } ?: throw NoSuchElementException()
                 }
 
-                override fun serialize(encoder: Encoder, value: ContentLabelVisibility) {
+                override fun serialize(
+                    encoder: Encoder,
+                    value: ContentLabelVisibility
+                ) {
                     encoder.encodeString(value.identifier)
                 }
             }
         }
     }
-
-
 }

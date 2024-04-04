@@ -8,24 +8,21 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.Feed
 import kotlinx.serialization.Serializable
 
-class GetTimeLine(val domain: Domain): AtProtocolGet<GetTimeLine.GetTimelineRequest, GetTimeLine.GetTimelineResponse>(
+class GetTimeLine(val domain: Domain) : AtProtocolGet<GetTimeLine.GetTimelineRequest, GetTimeLine.GetTimelineResponse>(
     action = BskyActions.GetTimeLine,
     domain = domain,
     GetTimelineRequest::class,
     GetTimelineResponse::class
-){
-
+) {
     @Serializable
     data class GetTimelineRequest(
         override val accessJwt: String,
         val cursor: String,
         val limit: Int
-    ): AtProtocolRequestWithSession
-
+    ) : AtProtocolRequestWithSession
 
     @Serializable
     data class GetTimelineResponse(
         val feed: List<Feed>
-    ): AtProtocolModel
-
+    ) : AtProtocolModel
 }

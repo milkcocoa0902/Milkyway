@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class HiddenPostsPref(
     val items: List<String>
-): ActorPreferenceDef(){
+) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.HiddenPostsPref
 }

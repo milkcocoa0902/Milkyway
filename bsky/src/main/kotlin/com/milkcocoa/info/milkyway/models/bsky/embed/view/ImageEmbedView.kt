@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ImageEmbedView(
     val images: List<Image>
-): EmbedView() {
+) : EmbedView() {
     override val type: EmbedViewType
         get() = EmbedViewType.EmbedImagesView
 
@@ -16,7 +16,7 @@ data class ImageEmbedView(
         val fullsize: String,
         val alt: String,
         val aspectRatio: AspectRatio? = null
-    ){
+    ) {
         @Serializable
         data class AspectRatio(
             val width: Int,

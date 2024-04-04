@@ -10,7 +10,6 @@ import kotlinx.serialization.json.JsonElement
 
 @Serializable(with = RecordEmbedViewRecord.Companion::class)
 abstract class RecordEmbedViewRecord {
-
     @SerialName("\$type")
     abstract val type: EmbedViewRecordType
 

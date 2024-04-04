@@ -1,10 +1,10 @@
 package com.milkcocoa.info.milkyway.models.bsky.feed
 
 import com.milkcocoa.info.milkyway.models.bsky.actor.ActorProfileView
-import com.milkcocoa.info.milkyway.models.entity.Label
 import com.milkcocoa.info.milkyway.models.bsky.embed.view.EmbedView
 import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.ThreadGate
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
+import com.milkcocoa.info.milkyway.models.entity.Label
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
@@ -23,10 +23,9 @@ data class Post(
     val indexedAt: LocalDateTime,
     val viewer: Viewer? = null,
     val labels: List<Label>?,
-    val threadgate: ThreadGate? = null,
-){
-
+    val threadgate: ThreadGate? = null
+) {
     companion object {
-        object IndexedAtSerializer: DateTimeSerializer("indexedAt")
+        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
     }
 }

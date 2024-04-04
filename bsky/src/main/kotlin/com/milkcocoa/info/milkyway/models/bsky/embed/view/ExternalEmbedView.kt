@@ -6,9 +6,10 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ExternalEmbedView(
     val external: External
-): EmbedView() {
+) : EmbedView() {
     override val type: EmbedViewType
         get() = EmbedViewType.EmbedExternalView
+
     @Serializable
     data class External(
         val uri: String,

@@ -14,7 +14,7 @@ kotlin {
     jvmToolchain(11)
 }
 
-dependencies{
+dependencies {
     implementation(libs.ktor.core)
     implementation(libs.ktor.cio)
     implementation(libs.coroutines.core)
@@ -22,7 +22,6 @@ dependencies{
     implementation(libs.serialization.json)
     implementation(libs.serialization.properties)
     testImplementation(libs.kotlin.test)
-
 
     api(project(":core"))
 }
