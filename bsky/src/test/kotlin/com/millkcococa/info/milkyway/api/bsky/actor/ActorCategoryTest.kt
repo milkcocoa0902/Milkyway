@@ -5,6 +5,7 @@ import com.milkcocoa.info.milkyway.api.atproto.server.CreateSession
 import com.milkcocoa.info.milkyway.api.bsky
 import com.milkcocoa.info.milkyway.api.bsky.actor.GetPreferences
 import com.milkcocoa.info.milkyway.api.bsky.actor.GetProfile
+import com.milkcocoa.info.milkyway.api.bsky.actor.GetProfiles
 import com.milkcocoa.info.milkyway.domain.Domain
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
@@ -29,10 +30,40 @@ class ActorCategoryTest {
                 .actor()
                 .getProfile(
                     request =
-                        GetProfile.GetProfileRequest(
-                            accessJwt = session.accessJwt,
-                            actor = session.didDoc.id
+                    GetProfile.GetProfileRequest(
+                        accessJwt = session.accessJwt,
+                        actor = session.didDoc.id
+                    )
+                )
+                .let {
+                    println(it)
+                }
+        }
+    }
+
+    @Test
+    fun getProfiles() {
+        runBlocking {
+            val session =
+                Milkyway.instance(domain = Domain("https://bsky.social"))
+                    .atProtocol()
+                    .server()
+                    .createSession(
+                        CreateSession.CreateSessionRequest(
+                            identifier = System.getenv("BSKY_IDENTIFIER"),
+                            password = System.getenv("BSKY_PASSWORD")
                         )
+                    )
+
+            Milkyway.instance(domain = Domain("https://bsky.social"))
+                .bsky()
+                .actor()
+                .getProfiles(
+                    request =
+                    GetProfiles.GetProfilesRequest(
+                        accessJwt = session.accessJwt,
+                        actors = listOf(session.didDoc.id)
+                    )
                 )
                 .let {
                     println(it)
