@@ -1,5 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.actor
 
+import com.milkcocoa.info.milkyway.models.entity.Label
 import kotlinx.serialization.Serializable
 
 /**
@@ -14,5 +15,5 @@ data class ProfileViewBasic(
     val avatar: String? = null,
     val associated: Associated? = null,
     val viewer: Viewer? = null,
-    val labels: List<String> = emptyList()
+    val labels: List<Label> = emptyList()
 )

@@ -8,4 +8,5 @@ class Actor(
     suspend fun getProfile(request: GetProfile.GetProfileRequest) = GetProfile(domain).execute(request)
     suspend fun getProfiles(request: GetProfiles.GetProfilesRequest) = GetProfiles(domain).execute(request)
     suspend fun getPReferences(request: GetPreferences.GetPreferencesRequest) = GetPreferences(domain).execute(request)
+    suspend fun getSuggestions(request: GetSuggestions.GetSuggestionsRequest) = GetSuggestions(domain).execute(request)
 }

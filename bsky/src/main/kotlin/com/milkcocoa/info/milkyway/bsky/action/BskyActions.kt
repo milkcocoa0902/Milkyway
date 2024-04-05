@@ -7,4 +7,5 @@ object BskyActions {
     val GetProfile = Action("app.bsky.actor.getProfile")
     val GetProfiles = Action("app.bsky.actor.getProfiles")
     val GetPreferences = Action("app.bsky.actor.getPreferences")
+    val GetSuggestions = Action("app.bsky.actor.getSuggestions")
 }

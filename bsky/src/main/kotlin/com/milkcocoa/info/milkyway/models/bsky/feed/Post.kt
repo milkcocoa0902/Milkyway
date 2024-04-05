@@ -22,7 +22,7 @@ data class Post(
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime,
     val viewer: Viewer? = null,
-    val labels: List<Label>?,
+    val labels: List<Label>? = emptyList(),
     val threadgate: ThreadGate? = null
 ) {
     companion object {
