@@ -1,6 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.feed
 
-import com.milkcocoa.info.milkyway.models.bsky.actor.ActorProfileView
+import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileViewBasic
 import com.milkcocoa.info.milkyway.models.bsky.embed.view.EmbedView
 import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.ThreadGate
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
@@ -13,7 +13,7 @@ import java.time.LocalDateTime
 data class Post(
     val uri: String,
     val cid: String,
-    val author: ActorProfileView,
+    val author: ProfileViewBasic,
     val record: BskyRecord,
     val embed: EmbedView? = null,
     val replyCount: Int?,

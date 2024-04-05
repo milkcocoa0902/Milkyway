@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
  */
 
 @Serializable
-data class ActorProfileView(
+data class ProfileViewBasic(
     val did: String,
     val handle: String,
     val displayName: String? = null,
