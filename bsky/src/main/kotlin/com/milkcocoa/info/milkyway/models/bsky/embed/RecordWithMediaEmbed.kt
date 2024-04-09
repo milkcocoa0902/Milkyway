@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RecordWithMediaEmbed(
-    val media: ImageEmbed,
+    val media: Embed,
     val record: RecordEmbed
 ) : Embed() {
     override val type: EmbedType

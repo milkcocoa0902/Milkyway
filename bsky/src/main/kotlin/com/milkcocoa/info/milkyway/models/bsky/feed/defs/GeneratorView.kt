@@ -1,8 +1,10 @@
-package com.milkcocoa.info.milkyway.models.bsky.feed
+package com.milkcocoa.info.milkyway.models.bsky.feed.defs
 
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
-import com.milkcocoa.info.milkyway.models.bsky.textdecor.Facet
+import com.milkcocoa.info.milkyway.models.bsky.embed.defs.view.EmbedView
+import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
 import com.milkcocoa.info.milkyway.models.entity.Label
+import com.milkcocoa.info.milkyway.types.EmbedViewType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
@@ -22,7 +24,9 @@ data class GeneratorView(
     val viewer: ViewerState? = null,
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime,
-) {
+): EmbedView() {
+    override val type: EmbedViewType
+        get() = EmbedViewType.GeneratorView
     companion object {
         object IndexedAtSerializer : DateTimeSerializer("indexedAt")
     }

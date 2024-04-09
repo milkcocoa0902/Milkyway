@@ -1,8 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.record
 
 import com.milkcocoa.info.milkyway.models.Record
-import com.milkcocoa.info.milkyway.models.bsky.feed.FeedPostRecord
-import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.ThreadGateRecord
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
 import kotlinx.serialization.DeserializationStrategy

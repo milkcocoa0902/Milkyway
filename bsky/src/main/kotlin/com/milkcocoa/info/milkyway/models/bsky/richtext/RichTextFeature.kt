@@ -1,4 +1,4 @@
-package com.milkcocoa.info.milkyway.models.bsky.textdecor
+package com.milkcocoa.info.milkyway.models.bsky.richtext
 
 import com.milkcocoa.info.milkyway.types.RichTextType
 import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
@@ -17,6 +17,8 @@ abstract class RichTextFeature {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<RichTextFeature> {
             return when (RichTextType.getByIdentifier(element.type)) {
                 RichTextType.RichTextTypeLink -> RichTextLink.serializer()
+                RichTextType.RichTextTypeTag -> RichTextTag.serializer()
+                RichTextType.RichTextTypeMention -> RichTextMention.serializer()
                 else -> Unknown.serializer()
             }
         }

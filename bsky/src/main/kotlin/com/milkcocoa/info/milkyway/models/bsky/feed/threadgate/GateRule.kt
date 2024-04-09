@@ -18,6 +18,7 @@ abstract class GateRule {
             return when (GateRuleType.getByIdentifier(element.type)) {
                 GateRuleType.MentionRule -> MentionRule.serializer()
                 GateRuleType.FollowingRule -> FollowingRule.serializer()
+                GateRuleType.ListRule -> ListRule.serializer()
                 else -> Unknown.serializer()
             }
         }

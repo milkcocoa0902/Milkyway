@@ -1,8 +1,7 @@
-package com.milkcocoa.info.milkyway.models.bsky.feed
+package com.milkcocoa.info.milkyway.models.bsky.record
 
 import com.milkcocoa.info.milkyway.models.bsky.embed.Embed
-import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
-import com.milkcocoa.info.milkyway.models.bsky.textdecor.Facet
+import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable

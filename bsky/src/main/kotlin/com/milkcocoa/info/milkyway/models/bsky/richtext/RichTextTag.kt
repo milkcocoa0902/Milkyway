@@ -1,4 +1,4 @@
-package com.milkcocoa.info.milkyway.models.bsky.textdecor
+package com.milkcocoa.info.milkyway.models.bsky.richtext
 
 import com.milkcocoa.info.milkyway.types.RichTextType
 import kotlinx.serialization.Serializable

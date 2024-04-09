@@ -4,23 +4,24 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequest
-import com.milkcocoa.info.milkyway.models.bsky.feed.GeneratorView
+import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.bsky.feed.defs.GeneratorView
 import kotlinx.serialization.Serializable
 
 class GetActorFeeds(val domain: Domain) :
-    AtProtocolGet<GetActorFeeds.SearchActorsTypeAheadRequest, GetActorFeeds.GetActorFeedsResponse>(
-    action = BskyActions.SearchActorsTypeAhead,
-    domain = domain,
-    SearchActorsTypeAheadRequest::class,
-    GetActorFeedsResponse::class
+    AtProtocolGet<GetActorFeeds.GetActorFeedsRequest, GetActorFeeds.GetActorFeedsResponse>(
+        action = BskyActions.GetActorFeeds,
+        domain = domain,
+        GetActorFeedsRequest::class,
+        GetActorFeedsResponse::class
 ) {
     @Serializable
-    data class SearchActorsTypeAheadRequest(
+    data class GetActorFeedsRequest(
+        override val accessJwt: String,
         val actor: String,
         val limit: Int = 50,
         val cursor: String
-    ) : AtProtocolRequest
+    ) : AtProtocolRequestWithSession
 
     @Serializable
     data class GetActorFeedsResponse(

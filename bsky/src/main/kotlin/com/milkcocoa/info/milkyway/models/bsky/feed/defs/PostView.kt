@@ -1,10 +1,8 @@
 package com.milkcocoa.info.milkyway.models.bsky.feed.defs
 
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileViewBasic
-import com.milkcocoa.info.milkyway.models.bsky.embed.view.EmbedView
+import com.milkcocoa.info.milkyway.models.bsky.embed.defs.view.EmbedView
 import com.milkcocoa.info.milkyway.models.bsky.feed.Post
-import com.milkcocoa.info.milkyway.models.bsky.feed.ViewerState
-import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.ThreadGate
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.models.entity.Label
 import com.milkcocoa.info.milkyway.types.PostType
@@ -26,7 +24,7 @@ data class PostView(
     val indexedAt: LocalDateTime,
     val viewer: ViewerState? = null,
     val labels: List<Label>? = emptyList(),
-    val threadgate: ThreadGate? = null
+    val threadgate: ThreadGateView? = null
 ): Post() {
     override val type: PostType
         get() = PostType.Post

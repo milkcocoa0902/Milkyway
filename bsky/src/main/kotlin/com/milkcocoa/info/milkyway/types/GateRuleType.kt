@@ -7,6 +7,7 @@ import kotlinx.serialization.Serializable
 enum class GateRuleType(override val identifier: String) : SerializableEnum {
     MentionRule("app.bsky.feed.threadgate#mentionRule"),
     FollowingRule("app.bsky.feed.threadgate#followingRule"),
+    ListRule("app.bsky.feed.threadgate#listRule"),
     UnknownRule("unknown")
     ;
 

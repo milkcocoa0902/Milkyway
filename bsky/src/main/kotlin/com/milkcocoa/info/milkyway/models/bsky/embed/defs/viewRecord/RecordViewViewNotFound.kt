@@ -1,13 +1,13 @@
-package com.milkcocoa.info.milkyway.models.bsky.embed.viewRecord
+package com.milkcocoa.info.milkyway.models.bsky.embed.defs.viewRecord
 
 import com.milkcocoa.info.milkyway.types.EmbedViewRecordType
 import kotlinx.serialization.Serializable
 
 @Serializable
-class RecordEmbedViewNotFound(
+class RecordViewViewNotFound(
     val uri: String,
     val notFound: Boolean = true
-) : RecordEmbedViewRecord() {
+) : RecordViewRecord() {
     override val type: EmbedViewRecordType
         get() = EmbedViewRecordType.ViewRecord
 }

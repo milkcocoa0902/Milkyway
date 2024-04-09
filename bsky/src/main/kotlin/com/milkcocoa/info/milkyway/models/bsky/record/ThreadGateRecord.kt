@@ -1,6 +1,6 @@
-package com.milkcocoa.info.milkyway.models.bsky.feed.threadgate
+package com.milkcocoa.info.milkyway.models.bsky.record
 
-import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
+import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.GateRule
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable

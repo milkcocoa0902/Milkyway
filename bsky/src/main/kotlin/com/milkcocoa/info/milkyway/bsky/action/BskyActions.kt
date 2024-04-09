@@ -12,4 +12,11 @@ object BskyActions {
     val SearchActorsTypeAhead = Action("app.bsky.actor.searchActorsTypeahead")
     val SearchActors = Action("app.bsky.actor.searchActors")
     val GetActorFeeds = Action("app.bsky.feed.getActorFeeds")
+    val GetActorLikes = Action("app.bsky.feed.getActorLikes")
+    val GetAuthorFeed = Action("app.bsky.feed.getAuthorFeed")
+    val GetFeedGenerator = Action("app.bsky.feed.getFeedGenerator")
+    val GetFeedGenerators = Action("app.bsky.feed.getFeedGenerators")
+    val GetFeed= Action("app.bsky.feed.getFeed")
+    val GetLikes= Action("app.bsky.feed.getLikes")
+    val GetListFeed= Action("app.bsky.feed.getListFeed")
 }

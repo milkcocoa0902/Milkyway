@@ -1,6 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.embed
 
-import com.milkcocoa.info.milkyway.models.entity.Blob
+import com.milkcocoa.info.milkyway.models.bsky.embed.defs.view.External
 import com.milkcocoa.info.milkyway.types.EmbedType
 import kotlinx.serialization.Serializable
 
@@ -10,12 +10,4 @@ data class ExternalEmbed(
 ) : Embed() {
     override val type: EmbedType
         get() = EmbedType.EmbedExternal
-
-    @Serializable
-    data class External(
-        val description: String,
-        val thumb: Blob,
-        val title: String,
-        val uri: String
-    )
 }
