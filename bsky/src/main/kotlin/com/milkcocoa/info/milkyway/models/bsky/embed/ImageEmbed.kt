@@ -14,7 +14,7 @@ data class ImageEmbed(
     @Serializable
     data class Image(
         val alt: String,
-        val aspectRatio: AspectRatio,
+        val aspectRatio: AspectRatio? = null,
         val image: Blob
     ) {
         @Serializable

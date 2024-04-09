@@ -1,6 +1,5 @@
 package com.milkcocoa.info.milkyway.models.bsky.actor
 
-import com.milkcocoa.info.milkyway.models.bsky.feed.Post.Companion.IndexedAtSerializer
 import com.milkcocoa.info.milkyway.models.entity.Label
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
@@ -20,7 +19,7 @@ data class ProfileView(
     val associated: Associated? = null,
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime? = null,
-    val viewer: Viewer? = null,
+    val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
 ){
     companion object {

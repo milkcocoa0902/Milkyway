@@ -1,31 +1,40 @@
 package com.milkcocoa.info.milkyway.models.bsky.feed
 
-import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileViewBasic
 import com.milkcocoa.info.milkyway.models.bsky.embed.view.EmbedView
-import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.ThreadGate
-import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
-import com.milkcocoa.info.milkyway.models.entity.Label
-import com.milkcocoa.info.milkyway.util.DateTimeSerializer
+import com.milkcocoa.info.milkyway.models.bsky.embed.view.ExternalEmbedView
+import com.milkcocoa.info.milkyway.models.bsky.embed.view.ImageEmbedView
+import com.milkcocoa.info.milkyway.models.bsky.embed.view.RecordEmbedView
+import com.milkcocoa.info.milkyway.models.bsky.embed.view.RecordWithMediaEmbedView
+import com.milkcocoa.info.milkyway.models.bsky.feed.defs.BlockedPost
+import com.milkcocoa.info.milkyway.models.bsky.feed.defs.NotFoundPost
+import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
+import com.milkcocoa.info.milkyway.types.EmbedViewType
+import com.milkcocoa.info.milkyway.types.PostType
+import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
+import kotlinx.serialization.DeserializationStrategy
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import java.time.LocalDateTime
+import kotlinx.serialization.json.JsonContentPolymorphicSerializer
+import kotlinx.serialization.json.JsonElement
 
-@Serializable()
-data class Post(
-    val uri: String,
-    val cid: String,
-    val author: ProfileViewBasic,
-    val record: BskyRecord,
-    val embed: EmbedView? = null,
-    val replyCount: Int?,
-    val repostCount: Int?,
-    val likeCount: Int?,
-    @Serializable(with = IndexedAtSerializer::class)
-    val indexedAt: LocalDateTime,
-    val viewer: Viewer? = null,
-    val labels: List<Label>? = emptyList(),
-    val threadgate: ThreadGate? = null
-) {
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
+@Serializable(with = Post.Companion::class)
+abstract class Post {
+    @SerialName("\$type")
+    abstract val type: PostType
+
+    companion object : JsonContentPolymorphicSerializer<Post>(Post::class) {
+        override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Post> {
+            return when (PostType.getByIdentifier(element.type)) {
+                PostType.Post -> PostView.serializer()
+                PostType.NotFoundPost -> NotFoundPost.serializer()
+                PostType.BlockedPost -> BlockedPost.serializer()
+                else -> Unknown.serializer()
+            }
+        }
+
+        @Serializable
+        class Unknown : Post() {
+            override var type = PostType.Unknown
+        }
     }
 }

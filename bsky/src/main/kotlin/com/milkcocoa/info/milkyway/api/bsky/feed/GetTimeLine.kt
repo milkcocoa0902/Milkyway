@@ -5,7 +5,7 @@ import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
-import com.milkcocoa.info.milkyway.models.bsky.feed.Feed
+import com.milkcocoa.info.milkyway.models.bsky.feed.defs.FeedViewPost
 import kotlinx.serialization.Serializable
 
 class GetTimeLine(val domain: Domain) : AtProtocolGet<GetTimeLine.GetTimelineRequest, GetTimeLine.GetTimelineResponse>(
@@ -23,6 +23,6 @@ class GetTimeLine(val domain: Domain) : AtProtocolGet<GetTimeLine.GetTimelineReq
 
     @Serializable
     data class GetTimelineResponse(
-        val feed: List<Feed>
+        val feed: List<FeedViewPost>
     ) : AtProtocolModel
 }

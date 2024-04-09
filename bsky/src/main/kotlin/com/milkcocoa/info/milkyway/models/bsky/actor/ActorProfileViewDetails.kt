@@ -24,7 +24,7 @@ data class ActorProfileViewDetails(
     val associated: Associated? = null,
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime? = null,
-    val viewer: Viewer? = null,
+    val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
 ) : AtProtocolModel {
     companion object {

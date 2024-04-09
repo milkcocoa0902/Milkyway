@@ -2,9 +2,7 @@ package com.milkcocoa.info.milkyway.models
 
 import kotlinx.serialization.Transient
 
-interface AtProtocolRequest {
-    fun toMap(): Map<String, Any> = emptyMap()
-}
+interface AtProtocolRequest
 
 interface AtProtocolRequestWithSession : AtProtocolRequest {
     @Transient

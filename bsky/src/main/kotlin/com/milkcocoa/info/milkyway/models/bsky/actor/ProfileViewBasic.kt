@@ -14,6 +14,6 @@ data class ProfileViewBasic(
     val displayName: String? = null,
     val avatar: String? = null,
     val associated: Associated? = null,
-    val viewer: Viewer? = null,
+    val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
 )

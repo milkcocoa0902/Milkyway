@@ -4,7 +4,7 @@ import com.milkcocoa.info.milkyway.models.bsky.feed.threadgate.ActorListElement
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Viewer(
+data class ViewerState(
     val muted: Boolean? = null,
     val mutedByList: List<ActorListElement> = emptyList(),
     val blockedBy: Boolean? = null,
