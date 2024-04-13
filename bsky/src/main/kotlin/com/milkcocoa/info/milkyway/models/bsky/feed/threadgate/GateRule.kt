@@ -1,10 +1,5 @@
 package com.milkcocoa.info.milkyway.models.bsky.feed.threadgate
 
-import com.milkcocoa.info.milkyway.models.bsky.embed.view.ExternalEmbedView
-import com.milkcocoa.info.milkyway.models.bsky.embed.view.ImageEmbedView
-import com.milkcocoa.info.milkyway.models.bsky.embed.view.RecordEmbedView
-import com.milkcocoa.info.milkyway.models.bsky.embed.view.RecordWithMediaEmbedView
-import com.milkcocoa.info.milkyway.types.EmbedViewType
 import com.milkcocoa.info.milkyway.types.GateRuleType
 import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
 import kotlinx.serialization.DeserializationStrategy
@@ -18,15 +13,16 @@ abstract class GateRule {
     @SerialName("\$type")
     abstract val type: GateRuleType
 
-
-    companion object : JsonContentPolymorphicSerializer<GateRule>(GateRule::class){
+    companion object : JsonContentPolymorphicSerializer<GateRule>(GateRule::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<GateRule> {
-            return when(GateRuleType.getByIdentifier(element.type)){
+            return when (GateRuleType.getByIdentifier(element.type)) {
                 GateRuleType.MentionRule -> MentionRule.serializer()
                 GateRuleType.FollowingRule -> FollowingRule.serializer()
+                GateRuleType.ListRule -> ListRule.serializer()
                 else -> Unknown.serializer()
             }
         }
+
         @Serializable
         class Unknown : GateRule() {
             override var type = GateRuleType.UnknownRule

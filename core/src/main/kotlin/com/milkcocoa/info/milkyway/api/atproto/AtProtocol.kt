@@ -6,5 +6,6 @@ import com.milkcocoa.info.milkyway.domain.Domain
 
 class AtProtocol(private val domain: Domain) {
     fun server() = Server(domain)
+
     fun repo() = Repo(domain)
 }

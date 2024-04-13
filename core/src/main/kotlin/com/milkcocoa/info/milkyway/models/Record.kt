@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-abstract class Record<T: SerializableEnum>{
+abstract class Record<T : SerializableEnum> {
     @SerialName("\$type")
     abstract val type: T
 }

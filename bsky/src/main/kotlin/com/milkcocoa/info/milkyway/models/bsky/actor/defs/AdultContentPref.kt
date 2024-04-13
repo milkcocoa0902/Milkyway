@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class AdultContentPref(
     val enabled: Boolean
-): ActorPreferenceDef() {
+) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.AdultContentPref
 }

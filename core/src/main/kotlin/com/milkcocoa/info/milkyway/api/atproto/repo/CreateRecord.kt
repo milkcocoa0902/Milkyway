@@ -4,25 +4,23 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
-class CreateRecord(val domain: Domain): AtProtocolPost<CreateRecord.CreateRecordRequest, CreateRecord.CreateRecordResponse>(
-    AtProtoActions.ATPROTO_CREATE_RECORD,
-    domain,
-    CreateRecordRequest::class,
-    CreateRecordResponse::class
-){
-
+class CreateRecord(val domain: Domain) :
+    AtProtocolPost<CreateRecord.CreateRecordRequest, CreateRecord.CreateRecordResponse>(
+        AtProtoActions.ATPROTO_CREATE_RECORD,
+        domain,
+        CreateRecordRequest::class,
+        CreateRecordResponse::class
+    ) {
     @Serializable
     data class CreateRecordRequest(
         override val accessJwt: String,
         val repo: String,
         val collection: String,
         val record: Record
-    ): AtProtocolRequestWithSession {
+    ) : AtProtocolRequestWithSession {
         @Serializable
         data class Record(
             val text: String,
@@ -30,10 +28,9 @@ class CreateRecord(val domain: Domain): AtProtocolPost<CreateRecord.CreateRecord
         )
     }
 
-
     @Serializable
     data class CreateRecordResponse(
         val uri: String,
         val cid: String
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

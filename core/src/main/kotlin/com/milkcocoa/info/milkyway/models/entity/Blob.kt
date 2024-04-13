@@ -8,7 +8,7 @@ data class Blob(
     val ref: Ref,
     val mimeType: String,
     val size: Int
-){
+) {
     @SerialName("\$type")
     val type: String = "blob"
 

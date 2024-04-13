@@ -7,5 +7,5 @@ data class VerificationMethod(
     val id: String,
     val type: String,
     val controller: String,
-    val publicKeyMultibase: String,
+    val publicKeyMultibase: String
 )

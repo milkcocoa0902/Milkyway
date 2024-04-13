@@ -8,10 +8,12 @@ bsky
 ## Features
 
 ⭐ com.atproto.server.createSession  
-⭐ com.atproto.repo.createRecord
+⭐ com.atproto.repo.createRecord  
 ⭐ app.bsky.actor.getPreferences  
 ⭐ app.bsky.actor.getProfile  
-⭐ app.bsky.feed.getTimeline   
+⭐ app.bsky.actor.getProfiles  
+⭐ app.bsky.actor.getSuggestions   
+⭐ app.bsky.feed.getTimeline
 
 ## Installation  
 TBD

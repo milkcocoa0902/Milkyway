@@ -1,7 +1,6 @@
 package com.milkcocoa.info.milkyway.api.atproto.repo
 
 import com.milkcocoa.info.milkyway.Milkyway
-import com.milkcocoa.info.milkyway.api.atproto.repo.CreateRecord
 import com.milkcocoa.info.milkyway.api.atproto.server.CreateSession
 import com.milkcocoa.info.milkyway.domain.Domain
 import kotlinx.coroutines.runBlocking
@@ -12,18 +11,18 @@ import kotlin.test.Test
 
 class CreateEmbedViewViewRecordTest {
     @Test
-    fun test(){
+    fun test() {
         runBlocking {
-            val session = Milkyway.instance(domain = Domain("https://bsky.social"))
-                .atProtocol()
-                .server()
-                .createSession(
-                    CreateSession.CreateSessionRequest(
-                        identifier = System.getenv("BSKY_IDENTIFIER"),
-                        password = System.getenv("BSKY_PASSWORD")
+            val session =
+                Milkyway.instance(domain = Domain("https://bsky.social"))
+                    .atProtocol()
+                    .server()
+                    .createSession(
+                        CreateSession.CreateSessionRequest(
+                            identifier = System.getenv("BSKY_IDENTIFIER"),
+                            password = System.getenv("BSKY_PASSWORD")
+                        )
                     )
-                )
-
 
             Milkyway.instance(domain = Domain("https://bsky.social"))
                 .atProtocol()
@@ -33,11 +32,13 @@ class CreateEmbedViewViewRecordTest {
                         accessJwt = session.accessJwt,
                         repo = session.handle,
                         collection = "app.bsky.feed.post",
-                        record = CreateRecord.CreateRecordRequest.Record(
-                            text = "hello from Milkeyway",
-                            createdAt = LocalDateTime.now(ZoneOffset.UTC)
-                                .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"))
-                        )
+                        record =
+                            CreateRecord.CreateRecordRequest.Record(
+                                text = "hello from Milkeyway",
+                                createdAt =
+                                    LocalDateTime.now(ZoneOffset.UTC)
+                                        .format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'"))
+                            )
                     )
                 )
         }

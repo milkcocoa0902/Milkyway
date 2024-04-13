@@ -4,7 +4,7 @@ import com.milkcocoa.info.milkyway.util.SerializableEnum
 import kotlinx.serialization.Serializable
 
 @Serializable(with = ActorPreferenceType.Companion.Serializer::class)
-enum class ActorPreferenceType(override val identifier: String) : SerializableEnum{
+enum class ActorPreferenceType(override val identifier: String) : SerializableEnum {
     AdultContentPref("app.bsky.actor.defs#adultContentPref"),
     ContentsLabelPref("app.bsky.actor.defs#contentLabelPref"),
     SavedFeedsPref("app.bsky.actor.defs#savedFeedsPref"),
@@ -14,12 +14,14 @@ enum class ActorPreferenceType(override val identifier: String) : SerializableEn
     InterestsPref("app.bsky.actor.defs#interestsPref"),
     MutedWordsPref("app.bsky.actor.defs#mutedWordsPref"),
     HiddenPostsPref("app.bsky.actor.defs#hiddenPostsPref"),
-    Unknown("unknown");
+    Unknown("unknown")
+    ;
 
-    companion object{
-        fun getByIdentifier(identifier: String?) =
-            entries.find { it.identifier == identifier } ?: Unknown
-        object Serializer: SerializableEnum.Companion.SerializableEnumSerializer<ActorPreferenceType>(ActorPreferenceType::class)
+    companion object {
+        fun getByIdentifier(identifier: String?) = entries.find { it.identifier == identifier } ?: Unknown
+
+        object Serializer : SerializableEnum.Companion.SerializableEnumSerializer<ActorPreferenceType>(
+            ActorPreferenceType::class
+        )
     }
 }
-

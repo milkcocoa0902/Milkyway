@@ -7,7 +7,7 @@ import kotlin.test.Test
 
 class CreateSessionTest {
     @Test
-    fun test(){
+    fun test() {
         runBlocking {
             Milkyway.instance(domain = Domain("https://bsky.social"))
                 .atProtocol()
