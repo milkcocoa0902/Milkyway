@@ -4,7 +4,6 @@ import com.milkcocoa.info.milkyway.api.bsky.feed.GetSuggestedFeeds
 import com.milkcocoa.info.milkyway.atproto.action.Action
 
 object BskyActions {
-    val GetTimeLine = Action("app.bsky.feed.getTimeline")
     val GetProfile = Action("app.bsky.actor.getProfile")
     val GetProfiles = Action("app.bsky.actor.getProfiles")
     val GetPreferences = Action("app.bsky.actor.getPreferences")
@@ -12,6 +11,8 @@ object BskyActions {
     val PutPreferences = Action("app.bsky.actor.putPreferences")
     val SearchActorsTypeAhead = Action("app.bsky.actor.searchActorsTypeahead")
     val SearchActors = Action("app.bsky.actor.searchActors")
+
+
     val GetActorFeeds = Action("app.bsky.feed.getActorFeeds")
     val GetActorLikes = Action("app.bsky.feed.getActorLikes")
     val GetAuthorFeed = Action("app.bsky.feed.getAuthorFeed")
@@ -24,5 +25,13 @@ object BskyActions {
     val GetPosts= Action("app.bsky.feed.getPosts")
     val GetRepostedBy= Action("app.bsky.feed.getRepostedBy")
     val GetSuggestedFeeds= Action("app.bsky.feed.getSuggestedFeeds")
+    val GetTimeLine = Action("app.bsky.feed.getTimeline")
     val SearchPosts= Action("app.bsky.feed.searchPosts")
+
+
+    val GetBlocks= Action("app.bsky.graph.getBlocks")
+    val GetFollowers = Action("app.bsky.graph.getFollowers")
+    val GetFollows = Action("app.bsky.graph.getFollows")
+    val GetListBlocks = Action("app.bsky.graph.getListBlocks")
+
 }
