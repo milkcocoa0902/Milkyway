@@ -3,6 +3,7 @@ package com.milkcocoa.info.milkyway.models.bsky.feed
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.BlockedPost
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.NotFoundPost
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
+import com.milkcocoa.info.milkyway.models.bsky.feed.defs.ThreadViewPost
 import com.milkcocoa.info.milkyway.types.PostType
 import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
 import kotlinx.serialization.DeserializationStrategy
@@ -22,6 +23,7 @@ abstract class Post {
                 PostType.Post -> PostView.serializer()
                 PostType.NotFoundPost -> NotFoundPost.serializer()
                 PostType.BlockedPost -> BlockedPost.serializer()
+                PostType.ThreadViewPost -> ThreadViewPost.serializer()
                 else -> Unknown.serializer()
             }
         }

@@ -5,27 +5,24 @@ import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
-import com.milkcocoa.info.milkyway.models.bsky.feed.defs.GeneratorView
+import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
 import kotlinx.serialization.Serializable
 
-class GetActorFeeds(val domain: Domain) :
-    AtProtocolGet<GetActorFeeds.GetActorFeedsRequest, GetActorFeeds.GetActorFeedsResponse>(
-        action = BskyActions.GetActorFeeds,
+class GetPosts(val domain: Domain) :
+    AtProtocolGet<GetPosts.GetPostsRequest, GetPosts.GetPostsResponse>(
+        action = BskyActions.GetPosts,
         domain = domain,
-        GetActorFeedsRequest::class,
-        GetActorFeedsResponse::class
+        GetPostsRequest::class,
+        GetPostsResponse::class
 ) {
     @Serializable
-    data class GetActorFeedsRequest(
+    data class GetPostsRequest(
         override val accessJwt: String,
-        val actor: String,
-        val limit: Int = 50,
-        val cursor: String
+        val uris: List<String>
     ) : AtProtocolRequestWithSession
 
     @Serializable
-    data class GetActorFeedsResponse(
-        val cursor: String = "",
-        val feeds: List<GeneratorView>
+    data class GetPostsResponse(
+        val feeds: List<PostView>
     ): AtProtocolModel
 }

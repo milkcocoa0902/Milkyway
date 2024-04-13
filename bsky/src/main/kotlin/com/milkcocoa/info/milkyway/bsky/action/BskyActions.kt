@@ -1,5 +1,6 @@
 package com.milkcocoa.info.milkyway.bsky.action
 
+import com.milkcocoa.info.milkyway.api.bsky.feed.GetSuggestedFeeds
 import com.milkcocoa.info.milkyway.atproto.action.Action
 
 object BskyActions {
@@ -19,4 +20,9 @@ object BskyActions {
     val GetFeed= Action("app.bsky.feed.getFeed")
     val GetLikes= Action("app.bsky.feed.getLikes")
     val GetListFeed= Action("app.bsky.feed.getListFeed")
+    val GetPostThread= Action("app.bsky.feed.getPostThread")
+    val GetPosts= Action("app.bsky.feed.getPosts")
+    val GetRepostedBy= Action("app.bsky.feed.getRepostedBy")
+    val GetSuggestedFeeds= Action("app.bsky.feed.getSuggestedFeeds")
+    val SearchPosts= Action("app.bsky.feed.searchPosts")
 }

@@ -8,6 +8,7 @@ enum class PostType(override val identifier: String) : SerializableEnum {
     Post("app.bsky.feed.defs#postView"),
     NotFoundPost("app.bsky.feed.defs#notFoundPost"),
     BlockedPost("app.bsky.feed.defs#blockedPost"),
+    ThreadViewPost("app.bsky.feed.defs#threadViewPost"),
     Unknown("unknown")
     ;
 

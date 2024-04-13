@@ -6,5 +6,8 @@ import io.ktor.client.engine.cio.*
 object KtorHttpClient {
     fun instance() =
         HttpClient(CIO) {
+            engine {
+
+            }
         }
 }
