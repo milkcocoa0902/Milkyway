@@ -1,6 +1,7 @@
 package com.milkcocoa.info.milkyway.models.bsky.record
 
 import com.milkcocoa.info.milkyway.models.Record
+import com.milkcocoa.info.milkyway.models.bsky.record.actor.ProfileRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.feed.FeedPostRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.feed.ThreadGateRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.graph.BlockRecord
@@ -27,6 +28,7 @@ abstract class BskyRecord() : Record<RecordType>() {
                 RecordType.ListRecord -> ListRecord.serializer()
                 RecordType.ListItemRecord -> ListItemRecord.serializer()
                 RecordType.ListBlockRecord -> ListBlockRecord.serializer()
+                RecordType.ProfileRecord -> ProfileRecord.serializer()
                 else -> Unknown.serializer()
             }
         }

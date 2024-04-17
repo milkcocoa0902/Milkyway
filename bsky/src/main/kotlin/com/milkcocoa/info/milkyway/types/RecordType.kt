@@ -12,6 +12,7 @@ enum class RecordType(override val identifier: String) : SerializableEnum {
     ListRecord("app.bsky.graph.list"),
     ListBlockRecord("app.bsky.graph.list.block"),
     ListItemRecord("app.bsky.graph.list.item"),
+    ProfileRecord("app.bsky.actor.profile"),
     UnknownEmbed("unknown")
     ;
 
