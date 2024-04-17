@@ -3,7 +3,7 @@ package com.milkcocoa.info.milkyway.models.bsky.feed.defs
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import com.milkcocoa.info.milkyway.models.bsky.embed.defs.view.EmbedView
 import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
-import com.milkcocoa.info.milkyway.models.entity.Label
+import com.milkcocoa.info.milkyway.models.atproto.label.defs.Label
 import com.milkcocoa.info.milkyway.types.EmbedViewType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable

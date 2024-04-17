@@ -2,10 +2,8 @@ package com.milkcocoa.info.milkyway.models.bsky.record.graph
 
 import com.milkcocoa.info.milkyway.models.atproto.label.defs.SelfLabels
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
-import com.milkcocoa.info.milkyway.models.bsky.record.feed.FeedPostRecord.Companion.CreatedAtSerializer
 import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
 import com.milkcocoa.info.milkyway.models.entity.Blob
-import com.milkcocoa.info.milkyway.models.entity.Label
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable

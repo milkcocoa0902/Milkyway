@@ -1,7 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.graph.defs
 
-import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView.Companion.IndexedAtSerializer
-import com.milkcocoa.info.milkyway.models.entity.Label
+import com.milkcocoa.info.milkyway.models.atproto.label.defs.Label
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime

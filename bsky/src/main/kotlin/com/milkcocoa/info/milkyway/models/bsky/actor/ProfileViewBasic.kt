@@ -1,6 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.actor
 
-import com.milkcocoa.info.milkyway.models.entity.Label
+import com.milkcocoa.info.milkyway.models.atproto.label.defs.Label
 import kotlinx.serialization.Serializable
 
 /**
