@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.KSerializer
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
@@ -82,38 +83,14 @@ class SearchPosts(val domain: Domain) :
         val cursor: String = ""
     ) : AtProtocolRequestWithSession{
 
-        @Serializable(with = SortedBy.Companion.Serializer::class)
-        enum class SortedBy(val identifier: String) {
-            Top("top"),
-            Latest("latest"),
-            Unknown("unknown")
+        @Serializable
+        enum class SortedBy{
+            @SerialName("top")
+            Top,
+            @SerialName("latest")
+            Latest
             ;
 
-            companion object {
-                fun getByIdentifier(identifier: String?) = entries.find { it.identifier == identifier } ?: Unknown
-
-                object Serializer : KSerializer<SortedBy> {
-                    override val descriptor: SerialDescriptor
-                        get() =
-                            PrimitiveSerialDescriptor(
-                                "sort",
-                                PrimitiveKind.STRING
-                            )
-
-                    override fun deserialize(decoder: Decoder): SortedBy {
-                        val value = decoder.decodeString()
-                        return SortedBy.entries
-                            .firstOrNull { it.identifier == value } ?: throw NoSuchElementException()
-                    }
-
-                    override fun serialize(
-                        encoder: Encoder,
-                        value: SortedBy
-                    ) {
-                        encoder.encodeString(value.identifier)
-                    }
-                }
-            }
         }
 
         companion object{
