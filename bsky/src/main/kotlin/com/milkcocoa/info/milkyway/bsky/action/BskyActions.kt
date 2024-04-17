@@ -33,5 +33,15 @@ object BskyActions {
     val GetFollowers = Action("app.bsky.graph.getFollowers")
     val GetFollows = Action("app.bsky.graph.getFollows")
     val GetListBlocks = Action("app.bsky.graph.getListBlocks")
+    val GetListMutes = Action("app.bsky.graph.getListMutes")
+    val GetList = Action("app.bsky.graph.getList")
+    val GetLists = Action("app.bsky.graph.getLists")
+    val GetMutes = Action("app.bsky.graph.getMutes")
+    val GetSuggestedFollowsByActor = Action("app.bsky.graph.getSuggestedFollowsByActor")
+    val GetRelationships = Action("app.bsky.graph.getRelationships")
+    val MuteActor = Action("app.bsky.graph.muteActor")
+    val MuteActorList = Action("app.bsky.graph.muteActorList")
+    val UnMuteActorList = Action("app.bsky.graph.unmuteActorList")
+    val UnMuteActor = Action("app.bsky.graph.unmuteActor")
 
 }

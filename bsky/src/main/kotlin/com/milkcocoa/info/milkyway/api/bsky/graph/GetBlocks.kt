@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 
 class GetBlocks(val domain: Domain):
     AtProtocolGet<GetBlocks.GetBlocksRequest, GetBlocks.GetBlocksResponse>(
-    action = BskyActions.GetFollowers,
+    action = BskyActions.GetBlocks,
     domain = domain,
     GetBlocksRequest::class,
     GetBlocksResponse::class

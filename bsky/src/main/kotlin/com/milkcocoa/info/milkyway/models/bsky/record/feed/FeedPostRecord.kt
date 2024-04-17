@@ -1,6 +1,7 @@
-package com.milkcocoa.info.milkyway.models.bsky.record
+package com.milkcocoa.info.milkyway.models.bsky.record.feed
 
 import com.milkcocoa.info.milkyway.models.bsky.embed.Embed
+import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer

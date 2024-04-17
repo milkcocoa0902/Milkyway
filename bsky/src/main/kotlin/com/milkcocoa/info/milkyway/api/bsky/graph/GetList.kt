@@ -4,30 +4,30 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
-import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
+import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListItemView
+import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
 
-class GetFollowers(val domain: Domain):
-    AtProtocolGet<GetFollowers.GetFollowersRequest, GetFollowers.GetFollowersResponse>(
-    action = BskyActions.GetFollowers,
+class GetList(val domain: Domain):
+    AtProtocolGet<GetList.GetListRequest, GetList.GetListResponse>(
+    action = BskyActions.GetList,
     domain = domain,
-    GetFollowersRequest::class,
-    GetFollowersResponse::class
+    GetListRequest::class,
+    GetListResponse::class
 ) {
     @Serializable
-    data class GetFollowersRequest(
+    data class GetListRequest(
         override val accessJwt: String,
-        val actor: String,
+        val list: String,
         val limit: Int = 50,
-        val cursor: String? = null,
+        val cursor: String = ""
     ) : AtProtocolRequestWithSession
 
     @Serializable
-    data class GetFollowersResponse(
-        val subject: ProfileView,
+    data class GetListResponse(
         val cursor: String = "",
-        val followers: List<ProfileView>
+        val list: ListView,
+        val items: List<ListItemView>
     ): AtProtocolModel
 }
