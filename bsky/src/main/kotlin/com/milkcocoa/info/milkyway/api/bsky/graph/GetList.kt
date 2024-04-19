@@ -9,13 +9,13 @@ import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListItemView
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
 
-class GetList(val domain: Domain):
+class GetList(val domain: Domain) :
     AtProtocolGet<GetList.GetListRequest, GetList.GetListResponse>(
-    action = BskyActions.GetList,
-    domain = domain,
-    GetListRequest::class,
-    GetListResponse::class
-) {
+        action = BskyActions.GetList,
+        domain = domain,
+        GetListRequest::class,
+        GetListResponse::class
+    ) {
     @Serializable
     data class GetListRequest(
         override val accessJwt: String,
@@ -29,5 +29,5 @@ class GetList(val domain: Domain):
         val cursor: String = "",
         val list: ListView,
         val items: List<ListItemView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

@@ -11,9 +11,10 @@ data class ReasonRepost(
     val by: ProfileViewBasic,
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime
-): Reason() {
+) : Reason() {
     override val type: FeedReasonType
         get() = FeedReasonType.FeedReasonRepost
+
     companion object {
         object IndexedAtSerializer : DateTimeSerializer("indexedAt")
     }

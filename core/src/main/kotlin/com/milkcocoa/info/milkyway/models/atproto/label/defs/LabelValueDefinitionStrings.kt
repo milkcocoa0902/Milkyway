@@ -18,5 +18,5 @@ data class LabelValueDefinitionStrings(
     /**
      * A longer description of what the label means and why it might be applied.
      */
-    val description: String,
+    val description: String
 )

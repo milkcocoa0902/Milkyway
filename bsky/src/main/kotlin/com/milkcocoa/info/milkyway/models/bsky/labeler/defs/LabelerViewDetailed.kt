@@ -19,9 +19,10 @@ data class LabelerViewDetailed(
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime,
     val labels: List<Label>
-): Labeler(){
+) : Labeler() {
     override val type: LabelerType
         get() = LabelerType.LabelerViewDetailed
+
     companion object {
         object IndexedAtSerializer : DateTimeSerializer("indexedAt")
     }

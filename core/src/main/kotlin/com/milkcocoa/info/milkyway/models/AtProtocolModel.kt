@@ -5,4 +5,4 @@ import kotlinx.serialization.Serializable
 interface AtProtocolModel
 
 @Serializable
-final class AtProtocolUnit: AtProtocolModel
+final class AtProtocolUnit : AtProtocolModel

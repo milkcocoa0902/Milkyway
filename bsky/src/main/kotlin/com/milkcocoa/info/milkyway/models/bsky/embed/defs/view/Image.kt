@@ -8,5 +8,4 @@ data class Image(
     val alt: String,
     val aspectRatio: AspectRatio? = null,
     val image: Blob
-) {
-}
+)

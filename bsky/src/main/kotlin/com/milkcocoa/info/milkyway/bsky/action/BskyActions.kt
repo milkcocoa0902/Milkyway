@@ -1,6 +1,5 @@
 package com.milkcocoa.info.milkyway.bsky.action
 
-import com.milkcocoa.info.milkyway.api.bsky.feed.GetSuggestedFeeds
 import com.milkcocoa.info.milkyway.atproto.action.Action
 
 object BskyActions {
@@ -12,24 +11,22 @@ object BskyActions {
     val SearchActorsTypeAhead = Action("app.bsky.actor.searchActorsTypeahead")
     val SearchActors = Action("app.bsky.actor.searchActors")
 
-
     val GetActorFeeds = Action("app.bsky.feed.getActorFeeds")
     val GetActorLikes = Action("app.bsky.feed.getActorLikes")
     val GetAuthorFeed = Action("app.bsky.feed.getAuthorFeed")
     val GetFeedGenerator = Action("app.bsky.feed.getFeedGenerator")
     val GetFeedGenerators = Action("app.bsky.feed.getFeedGenerators")
-    val GetFeed= Action("app.bsky.feed.getFeed")
-    val GetLikes= Action("app.bsky.feed.getLikes")
-    val GetListFeed= Action("app.bsky.feed.getListFeed")
-    val GetPostThread= Action("app.bsky.feed.getPostThread")
-    val GetPosts= Action("app.bsky.feed.getPosts")
-    val GetRepostedBy= Action("app.bsky.feed.getRepostedBy")
-    val GetSuggestedFeeds= Action("app.bsky.feed.getSuggestedFeeds")
+    val GetFeed = Action("app.bsky.feed.getFeed")
+    val GetLikes = Action("app.bsky.feed.getLikes")
+    val GetListFeed = Action("app.bsky.feed.getListFeed")
+    val GetPostThread = Action("app.bsky.feed.getPostThread")
+    val GetPosts = Action("app.bsky.feed.getPosts")
+    val GetRepostedBy = Action("app.bsky.feed.getRepostedBy")
+    val GetSuggestedFeeds = Action("app.bsky.feed.getSuggestedFeeds")
     val GetTimeLine = Action("app.bsky.feed.getTimeline")
-    val SearchPosts= Action("app.bsky.feed.searchPosts")
+    val SearchPosts = Action("app.bsky.feed.searchPosts")
 
-
-    val GetBlocks= Action("app.bsky.graph.getBlocks")
+    val GetBlocks = Action("app.bsky.graph.getBlocks")
     val GetFollowers = Action("app.bsky.graph.getFollowers")
     val GetFollows = Action("app.bsky.graph.getFollows")
     val GetListBlocks = Action("app.bsky.graph.getListBlocks")
@@ -44,4 +41,10 @@ object BskyActions {
     val UnMuteActorList = Action("app.bsky.graph.unmuteActorList")
     val UnMuteActor = Action("app.bsky.graph.unmuteActor")
 
+    val GetServices = Action("app.bsky.labeler.getSerices")
+
+    val GetUnreadCount = Action("app.bsky.notification.getUnreadCount")
+    val ListNotifications = Action("app.bsky.notification.listNotifications")
+    val RegisterPush = Action("app.bsky.notification.registerPush")
+    val UpdateSeen = Action("app.bsky.notification.updateSeen")
 }

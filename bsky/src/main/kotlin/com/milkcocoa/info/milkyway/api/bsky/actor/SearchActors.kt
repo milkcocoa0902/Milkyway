@@ -10,19 +10,19 @@ import kotlinx.serialization.Serializable
 
 class SearchActors(val domain: Domain) :
     AtProtocolGet<SearchActors.SearchActorsRequest, SearchActors.SearchActorsResponse>(
-    action = BskyActions.SearchActors,
-    domain = domain,
-    SearchActorsRequest::class,
-    SearchActorsResponse::class
-) {
+        action = BskyActions.SearchActors,
+        domain = domain,
+        SearchActorsRequest::class,
+        SearchActorsResponse::class
+    ) {
     @Serializable
     data class SearchActorsRequest(
         val q: String,
-        val limit: Int = 10,
+        val limit: Int = 10
     ) : AtProtocolRequest
 
     @Serializable
     data class SearchActorsResponse(
         val actors: List<ProfileViewBasic> = emptyList()
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

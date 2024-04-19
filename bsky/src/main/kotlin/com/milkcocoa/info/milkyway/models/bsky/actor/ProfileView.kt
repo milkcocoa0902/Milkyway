@@ -21,7 +21,7 @@ data class ProfileView(
     val indexedAt: LocalDateTime? = null,
     val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
-){
+) {
     companion object {
         object IndexedAtSerializer : DateTimeSerializer("indexedAt")
     }

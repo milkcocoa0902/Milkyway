@@ -10,13 +10,13 @@ data class ListViewBasic(
     val uri: String,
     val cid: String,
     val name: String,
-    val purpose: String,
+    val purpose: ListPurpose,
     val avatar: String = "",
     val labels: List<Label> = emptyList(),
     val viewer: ListViewerState? = null,
     @Serializable(with = IndexedAtSerializer::class)
     val indexedAt: LocalDateTime? = null
-){
+) {
     companion object {
         object IndexedAtSerializer : DateTimeSerializer("indexedAt")
     }

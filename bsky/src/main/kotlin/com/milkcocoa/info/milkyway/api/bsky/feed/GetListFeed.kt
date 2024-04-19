@@ -10,11 +10,11 @@ import kotlinx.serialization.Serializable
 
 class GetListFeed(val domain: Domain) :
     AtProtocolGet<GetListFeed.GetListFeedRequest, GetListFeed.GetListFeedResponse>(
-    action = BskyActions.GetListFeed,
-    domain = domain,
-    GetListFeedRequest::class,
-    GetListFeedResponse::class
-) {
+        action = BskyActions.GetListFeed,
+        domain = domain,
+        GetListFeedRequest::class,
+        GetListFeedResponse::class
+    ) {
     @Serializable
     data class GetListFeedRequest(
         val list: List<String>,
@@ -26,5 +26,5 @@ class GetListFeed(val domain: Domain) :
     data class GetListFeedResponse(
         val cursor: String = "",
         val feeds: List<FeedViewPost>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

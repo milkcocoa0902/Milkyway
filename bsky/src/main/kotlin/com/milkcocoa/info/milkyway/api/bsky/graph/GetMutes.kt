@@ -11,23 +11,23 @@ import kotlinx.serialization.Serializable
 /**
  * Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
  */
-class GetMutes(val domain: Domain):
+class GetMutes(val domain: Domain) :
     AtProtocolGet<GetMutes.GetMutesRequest, GetMutes.GetMutesResponse>(
-    action = BskyActions.GetMutes,
-    domain = domain,
-    GetMutesRequest::class,
-    GetMutesResponse::class
-) {
+        action = BskyActions.GetMutes,
+        domain = domain,
+        GetMutesRequest::class,
+        GetMutesResponse::class
+    ) {
     @Serializable
     data class GetMutesRequest(
         override val accessJwt: String,
         val limit: Int = 50,
-        val cursor: String? = null,
+        val cursor: String? = null
     ) : AtProtocolRequestWithSession
 
     @Serializable
     data class GetMutesResponse(
         val cursor: String = "",
         val mutes: List<ProfileView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

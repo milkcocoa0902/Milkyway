@@ -7,7 +7,6 @@ object KtorHttpClient {
     fun instance() =
         HttpClient(CIO) {
             engine {
-
             }
         }
 }

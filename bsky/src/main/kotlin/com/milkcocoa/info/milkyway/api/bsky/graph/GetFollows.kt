@@ -8,19 +8,19 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
 
-class GetFollows(val domain: Domain):
+class GetFollows(val domain: Domain) :
     AtProtocolGet<GetFollows.GetFollowsRequest, GetFollows.GetFollowsResponse>(
-    action = BskyActions.GetFollows,
-    domain = domain,
-    GetFollowsRequest::class,
-    GetFollowsResponse::class
-) {
+        action = BskyActions.GetFollows,
+        domain = domain,
+        GetFollowsRequest::class,
+        GetFollowsResponse::class
+    ) {
     @Serializable
     data class GetFollowsRequest(
         override val accessJwt: String,
         val actor: String,
         val limit: Int = 50,
-        val cursor: String? = null,
+        val cursor: String? = null
     ) : AtProtocolRequestWithSession
 
     @Serializable
@@ -28,5 +28,5 @@ class GetFollows(val domain: Domain):
         val subject: ProfileView,
         val cursor: String = "",
         val follows: List<ProfileView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

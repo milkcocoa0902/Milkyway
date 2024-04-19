@@ -9,11 +9,11 @@ import kotlinx.serialization.json.JsonContentPolymorphicSerializer
 import kotlinx.serialization.json.JsonElement
 
 @Serializable(with = Reason.Companion::class)
-abstract class Reason{
+abstract class Reason {
     @SerialName("\$type")
     abstract val type: FeedReasonType
 
-    companion object: JsonContentPolymorphicSerializer<Reason>(Reason::class) {
+    companion object : JsonContentPolymorphicSerializer<Reason>(Reason::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Reason> {
             return when (FeedReasonType.getByIdentifier(element.type)) {
                 FeedReasonType.FeedReasonRepost -> ReasonRepost.serializer()

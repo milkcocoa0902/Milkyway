@@ -4,19 +4,17 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
-import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileViewBasic
 import kotlinx.serialization.Serializable
 
-class GetBlocks(val domain: Domain):
+class GetBlocks(val domain: Domain) :
     AtProtocolGet<GetBlocks.GetBlocksRequest, GetBlocks.GetBlocksResponse>(
-    action = BskyActions.GetBlocks,
-    domain = domain,
-    GetBlocksRequest::class,
-    GetBlocksResponse::class
-) {
+        action = BskyActions.GetBlocks,
+        domain = domain,
+        GetBlocksRequest::class,
+        GetBlocksResponse::class
+    ) {
     @Serializable
     data class GetBlocksRequest(
         override val accessJwt: String,
@@ -28,5 +26,5 @@ class GetBlocks(val domain: Domain):
     data class GetBlocksResponse(
         val cursor: String = "",
         val blocks: List<ProfileView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

@@ -14,7 +14,7 @@ class GetSuggestedFeeds(val domain: Domain) :
         domain = domain,
         GetSuggestedFeedsRequest::class,
         GetSuggestedFeedsResponse::class
-) {
+    ) {
     @Serializable
     data class GetSuggestedFeedsRequest(
         override val accessJwt: String,
@@ -26,5 +26,5 @@ class GetSuggestedFeeds(val domain: Domain) :
     data class GetSuggestedFeedsResponse(
         val cursor: String = "",
         val repostedBy: List<GeneratorView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

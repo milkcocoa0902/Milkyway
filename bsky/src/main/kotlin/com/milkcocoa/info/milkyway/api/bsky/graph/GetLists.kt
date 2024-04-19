@@ -5,20 +5,19 @@ import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
-import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListItemView
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
 
 /**
  * Enumerates the lists created by a specified account (actor).
  */
-class GetLists(val domain: Domain):
+class GetLists(val domain: Domain) :
     AtProtocolGet<GetLists.GetListsRequest, GetLists.GetListsResponse>(
-    action = BskyActions.GetLists,
-    domain = domain,
-    GetListsRequest::class,
-    GetListsResponse::class
-) {
+        action = BskyActions.GetLists,
+        domain = domain,
+        GetListsRequest::class,
+        GetListsResponse::class
+    ) {
     @Serializable
     data class GetListsRequest(
         override val accessJwt: String,
@@ -34,5 +33,5 @@ class GetLists(val domain: Domain):
     data class GetListsResponse(
         val cursor: String = "",
         val lists: List<ListView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

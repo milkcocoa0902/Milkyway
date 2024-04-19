@@ -6,19 +6,21 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
-import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
 
 /**
  * Enumerates follows similar to a given account (actor). Expected use is to recommend additional accounts immediately after following one account.
  */
-class GetSuggestedFollowsByActor(val domain: Domain):
-    AtProtocolGet<GetSuggestedFollowsByActor.GetSuggestedFollowsByActorRequest, GetSuggestedFollowsByActor.GetSuggestedFoloowsByActorResponse>(
-    action = BskyActions.GetSuggestedFollowsByActor,
-    domain = domain,
-    GetSuggestedFollowsByActorRequest::class,
-    GetSuggestedFoloowsByActorResponse::class
-) {
+class GetSuggestedFollowsByActor(val domain: Domain) :
+    AtProtocolGet<
+        GetSuggestedFollowsByActor.GetSuggestedFollowsByActorRequest,
+        GetSuggestedFollowsByActor.GetSuggestedFoloowsByActorResponse
+    >(
+        action = BskyActions.GetSuggestedFollowsByActor,
+        domain = domain,
+        GetSuggestedFollowsByActorRequest::class,
+        GetSuggestedFoloowsByActorResponse::class
+    ) {
     @Serializable
     data class GetSuggestedFollowsByActorRequest(
         override val accessJwt: String,
@@ -29,5 +31,5 @@ class GetSuggestedFollowsByActor(val domain: Domain):
     data class GetSuggestedFoloowsByActorResponse(
         val cursor: String = "",
         val items: List<ProfileView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

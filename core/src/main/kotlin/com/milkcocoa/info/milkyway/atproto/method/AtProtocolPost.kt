@@ -5,6 +5,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolUnit
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -45,3 +46,14 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
         }
     }
 }
+
+open class AtProtocolUnitPost<in I : AtProtocolRequest>(
+    private val action: Action,
+    private val domain: Domain,
+    private val requestClass: KClass<I>
+) : AtProtocolPost<I, AtProtocolUnit>(
+        action,
+        domain,
+        requestClass,
+        AtProtocolUnit::class
+    )

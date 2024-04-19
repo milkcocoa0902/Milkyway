@@ -24,7 +24,7 @@ data class ListRecord(
     val avatar: Blob? = null,
     val labels: SelfLabels? = null,
     @Serializable(with = CreatedAtSerializer::class)
-    val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.ListRecord

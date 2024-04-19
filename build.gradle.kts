@@ -55,6 +55,6 @@ val ktlintFormat by tasks.creating(JavaExec::class) {
     classpath = ktlint
     mainClass.set("com.pinterest.ktlint.Main")
     // see https://pinterest.github.io/ktlint/install/cli/#command-line-usage for more information
-    args = listOf("-F", "**/*.kt", "**.kts", "!**/build/**")
+    args = listOf("--format", "**/*.kt", "**.kts", "!**/build/**")
     jvmArgs = listOf("--add-opens", "java.base/java.lang=ALL-UNNAMED")
 }

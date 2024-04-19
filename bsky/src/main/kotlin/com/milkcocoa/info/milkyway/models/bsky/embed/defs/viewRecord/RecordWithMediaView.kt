@@ -13,6 +13,7 @@ data class RecordWithMediaView(
     data class RecordWrap(
         val record: RecordViewRecord
     )
+
     override val type: EmbedViewType
         get() = EmbedViewType.EmbedRecordWithMediaView
 }

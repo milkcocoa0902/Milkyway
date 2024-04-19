@@ -7,14 +7,8 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
-import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.descriptors.PrimitiveKind
-import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
-import kotlinx.serialization.descriptors.SerialDescriptor
-import kotlinx.serialization.encoding.Decoder
-import kotlinx.serialization.encoding.Encoder
 import java.time.LocalDateTime
 
 class SearchPosts(val domain: Domain) :
@@ -23,7 +17,7 @@ class SearchPosts(val domain: Domain) :
         domain = domain,
         SearchPostsRequest::class,
         SearchPostsResponse::class
-) {
+    ) {
     @Serializable
     data class SearchPostsRequest(
         override val accessJwt: String,
@@ -31,24 +25,20 @@ class SearchPosts(val domain: Domain) :
          * Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.
          */
         val q: String,
-
         /**
          * Specifies the ranking order of results.
          */
         val sort: SortedBy? = null,
-
         /**
          * Filter results for posts after the indicated datetime (inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYYY-MM-DD).
          */
         @Serializable(with = SinceSerializer::class)
         val since: LocalDateTime? = null,
-
         /**
          * Filter results for posts before the indicated datetime (not inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYY-MM-DD).
          */
         @Serializable(with = UntilSerializer::class)
         val until: LocalDateTime? = null,
-
         /**
          * Filter to posts which mention the given account. Handles are resolved to DID before query-time. Only matches rich-text facet mentions.
          */
@@ -57,54 +47,45 @@ class SearchPosts(val domain: Domain) :
          * Filter to posts by the given account. Handles are resolved to DID before query-time.
          */
         val author: String? = null,
-
         /**
          * Filter to posts in the given language. Expected to be based on post language field, though server may override language detection.
          */
         val lang: String? = null,
-
         /**
          * Filter to posts with URLs (facet links or embeds) linking to the given domain (hostname). Server may apply hostname normalization.
          */
         val domain: String? = null,
-
         /**
          * Filter to posts with links (facet links or embeds) pointing to this URL. Server may apply URL normalization or fuzzy matching.
          */
         val url: String? = null,
-
         /**
          * Filter to posts with the given tag (hashtag), based on rich-text facet or tag field. Do not include the hash (#) prefix. Multiple tags can be specified, with 'AND' matching.
          */
         val tag: List<String>? = null,
-
-
         val limit: Int = 25,
         val cursor: String = ""
-    ) : AtProtocolRequestWithSession{
-
+    ) : AtProtocolRequestWithSession {
         @Serializable
-        enum class SortedBy{
+        enum class SortedBy {
             @SerialName("top")
             Top,
+
             @SerialName("latest")
             Latest
-            ;
-
         }
 
-        companion object{
+        companion object {
             object SinceSerializer : DateTimeSerializer("since")
+
             object UntilSerializer : DateTimeSerializer("until")
         }
     }
-
-
 
     @Serializable
     data class SearchPostsResponse(
         val cursor: String = "",
         val hitTotal: Int? = null,
         val posts: List<PostView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

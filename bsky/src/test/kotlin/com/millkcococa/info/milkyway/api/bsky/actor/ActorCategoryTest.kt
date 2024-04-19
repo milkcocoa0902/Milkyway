@@ -31,10 +31,10 @@ class ActorCategoryTest {
                 .actor()
                 .getProfile(
                     request =
-                    GetProfile.GetProfileRequest(
-                        accessJwt = session.accessJwt,
-                        actor = session.didDoc.id
-                    )
+                        GetProfile.GetProfileRequest(
+                            accessJwt = session.accessJwt,
+                            actor = session.didDoc.id
+                        )
                 )
                 .let {
                     println(it)
@@ -61,10 +61,10 @@ class ActorCategoryTest {
                 .actor()
                 .getProfiles(
                     request =
-                    GetProfiles.GetProfilesRequest(
-                        accessJwt = session.accessJwt,
-                        actors = listOf(session.didDoc.id)
-                    )
+                        GetProfiles.GetProfilesRequest(
+                            accessJwt = session.accessJwt,
+                            actors = listOf(session.didDoc.id)
+                        )
                 )
                 .let {
                     println(it)
@@ -91,15 +91,16 @@ class ActorCategoryTest {
                 .actor()
                 .getPReferences(
                     request =
-                    GetPreferences.GetPreferencesRequest(
-                        accessJwt = session.accessJwt
-                    )
+                        GetPreferences.GetPreferencesRequest(
+                            accessJwt = session.accessJwt
+                        )
                 )
                 .let {
                     println(it)
                 }
         }
     }
+
     @Test
     fun getSuggestions() {
         runBlocking {

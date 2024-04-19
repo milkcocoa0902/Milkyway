@@ -26,37 +26,41 @@ data class LabelValueDefinition(
      * Does the user need to have adult content enabled in order to configure this label?
      */
     val adultOnly: Boolean? = null,
-
     val locales: List<LabelValueDefinitionStrings>? = null
-
-){
+) {
     @Serializable
-    enum class Severity{
+    enum class Severity {
         @SerialName("inform")
         Inform,
+
         @SerialName("alert")
         Alert,
+
         @SerialName("none")
         None
     }
 
     @Serializable
-    enum class Blurs{
+    enum class Blurs {
         @SerialName("content")
         Content,
+
         @SerialName("media")
         Media,
+
         @SerialName("none")
         None
     }
 
     @Serializable
-    enum class DefaultSetting{
+    enum class DefaultSetting {
         @SerialName("ignore")
         Ignore,
+
         @SerialName("warn")
         Warn,
+
         @SerialName("hide")
-        Hide,
+        Hide
     }
 }

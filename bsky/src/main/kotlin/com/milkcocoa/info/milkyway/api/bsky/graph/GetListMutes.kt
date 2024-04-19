@@ -8,13 +8,13 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
 
-class GetListMutes(val domain: Domain):
+class GetListMutes(val domain: Domain) :
     AtProtocolGet<GetListMutes.GetListMutesRequest, GetListMutes.GetListMutesResponse>(
-    action = BskyActions.GetListMutes,
-    domain = domain,
-    GetListMutesRequest::class,
-    GetListMutesResponse::class
-) {
+        action = BskyActions.GetListMutes,
+        domain = domain,
+        GetListMutesRequest::class,
+        GetListMutesResponse::class
+    ) {
     @Serializable
     data class GetListMutesRequest(
         override val accessJwt: String,
@@ -26,5 +26,5 @@ class GetListMutes(val domain: Domain):
     data class GetListMutesResponse(
         val cursor: String = "",
         val lists: List<ListView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

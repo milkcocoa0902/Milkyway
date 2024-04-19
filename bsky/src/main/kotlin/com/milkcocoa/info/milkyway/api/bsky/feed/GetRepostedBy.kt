@@ -14,7 +14,7 @@ class GetRepostedBy(val domain: Domain) :
         domain = domain,
         GetRepostedByRequest::class,
         GetRepostedByResponse::class
-) {
+    ) {
     @Serializable
     data class GetRepostedByRequest(
         override val accessJwt: String,
@@ -30,5 +30,5 @@ class GetRepostedBy(val domain: Domain) :
         val cid: String = "",
         val cursor: String = "",
         val repostedBy: List<ProfileView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

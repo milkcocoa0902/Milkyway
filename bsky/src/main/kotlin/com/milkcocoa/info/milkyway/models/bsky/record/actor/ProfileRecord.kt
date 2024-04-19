@@ -16,7 +16,6 @@ data class ProfileRecord(
      * Free-form profile description text
      */
     val description: String,
-
     /**
      * Small image to be displayed next to posts from account. AKA, 'profile picture'
      */
@@ -28,8 +27,8 @@ data class ProfileRecord(
     /**
      * Self-label values, specific to the Bluesky application, on the overall account.
      */
-    val labels: SelfLabels,
-): BskyRecord(){
+    val labels: SelfLabels
+) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.ProfileRecord
 }

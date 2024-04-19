@@ -14,7 +14,7 @@ class GetFeedGenerators(val domain: Domain) :
         domain = domain,
         GetFeedGeneratorsRequest::class,
         GetFeedGeneratorsResponse::class
-) {
+    ) {
     @Serializable
     data class GetFeedGeneratorsRequest(
         override val accessJwt: String,
@@ -24,5 +24,5 @@ class GetFeedGenerators(val domain: Domain) :
     @Serializable
     data class GetFeedGeneratorsResponse(
         val feeds: List<GeneratorView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

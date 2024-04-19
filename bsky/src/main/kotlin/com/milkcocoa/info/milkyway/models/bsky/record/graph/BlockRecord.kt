@@ -17,7 +17,7 @@ data class BlockRecord(
      */
     val subject: String,
     @Serializable(with = CreatedAtSerializer::class)
-    val createdAt: LocalDateTime,
+    val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.BlockRecord
