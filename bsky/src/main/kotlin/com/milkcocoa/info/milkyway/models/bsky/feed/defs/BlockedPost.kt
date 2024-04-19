@@ -9,8 +9,7 @@ data class BlockedPost(
     val uri: String,
     val blocked: Boolean,
     val author: BlockedAuthor
-): Post(){
-
+) : Post() {
     override val type: PostType
         get() = PostType.BlockedPost
 }

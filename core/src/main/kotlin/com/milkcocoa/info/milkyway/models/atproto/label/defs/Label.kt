@@ -1,4 +1,4 @@
-package com.milkcocoa.info.milkyway.models.entity
+package com.milkcocoa.info.milkyway.models.atproto.label.defs
 
 import kotlinx.serialization.Serializable
 

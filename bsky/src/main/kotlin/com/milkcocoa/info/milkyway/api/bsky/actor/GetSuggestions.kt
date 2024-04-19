@@ -8,12 +8,13 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
 
-class GetSuggestions(val domain: Domain) : AtProtocolGet<GetSuggestions.GetSuggestionsRequest, GetSuggestions.GetSuggestionsResponse>(
-    action = BskyActions.GetSuggestions,
-    domain = domain,
-    GetSuggestionsRequest::class,
-    GetSuggestionsResponse::class
-) {
+class GetSuggestions(val domain: Domain) :
+    AtProtocolGet<GetSuggestions.GetSuggestionsRequest, GetSuggestions.GetSuggestionsResponse>(
+        action = BskyActions.GetSuggestions,
+        domain = domain,
+        GetSuggestionsRequest::class,
+        GetSuggestionsResponse::class
+    ) {
     @Serializable
     data class GetSuggestionsRequest(
         override val accessJwt: String,
@@ -25,5 +26,5 @@ class GetSuggestions(val domain: Domain) : AtProtocolGet<GetSuggestions.GetSugge
     data class GetSuggestionsResponse(
         val cursor: String = "",
         val actors: List<ProfileView> = emptyList()
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

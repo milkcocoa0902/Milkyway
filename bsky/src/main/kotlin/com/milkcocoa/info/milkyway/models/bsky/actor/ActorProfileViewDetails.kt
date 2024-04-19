@@ -1,7 +1,7 @@
 package com.milkcocoa.info.milkyway.models.bsky.actor
 
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.entity.Label
+import com.milkcocoa.info.milkyway.models.atproto.label.defs.Label
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime

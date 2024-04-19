@@ -9,7 +9,7 @@ data class ThreadViewPost(
     val post: PostView,
     val parent: Post,
     val replies: List<Post>
-): Post(){
+) : Post() {
     override val type: PostType
         get() = PostType.ThreadViewPost
 }

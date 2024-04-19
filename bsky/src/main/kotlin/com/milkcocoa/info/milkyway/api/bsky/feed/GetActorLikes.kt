@@ -10,11 +10,11 @@ import kotlinx.serialization.Serializable
 
 class GetActorLikes(val domain: Domain) :
     AtProtocolGet<GetActorLikes.GetActorLikesRequest, GetActorLikes.GetActorLikesResponse>(
-    action = BskyActions.GetActorLikes,
-    domain = domain,
-    GetActorLikesRequest::class,
-    GetActorLikesResponse::class
-) {
+        action = BskyActions.GetActorLikes,
+        domain = domain,
+        GetActorLikesRequest::class,
+        GetActorLikesResponse::class
+    ) {
     @Serializable
     data class GetActorLikesRequest(
         val actor: String,
@@ -26,5 +26,5 @@ class GetActorLikes(val domain: Domain) :
     data class GetActorLikesResponse(
         val cursor: String = "",
         val feeds: List<FeedViewPost>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

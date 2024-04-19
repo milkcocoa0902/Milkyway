@@ -7,6 +7,16 @@ import kotlinx.serialization.Serializable
 enum class RecordType(override val identifier: String) : SerializableEnum {
     FeedPostRecord("app.bsky.feed.post"),
     ThreadGateRecord("app.bsky.feed.threadgate"),
+    LikeRecord("app.bsky.feed.like"),
+    RepostRecord("app.bsky.feed.repost"),
+    GeneratorRecord("app.bsky.feed.generator"),
+    FollowRecord("app.bsky.graph.follow"),
+    BlockRecord("app.bsky.graph.block"),
+    ListRecord("app.bsky.graph.list"),
+    ListBlockRecord("app.bsky.graph.list.block"),
+    ListItemRecord("app.bsky.graph.list.item"),
+    ProfileRecord("app.bsky.actor.profile"),
+    LabelerServiceRecord("app.bsky.labeler.service"),
     UnknownEmbed("unknown")
     ;
 

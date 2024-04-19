@@ -5,7 +5,6 @@ import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
-import com.milkcocoa.info.milkyway.models.bsky.feed.defs.FeedViewPost
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.ThreadViewPost
 import kotlinx.serialization.Serializable
 
@@ -15,7 +14,7 @@ class GetPostThread(val domain: Domain) :
         domain = domain,
         GetPostThreadRequest::class,
         GetPostThreadResponse::class
-) {
+    ) {
     @Serializable
     data class GetPostThreadRequest(
         override val accessJwt: String,
@@ -27,5 +26,5 @@ class GetPostThread(val domain: Domain) :
     @Serializable
     data class GetPostThreadResponse(
         val thread: ThreadViewPost
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

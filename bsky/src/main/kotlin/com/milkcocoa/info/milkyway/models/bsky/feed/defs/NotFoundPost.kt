@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 data class NotFoundPost(
     val uri: String,
     val notFound: Boolean = true
-): Post(){
+) : Post() {
     override val type: PostType
         get() = PostType.NotFoundPost
 }

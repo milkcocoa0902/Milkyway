@@ -8,5 +8,5 @@ data class External(
     val uri: String,
     val title: String,
     val description: String,
-    val thumb: Blob? = null,
+    val thumb: Blob? = null
 )

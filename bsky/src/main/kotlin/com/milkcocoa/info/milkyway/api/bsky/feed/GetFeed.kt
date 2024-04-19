@@ -14,7 +14,7 @@ class GetFeed(val domain: Domain) :
         domain = domain,
         GetFeedRequest::class,
         GetFeedResponse::class
-) {
+    ) {
     @Serializable
     data class GetFeedRequest(
         override val accessJwt: String,
@@ -27,5 +27,5 @@ class GetFeed(val domain: Domain) :
     data class GetFeedResponse(
         val cursor: String = "",
         val feeds: List<FeedViewPost>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

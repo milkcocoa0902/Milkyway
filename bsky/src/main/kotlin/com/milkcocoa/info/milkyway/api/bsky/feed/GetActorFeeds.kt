@@ -14,7 +14,7 @@ class GetActorFeeds(val domain: Domain) :
         domain = domain,
         GetActorFeedsRequest::class,
         GetActorFeedsResponse::class
-) {
+    ) {
     @Serializable
     data class GetActorFeedsRequest(
         override val accessJwt: String,
@@ -27,5 +27,5 @@ class GetActorFeeds(val domain: Domain) :
     data class GetActorFeedsResponse(
         val cursor: String = "",
         val feeds: List<GeneratorView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

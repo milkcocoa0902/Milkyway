@@ -23,5 +23,5 @@ class GetProfiles(val domain: Domain) : AtProtocolGet<GetProfiles.GetProfilesReq
     @Serializable
     data class GetProfilesResponse(
         val profiles: List<ActorProfileViewDetails>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

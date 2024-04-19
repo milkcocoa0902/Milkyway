@@ -14,7 +14,7 @@ class GetPosts(val domain: Domain) :
         domain = domain,
         GetPostsRequest::class,
         GetPostsResponse::class
-) {
+    ) {
     @Serializable
     data class GetPostsRequest(
         override val accessJwt: String,
@@ -24,5 +24,5 @@ class GetPosts(val domain: Domain) :
     @Serializable
     data class GetPostsResponse(
         val feeds: List<PostView>
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

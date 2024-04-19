@@ -31,7 +31,7 @@ class GetLikes(val domain: Domain) : AtProtocolGet<GetLikes.GetLikesRequest, Get
         val cid: String = "",
         val cursor: String = "",
         val likes: List<Likes>
-    ) : AtProtocolModel{
+    ) : AtProtocolModel {
         @Serializable
         data class Likes(
             @Serializable(with = IndexedAtSerializer::class)
@@ -39,9 +39,10 @@ class GetLikes(val domain: Domain) : AtProtocolGet<GetLikes.GetLikesRequest, Get
             @Serializable(with = CreatedAtSerializer::class)
             val createdAt: LocalDateTime,
             val actor: ProfileView
-        ){
+        ) {
             companion object {
                 object IndexedAtSerializer : DateTimeSerializer("indexedAt")
+
                 object CreatedAtSerializer : DateTimeSerializer("createdAt")
             }
         }
