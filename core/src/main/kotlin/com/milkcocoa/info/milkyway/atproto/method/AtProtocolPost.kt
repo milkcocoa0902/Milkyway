@@ -9,11 +9,13 @@ import com.milkcocoa.info.milkyway.models.AtProtocolUnit
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import io.ktor.client.call.*
 import io.ktor.client.request.*
+import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.plus
 import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
@@ -26,6 +28,13 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
     @OptIn(InternalSerializationApi::class)
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
+            val j =
+                Json {
+                    classDiscriminator = "\$type"
+                    explicitNulls = true
+                    ignoreUnknownKeys = true
+                    serializersModule = KtorHttpClient.getSerializersModules().reduce { acc, serializersModule -> acc + serializersModule }
+                }
             return@withContext KtorHttpClient.instance().post(
                 urlString = "${domain.url}/xrpc/${action.action}"
             ) {
@@ -36,9 +45,10 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
                     }
                 }
                 contentType(ContentType.Application.Json)
-                setBody(Json.encodeToString(requestClass.serializer(), request))
+                setBody(j.encodeToString(requestClass.serializer(), request))
             }.let {
-                Json.decodeFromString(
+                println(it.bodyAsText())
+                j.decodeFromString(
                     responseClazz.serializer(),
                     it.body()
                 )
@@ -48,9 +58,9 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
 }
 
 open class AtProtocolUnitPost<in I : AtProtocolRequest>(
-    private val action: Action,
-    private val domain: Domain,
-    private val requestClass: KClass<I>
+    action: Action,
+    domain: Domain,
+    requestClass: KClass<I>
 ) : AtProtocolPost<I, AtProtocolUnit>(
         action,
         domain,

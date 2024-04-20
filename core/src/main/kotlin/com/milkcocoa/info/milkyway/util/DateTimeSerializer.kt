@@ -10,6 +10,9 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatter.ISO_LOCAL_DATE
+import java.time.format.DateTimeFormatter.ISO_LOCAL_TIME
+import java.time.format.DateTimeFormatterBuilder
 
 open class DateTimeSerializer(private val serialName: String) : KSerializer<LocalDateTime> {
     override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
@@ -17,7 +20,7 @@ open class DateTimeSerializer(private val serialName: String) : KSerializer<Loca
     override fun deserialize(decoder: Decoder): LocalDateTime {
         return LocalDateTime.parse(
             decoder.decodeString(),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]'Z'")
+            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]ZZZZZ")
         )
             .atZone(ZoneOffset.UTC)
             .withZoneSameInstant(ZoneId.systemDefault())
@@ -32,7 +35,7 @@ open class DateTimeSerializer(private val serialName: String) : KSerializer<Loca
             .withZoneSameInstant(ZoneOffset.UTC)
             .toLocalDateTime()
             .also {
-                encoder.encodeString(it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm:ss[.SSS]'Z'")))
+                encoder.encodeString(it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")))
             }
     }
 }
