@@ -1,14 +1,22 @@
 package com.milkcocoa.info.milkyway.models.bsky.record.actor
 
+import com.milkcocoa.info.milkyway.models.Record
 import com.milkcocoa.info.milkyway.models.atproto.label.defs.SelfLabels
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
+import com.milkcocoa.info.milkyway.models.bsky.record.feed.FeedPostRecord
 import com.milkcocoa.info.milkyway.models.entity.Blob
 import com.milkcocoa.info.milkyway.types.RecordType
+import com.milkcocoa.info.milkyway.util.KtorHttpClient
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 
 /**
  * A declaration of a Bluesky account profile.
  */
+@SerialName("app.bsky.actor.profile")
 @Serializable
 data class ProfileRecord(
     val displayName: String,
