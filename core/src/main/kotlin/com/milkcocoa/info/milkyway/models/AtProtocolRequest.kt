@@ -8,3 +8,7 @@ interface AtProtocolRequestWithSession : AtProtocolRequest {
     @Transient
     val accessJwt: String
 }
+
+interface AtProtocolBlobRequestWithSession: AtProtocolRequestWithSession{
+    val binary: ByteArray
+}
