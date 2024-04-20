@@ -39,19 +39,26 @@ class Bsky(private val domain: Domain) {
     fun notification() = Notification(domain)
 }
 
+inline fun <reified sub: Record<*>> polymorphic(): SerializersModule {
+    return SerializersModule {
+        polymorphic(Record::class) {
+            subclass(sub::class)
+        }
+    }
+}
 fun Milkyway.bsky() = Bsky(domain)
 fun Milkyway.installBskyDependencies(){
-    KtorHttpClient.addSerializersModule(serializersModuleOf(ProfileRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(FeedPostRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(GeneratorRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(LikeRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(RepostRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(ThreadGateRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(BlockRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(FollowRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(FollowRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(ListRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(ListBlockRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(ListItemRecord.serializer()))
-    KtorHttpClient.addSerializersModule(serializersModuleOf(ServiceRecord.serializer()))
+    KtorHttpClient.addSerializersModule(polymorphic<ProfileRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<FeedPostRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<GeneratorRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<LikeRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<RepostRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<ThreadGateRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<BlockRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<FollowRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<FollowRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<ListRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<ListBlockRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<ListItemRecord>())
+    KtorHttpClient.addSerializersModule(polymorphic<ServiceRecord>())
 }
