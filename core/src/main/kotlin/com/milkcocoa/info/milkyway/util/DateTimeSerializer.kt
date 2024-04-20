@@ -19,8 +19,8 @@ open class DateTimeSerializer(private val serialName: String) : KSerializer<Loca
 
     override fun deserialize(decoder: Decoder): LocalDateTime {
         return LocalDateTime.parse(
-            decoder.decodeString(),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]ZZZZZ")
+            decoder.decodeString().replace("+0000", "Z"),
+            DateTimeFormatter.ISO_OFFSET_DATE_TIME
         )
             .atZone(ZoneOffset.UTC)
             .withZoneSameInstant(ZoneId.systemDefault())

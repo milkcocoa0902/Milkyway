@@ -4,14 +4,20 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Blob(
+sealed class BlobBase{
+    @SerialName("\$type")
+    abstract val type: String
+}
+
+@Serializable
+@SerialName("blob")
+data class BlobObject(
     val ref: Ref,
     val mimeType: String,
     val size: Int
-) {
-    @SerialName("\$type")
-    val type: String = "blob"
-
+): BlobBase() {
+    override val type: String
+        get() = "blob"
     @Serializable
     data class Ref(
         @SerialName("\$link")

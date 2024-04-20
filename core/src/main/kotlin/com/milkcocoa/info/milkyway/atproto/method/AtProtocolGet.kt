@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
+import com.milkcocoa.info.milkyway.util.Unknown
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -14,9 +15,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
+import kotlinx.serialization.json.ClassDiscriminatorMode
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.modules.SerializersModule
+import kotlinx.serialization.modules.plus
+import kotlinx.serialization.modules.polymorphic
+import kotlinx.serialization.modules.subclass
 import kotlinx.serialization.properties.Properties
-import kotlinx.serialization.properties.encodeToMap
 import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
@@ -26,6 +31,20 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
     private val requestClass: KClass<I>,
     private val responseClazz: KClass<R>
 ) : AtProtocolMethod<I, R> {
+    val json =
+        Json {
+            classDiscriminator = "\$type"
+            explicitNulls = true
+            ignoreUnknownKeys = true
+            serializersModule = SerializersModule {
+                polymorphic(Any::class){
+                    subclass(Unknown::class)
+                }
+            }
+            if(KtorHttpClient.getSerializersModules().isEmpty().not()){
+                serializersModule += KtorHttpClient.getSerializersModules().reduce { acc, serializersModule -> acc + serializersModule }
+            }
+        }
     @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
@@ -50,15 +69,7 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
                 contentType(ContentType.Application.Json)
             }.let {
                 println(it.bodyAsText())
-
-                val j =
-                    Json {
-                        classDiscriminator = "\$type"
-                        explicitNulls = true
-                        ignoreUnknownKeys = true
-                    }
-
-                j.decodeFromString(
+                json.decodeFromString(
                     responseClazz.serializer(),
                     it.body()
                 )
