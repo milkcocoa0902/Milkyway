@@ -31,5 +31,4 @@ data class GeneratorRecord(
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.GeneratorRecord
-
 }

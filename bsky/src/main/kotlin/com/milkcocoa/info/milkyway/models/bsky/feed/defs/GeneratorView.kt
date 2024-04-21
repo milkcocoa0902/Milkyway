@@ -27,5 +27,4 @@ data class GeneratorView(
 ) : EmbedView() {
     override val type: EmbedViewType
         get() = EmbedViewType.GeneratorView
-
 }

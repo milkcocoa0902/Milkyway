@@ -6,7 +6,6 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 /**
  * Register to receive push notifications, via a specified service, for the requesting account. Requires auth.

@@ -8,7 +8,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.notification.Notification
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 /**
@@ -28,8 +27,7 @@ class ListNotifications(val domain: Domain) :
         val cursor: String? = null,
         @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolRequestWithSession {
-    }
+    ) : AtProtocolRequestWithSession
 
     @Serializable
     data class ListNotificationsResponse(
@@ -37,6 +35,5 @@ class ListNotifications(val domain: Domain) :
         val notifications: List<Notification>,
         @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolModel {
-    }
+    ) : AtProtocolModel
 }

@@ -18,5 +18,4 @@ data class ThreadGateRecord(
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.ThreadGateRecord
-
 }

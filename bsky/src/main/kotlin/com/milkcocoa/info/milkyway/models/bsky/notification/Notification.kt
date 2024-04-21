@@ -19,5 +19,4 @@ data class Notification(
     @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime,
     val labels: List<Label> = emptyList()
-) {
-}
+)

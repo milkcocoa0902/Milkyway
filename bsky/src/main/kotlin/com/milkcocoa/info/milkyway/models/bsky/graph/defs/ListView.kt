@@ -21,5 +21,4 @@ data class ListView(
     val viewer: ListViewerState? = null,
     @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime
-) {
-}
+)

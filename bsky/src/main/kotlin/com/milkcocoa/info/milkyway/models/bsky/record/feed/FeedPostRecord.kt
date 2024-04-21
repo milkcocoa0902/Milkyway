@@ -44,6 +44,7 @@ data class FeedPostRecord(
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.FeedPostRecord
+
     @Serializable
     data class ReplyRef(
         val root: StringRef,

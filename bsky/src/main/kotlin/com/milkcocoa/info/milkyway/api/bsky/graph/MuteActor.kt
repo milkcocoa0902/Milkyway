@@ -5,7 +5,6 @@ import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 /**
  * Creates a mute relationship for the specified account. Mutes are private in Bluesky. Requires auth.

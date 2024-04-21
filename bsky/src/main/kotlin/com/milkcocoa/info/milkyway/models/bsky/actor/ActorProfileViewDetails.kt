@@ -26,5 +26,4 @@ data class ActorProfileViewDetails(
     val indexedAt: LocalDateTime? = null,
     val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
-) : AtProtocolModel {
-}
+) : AtProtocolModel

@@ -21,10 +21,7 @@ import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.JsonTransformingSerializer
 import kotlinx.serialization.json.jsonObject
-import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
-import kotlinx.serialization.modules.polymorphic
-import kotlinx.serialization.modules.subclass
 import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
 
@@ -54,19 +51,19 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
 
     @OptIn(InternalSerializationApi::class)
     override suspend fun execute(request: I): R {
-
         return withContext(Dispatchers.IO) {
             return@withContext KtorHttpClient.instance().post(
                 urlString = "${domain.url}/xrpc/${action.action}"
             ) {
                 contentType(ContentType.Application.Json)
-                if(request is AtProtocolRequestWithSession){
+                if (request is AtProtocolRequestWithSession) {
                     @OptIn(InternalSerializationApi::class)
-                    val s = object: JsonTransformingSerializer<I>(requestClass.serializer()){
-                        override fun transformDeserialize(element: JsonElement): JsonElement {
-                            return JsonObject(element.jsonObject.filterKeys { it.equals("accessJwt").not() })
+                    val s =
+                        object : JsonTransformingSerializer<I>(requestClass.serializer()) {
+                            override fun transformDeserialize(element: JsonElement): JsonElement {
+                                return JsonObject(element.jsonObject.filterKeys { it.equals("accessJwt").not() })
+                            }
                         }
-                    }
 
                     headers {
                         (request as? AtProtocolRequestWithSession)?.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
@@ -75,7 +72,7 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
                         }
                     }
                     setBody(json.encodeToString(s, request).apply { println(this) })
-                }else{
+                } else {
                     setBody(json.encodeToString(requestClass.serializer(), request).apply { println(this) })
                 }
             }.let {

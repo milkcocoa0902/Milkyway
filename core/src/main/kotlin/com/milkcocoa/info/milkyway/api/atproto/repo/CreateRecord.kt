@@ -8,7 +8,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.Record
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 /**
  * Create a single new repository record. Requires auth, implemented by PDS.

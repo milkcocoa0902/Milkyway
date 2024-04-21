@@ -6,7 +6,6 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 /**
@@ -23,6 +22,5 @@ class UpdateSeen(val domain: Domain) :
         override val accessJwt: String,
         @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolRequestWithSession {
-    }
+    ) : AtProtocolRequestWithSession
 }

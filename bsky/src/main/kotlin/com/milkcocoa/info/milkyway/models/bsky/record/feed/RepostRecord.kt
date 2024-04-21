@@ -23,5 +23,4 @@ data class RepostRecord(
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.RepostRecord
-
 }

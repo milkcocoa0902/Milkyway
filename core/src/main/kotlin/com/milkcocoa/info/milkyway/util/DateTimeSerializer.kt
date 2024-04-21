@@ -9,17 +9,17 @@ import kotlinx.serialization.encoding.Encoder
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 open class DateTimeSerializer : KSerializer<LocalDateTime> {
     override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): LocalDateTime {
-        return LocalDateTime.parse(
+        return ZonedDateTime.parse(
             decoder.decodeString().replace("+0000", "Z"),
             DateTimeFormatter.ISO_OFFSET_DATE_TIME
         )
-            .atZone(ZoneOffset.UTC)
             .withZoneSameInstant(ZoneId.systemDefault())
             .toLocalDateTime()
     }

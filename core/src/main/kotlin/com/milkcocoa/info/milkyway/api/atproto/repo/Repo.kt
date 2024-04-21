@@ -11,7 +11,8 @@ class Repo(private val domain: Domain) {
 
     suspend fun getRecord(request: GetRecord.GetRecordRequest) = GetRecord(domain).execute(request)
 
-    suspend fun listMissingBlobs(request: ListMissingBlobs.ListMissingBlobsRequest) = ListMissingBlobs(domain).execute(request)
+    suspend fun listMissingBlobs(request: ListMissingBlobs.ListMissingBlobsRequest) =
+        ListMissingBlobs(domain).execute(request)
 
     suspend fun listRecords(request: ListRecords.ListRecordsRequest) = ListRecords(domain).execute(request)
 

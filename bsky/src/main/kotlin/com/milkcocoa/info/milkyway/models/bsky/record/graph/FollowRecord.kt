@@ -19,5 +19,4 @@ data class FollowRecord(
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.FollowRecord
-
 }

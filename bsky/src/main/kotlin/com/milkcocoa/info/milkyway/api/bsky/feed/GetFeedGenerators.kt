@@ -7,7 +7,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.GeneratorView
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 class GetFeedGenerators(val domain: Domain) :
     AtProtocolGet<GetFeedGenerators.GetFeedGeneratorsRequest, GetFeedGenerators.GetFeedGeneratorsResponse>(

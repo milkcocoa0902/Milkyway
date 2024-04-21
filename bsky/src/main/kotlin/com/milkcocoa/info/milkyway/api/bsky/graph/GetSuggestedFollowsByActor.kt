@@ -7,7 +7,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 /**
  * Enumerates follows similar to a given account (actor). Expected use is to recommend additional accounts immediately after following one account.

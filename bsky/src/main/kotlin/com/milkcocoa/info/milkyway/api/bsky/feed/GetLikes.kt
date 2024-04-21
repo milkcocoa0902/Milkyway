@@ -8,7 +8,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 class GetLikes(val domain: Domain) : AtProtocolGet<GetLikes.GetLikesRequest, GetLikes.GetLikesResponse>(

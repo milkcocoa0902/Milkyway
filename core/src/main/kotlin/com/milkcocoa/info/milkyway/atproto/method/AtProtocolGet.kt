@@ -15,10 +15,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
-import kotlinx.serialization.modules.polymorphic
-import kotlinx.serialization.modules.subclass
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.serializer
 import kotlin.reflect.KClass
@@ -52,16 +49,20 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
                 urlString = "${domain.url}/xrpc/${action.action}"
             ) {
                 val entries =
-                    if(request is AtProtocolRequestWithSession){
+                    if (request is AtProtocolRequestWithSession) {
                         Properties.encodeToMap(requestClass.serializer(), request).filterNot {
                             it.key == "accessJwt"
                         }
-                    }else{
+                    } else {
                         Properties.encodeToMap(requestClass.serializer(), request)
                     }
 
                 parameters {
-                    entries.entries.groupingBy { it.key.split(".").first() }.fold(listOf<String>()) { accumulator, element ->
+                    entries.entries.groupingBy {
+                        it.key.split(
+                            "."
+                        ).first()
+                    }.fold(listOf<String>()) { accumulator, element ->
                         accumulator + element.value.toString()
                     }.forEach {
                         parameter(it.key, it.value.joinToString(","))

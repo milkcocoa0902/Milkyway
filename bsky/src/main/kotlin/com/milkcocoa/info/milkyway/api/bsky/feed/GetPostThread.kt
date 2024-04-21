@@ -7,7 +7,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.ThreadViewPost
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 class GetPostThread(val domain: Domain) :
     AtProtocolGet<GetPostThread.GetPostThreadRequest, GetPostThread.GetPostThreadResponse>(

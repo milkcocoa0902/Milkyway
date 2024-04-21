@@ -7,7 +7,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 class GetListMutes(val domain: Domain) :
     AtProtocolGet<GetListMutes.GetListMutesRequest, GetListMutes.GetListMutesResponse>(

@@ -7,7 +7,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 /**
@@ -25,8 +24,7 @@ class GetUnreadCount(val domain: Domain) :
         override val accessJwt: String,
         @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolRequestWithSession {
-    }
+    ) : AtProtocolRequestWithSession
 
     @Serializable
     data class GetUnreadCountResponse(

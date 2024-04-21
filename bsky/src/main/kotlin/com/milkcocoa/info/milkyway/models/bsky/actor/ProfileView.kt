@@ -21,5 +21,4 @@ data class ProfileView(
     val indexedAt: LocalDateTime? = null,
     val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
-) {
-}
+)

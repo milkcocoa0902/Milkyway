@@ -6,7 +6,6 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.defs.ActorPreferenceDef
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 
 class PutPreferences(val domain: Domain) :
     AtProtocolUnitPost<PutPreferences.PutPreferencesRequest>(
