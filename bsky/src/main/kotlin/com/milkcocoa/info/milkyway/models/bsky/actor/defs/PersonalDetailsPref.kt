@@ -7,13 +7,9 @@ import java.time.LocalDateTime
 
 @Serializable
 data class PersonalDetailsPref(
-    @Serializable(with = BirthDataSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val birthDate: LocalDateTime? = null
 ) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.PersonalDetailsPref
-
-    companion object {
-        object BirthDataSerializer : DateTimeSerializer("birthDate")
-    }
 }

@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.labeler.Labeler
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Get information about a list of labeler services.

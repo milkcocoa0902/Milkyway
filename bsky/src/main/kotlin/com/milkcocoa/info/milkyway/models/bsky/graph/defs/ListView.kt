@@ -19,10 +19,7 @@ data class ListView(
     val avatar: String = "",
     val labels: List<Label> = emptyList(),
     val viewer: ListViewerState? = null,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime
 ) {
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
 }

@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolBlobRequestWithSession
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.entity.BlobObject
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Upload a new blob, to be referenced from a repository record.

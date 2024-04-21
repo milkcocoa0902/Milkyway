@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.FeedViewPost
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetTimeLine(val domain: Domain) : AtProtocolGet<GetTimeLine.GetTimelineRequest, GetTimeLine.GetTimelineResponse>(
     action = BskyActions.GetTimeLine,

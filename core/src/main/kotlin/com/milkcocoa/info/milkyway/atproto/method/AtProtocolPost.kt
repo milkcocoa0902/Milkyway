@@ -14,8 +14,13 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonTransformingSerializer
+import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.modules.polymorphic
@@ -29,6 +34,7 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
     private val requestClass: KClass<I>,
     private val responseClazz: KClass<R>
 ) : AtProtocolMethod<I, R> {
+    @OptIn(ExperimentalSerializationApi::class)
     val json =
         Json {
             classDiscriminator = "\$type"
@@ -48,18 +54,30 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
 
     @OptIn(InternalSerializationApi::class)
     override suspend fun execute(request: I): R {
+
         return withContext(Dispatchers.IO) {
             return@withContext KtorHttpClient.instance().post(
                 urlString = "${domain.url}/xrpc/${action.action}"
             ) {
-                headers {
-                    (request as? AtProtocolRequestWithSession)?.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
-                            accessJwt ->
-                        header(HttpHeaders.Authorization, "Bearer $accessJwt")
-                    }
-                }
                 contentType(ContentType.Application.Json)
-                setBody(json.encodeToString(requestClass.serializer(), request).apply { println(this) })
+                if(request is AtProtocolRequestWithSession){
+                    @OptIn(InternalSerializationApi::class)
+                    val s = object: JsonTransformingSerializer<I>(requestClass.serializer()){
+                        override fun transformDeserialize(element: JsonElement): JsonElement {
+                            return JsonObject(element.jsonObject.filterKeys { it.equals("accessJwt").not() })
+                        }
+                    }
+
+                    headers {
+                        (request as? AtProtocolRequestWithSession)?.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
+                                accessJwt ->
+                            header(HttpHeaders.Authorization, "Bearer $accessJwt")
+                        }
+                    }
+                    setBody(json.encodeToString(s, request).apply { println(this) })
+                }else{
+                    setBody(json.encodeToString(requestClass.serializer(), request).apply { println(this) })
+                }
             }.let {
                 println(it.bodyAsText())
                 json.decodeFromString(
@@ -87,6 +105,7 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobRequestWithSession, out R
     private val domain: Domain,
     private val responseClazz: KClass<R>
 ) : AtProtocolMethod<I, R> {
+    @OptIn(ExperimentalSerializationApi::class)
     val json =
         Json {
             explicitNulls = false

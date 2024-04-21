@@ -39,16 +39,11 @@ data class FeedPostRecord(
     /**
      * Client-declared timestamp when this post was originally created.
      */
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.FeedPostRecord
-
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
-
     @Serializable
     data class ReplyRef(
         val root: StringRef,

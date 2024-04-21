@@ -2,7 +2,31 @@ package com.milkcocoa.info.milkyway.atproto.action
 
 object AtProtoActions {
     // com.atproto.server
+    val ActivateAccount = Action("com.atproto.server.activateAccount")
+    val CheckAccountStatus = Action("com.atproto.server.checkAccountStatus")
+    val ConfirmEmail = Action("com.atproto.server.confirmEmail")
+    val CreateAccount = Action("com.atproto.server.createAccount")
+    val CreateAppPassword = Action("com.atproto.server.createAppPassword")
+    val CreateInviteCode = Action("com.atproto.server.createInviteCode")
+    val CreateInviteCodes = Action("com.atproto.server.createInviteCodes")
     val CreateSession = Action("com.atproto.server.createSession")
+    val DeactivateAccount = Action("com.atproto.server.deactivateAccount")
+    val DeleteAccount = Action("com.atproto.server.deleteAccount")
+    val DeleteSession = Action("com.atproto.server.deleteSession")
+    val DescribeServer = Action("com.atproto.server.describeServer")
+    val GetAccountInviteCodes = Action("com.atproto.server.getAccountInviteCodes")
+    val GetServiceAuth = Action("com.atproto.server.getServiceAuth")
+    val GetSession  = Action("com.atproto.server.getSession")
+    val ListAppPasswords = Action("com.atproto.server.listAppPasswords")
+    val RefreshSession = Action("com.atproto.server.refreshSession")
+    val RequestAccountDelete = Action("com.atproto.server.requestAccountDelete")
+    val RequestEmailConfirmation = Action("com.atproto.server.requestEmailConfirmation")
+    val RequestEmailUpdate = Action("com.atproto.server.requestEmailUpdate")
+    val RequestPasswordReset = Action("com.atproto.server.requestPasswordReset")
+    val ReverseSigningKey = Action("com.atproto.server.reverseSigningKey")
+    val ResetPassword = Action("com.atproto.server.resetPassword")
+    val RevokeAppPassword = Action("com.atproto.server.revokeAppPassword")
+    val UpdateEmail = Action("com.atproto.server.updateEmail")
 
     // com.atproto.repo
     val ApplyWrites = Action("com.atproto.repo.applyWrites")

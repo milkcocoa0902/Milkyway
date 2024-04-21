@@ -11,8 +11,8 @@ import java.time.ZoneId
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
-open class DateTimeSerializer(private val serialName: String) : KSerializer<LocalDateTime> {
-    override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+open class DateTimeSerializer : KSerializer<LocalDateTime> {
+    override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): LocalDateTime {
         return LocalDateTime.parse(

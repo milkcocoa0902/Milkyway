@@ -22,12 +22,9 @@ data class ActorProfileViewDetails(
     val followsCount: Int? = null,
     val postsCount: Int? = null,
     val associated: Associated? = null,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime? = null,
     val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
 ) : AtProtocolModel {
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
 }

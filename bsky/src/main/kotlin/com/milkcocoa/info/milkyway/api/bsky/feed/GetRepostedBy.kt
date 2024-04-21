@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetRepostedBy(val domain: Domain) :
     AtProtocolGet<GetRepostedBy.GetRepostedByRequest, GetRepostedBy.GetRepostedByResponse>(

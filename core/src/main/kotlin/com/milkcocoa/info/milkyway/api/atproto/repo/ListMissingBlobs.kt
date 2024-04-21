@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.atproto.repo.RecordBlob
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Returns a list of missing blobs for the requesting account. Intended to be used in the account migration flow.

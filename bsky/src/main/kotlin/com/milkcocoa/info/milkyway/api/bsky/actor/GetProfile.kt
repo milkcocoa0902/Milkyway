@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ActorProfileViewDetails
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetProfile(val domain: Domain) : AtProtocolGet<GetProfile.GetProfileRequest, ActorProfileViewDetails>(
     action = BskyActions.GetProfile,

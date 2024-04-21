@@ -1,7 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.record.graph
 
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
-import com.milkcocoa.info.milkyway.models.bsky.record.feed.FeedPostRecord.Companion.CreatedAtSerializer
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.SerialName
@@ -18,13 +17,9 @@ data class BlockRecord(
      * DID of the account to be blocked.
      */
     val subject: String,
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.BlockRecord
-
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
 }

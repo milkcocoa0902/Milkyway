@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 class GetLikes(val domain: Domain) : AtProtocolGet<GetLikes.GetLikesRequest, GetLikes.GetLikesResponse>(
@@ -34,17 +35,11 @@ class GetLikes(val domain: Domain) : AtProtocolGet<GetLikes.GetLikesRequest, Get
     ) : AtProtocolModel {
         @Serializable
         data class Likes(
-            @Serializable(with = IndexedAtSerializer::class)
+            @Serializable(with = DateTimeSerializer::class)
             val indexedAt: LocalDateTime,
-            @Serializable(with = CreatedAtSerializer::class)
+            @Serializable(with = DateTimeSerializer::class)
             val createdAt: LocalDateTime,
             val actor: ProfileView
-        ) {
-            companion object {
-                object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-
-                object CreatedAtSerializer : DateTimeSerializer("createdAt")
-            }
-        }
+        )
     }
 }

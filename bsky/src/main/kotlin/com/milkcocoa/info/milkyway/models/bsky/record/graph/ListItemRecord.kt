@@ -21,13 +21,9 @@ data class ListItemRecord(
      * Reference (AT-URI) to the list record (app.bsky.graph.list).
      */
     val list: String,
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.ListItemRecord
-
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
 }

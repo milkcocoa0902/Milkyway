@@ -16,14 +16,10 @@ data class LabelerViewDetailed(
     val policies: List<LabelerPolicies>,
     val likeCount: Int? = null,
     val viewer: LabelerViewerState? = null,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime,
     val labels: List<Label>
 ) : Labeler() {
     override val type: LabelerType
         get() = LabelerType.LabelerViewDetailed
-
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
 }

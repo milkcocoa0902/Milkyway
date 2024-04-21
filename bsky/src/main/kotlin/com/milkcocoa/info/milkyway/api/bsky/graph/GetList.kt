@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListItemView
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetList(val domain: Domain) :
     AtProtocolGet<GetList.GetListRequest, GetList.GetListResponse>(

@@ -26,13 +26,10 @@ data class GeneratorRecord(
     /**
      * Client-declared timestamp when this post was originally created.
      */
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.GeneratorRecord
 
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
 }

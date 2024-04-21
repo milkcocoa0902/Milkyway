@@ -22,8 +22,7 @@ class CreateRecord(val domain: Domain) :
     ) {
     @Serializable
     data class CreateRecordRequest(
-        @Transient
-        override val accessJwt: String = "",
+        override val accessJwt: String,
         /**
          * The handle or DID of the repo (aka, current account).
          */

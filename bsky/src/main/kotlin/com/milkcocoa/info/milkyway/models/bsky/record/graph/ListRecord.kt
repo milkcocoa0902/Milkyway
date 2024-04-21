@@ -25,13 +25,9 @@ data class ListRecord(
     val descriptionFacets: List<Facet> = emptyList(),
     val avatar: BlobObject? = null,
     val labels: SelfLabels? = null,
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.ListRecord
-
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
 }

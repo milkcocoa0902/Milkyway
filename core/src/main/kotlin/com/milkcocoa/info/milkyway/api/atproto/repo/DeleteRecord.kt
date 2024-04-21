@@ -5,6 +5,7 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Delete a repository record, or ensure it doesn't exist. Requires auth, implemented by PDS.

@@ -17,13 +17,9 @@ data class ListBlockRecord(
      * Reference (AT-URI) to the mod list record.
      */
     val subject: String,
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.ListBlockRecord
-
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
 }

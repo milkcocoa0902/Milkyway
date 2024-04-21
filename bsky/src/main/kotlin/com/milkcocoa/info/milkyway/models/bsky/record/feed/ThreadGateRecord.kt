@@ -12,14 +12,11 @@ import java.time.LocalDateTime
 @Serializable
 data class ThreadGateRecord(
     val allow: List<GateRule>,
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime,
     val post: String
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.ThreadGateRecord
 
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
 }

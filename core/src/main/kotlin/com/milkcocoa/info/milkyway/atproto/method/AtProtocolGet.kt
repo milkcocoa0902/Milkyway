@@ -29,6 +29,7 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
     private val requestClass: KClass<I>,
     private val responseClazz: KClass<R>
 ) : AtProtocolMethod<I, R> {
+    @OptIn(ExperimentalSerializationApi::class)
     val json =
         Json {
             classDiscriminator = "\$type"
@@ -50,15 +51,23 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
             return@withContext KtorHttpClient.instance().get(
                 urlString = "${domain.url}/xrpc/${action.action}"
             ) {
+                val entries =
+                    if(request is AtProtocolRequestWithSession){
+                        Properties.encodeToMap(requestClass.serializer(), request).filterNot {
+                            it.key == "accessJwt"
+                        }
+                    }else{
+                        Properties.encodeToMap(requestClass.serializer(), request)
+                    }
+
                 parameters {
-                    Properties.encodeToMap(requestClass.serializer(), request).filterNot {
-                        it.key == "accessJwt"
-                    }.entries.groupingBy { it.key.split(".").first() }.fold(listOf<String>()) { accumulator, element ->
+                    entries.entries.groupingBy { it.key.split(".").first() }.fold(listOf<String>()) { accumulator, element ->
                         accumulator + element.value.toString()
                     }.forEach {
                         parameter(it.key, it.value.joinToString(","))
                     }
                 }
+
                 headers {
                     (request as? AtProtocolRequestWithSession)?.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
                             accessJwt ->

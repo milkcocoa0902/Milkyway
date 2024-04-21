@@ -5,6 +5,7 @@ import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Unmutes the specified account. Requires auth.

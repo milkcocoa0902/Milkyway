@@ -17,13 +17,9 @@ import java.time.LocalDateTime
 data class ServiceRecord(
     val policies: LabelerPolicies,
     val labels: SelfLabels? = null,
-    @Serializable(with = CreatedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
 ) : BskyRecord() {
     override val type: RecordType
         get() = RecordType.LabelerServiceRecord
-
-    companion object {
-        object CreatedAtSerializer : DateTimeSerializer("createdAt")
-    }
 }
