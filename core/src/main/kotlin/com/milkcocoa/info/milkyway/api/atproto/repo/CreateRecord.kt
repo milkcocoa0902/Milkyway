@@ -5,8 +5,8 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
-import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.Record
+import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Transient
 

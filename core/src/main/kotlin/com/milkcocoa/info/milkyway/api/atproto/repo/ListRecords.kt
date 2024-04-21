@@ -5,7 +5,6 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
-import com.milkcocoa.info.milkyway.models.atproto.repo.RecordBlob
 import com.milkcocoa.info.milkyway.models.atproto.repo.WrappedRecord
 import kotlinx.serialization.Serializable
 
@@ -37,7 +36,7 @@ class ListRecords(val domain: Domain) :
          *
          */
         val cursor: String? = null,
-        val reverse: Boolean? = null,
+        val reverse: Boolean? = null
     ) : AtProtocolRequest
 
     @Serializable

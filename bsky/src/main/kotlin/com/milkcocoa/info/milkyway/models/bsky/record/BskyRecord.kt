@@ -14,14 +14,7 @@ import com.milkcocoa.info.milkyway.models.bsky.record.graph.ListItemRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.graph.ListRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.labeler.ServiceRecord
 import com.milkcocoa.info.milkyway.types.RecordType
-import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
-import com.milkcocoa.info.milkyway.util.SerializableEnum
-import kotlinx.serialization.DeserializationStrategy
-import kotlinx.serialization.KSerializer
-import kotlinx.serialization.PolymorphicSerializer
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonContentPolymorphicSerializer
-import kotlinx.serialization.json.JsonElement
 import kotlinx.serialization.modules.PolymorphicModuleBuilder
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
@@ -31,8 +24,9 @@ import kotlinx.serialization.modules.subclass
 open class BskyRecord() : Record<RecordType>() {
     override val type: RecordType
         get() = TODO("Not yet implemented")
+
     companion object {
-        fun PolymorphicModuleBuilder<Record<RecordType>>.register(){
+        fun PolymorphicModuleBuilder<Record<RecordType>>.register() {
             subclass(ProfileRecord::class)
             subclass(FeedPostRecord::class)
             subclass(GeneratorRecord::class)
@@ -47,15 +41,16 @@ open class BskyRecord() : Record<RecordType>() {
             subclass(ServiceRecord::class)
             defaultDeserializer { UnknownBskyRecord.serializer() }
         }
+
         val serializerModule
-            get() = SerializersModule {
-                polymorphic(Record::class){
-                    register()
+            get() =
+                SerializersModule {
+                    polymorphic(Record::class) {
+                        register()
+                    }
                 }
-            }
     }
 }
-
 
 @Serializable
 class UnknownBskyRecord : BskyRecord() {

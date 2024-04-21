@@ -8,7 +8,6 @@ import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.AtProtocolUnit
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
-import com.milkcocoa.info.milkyway.util.Unknown
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -36,13 +35,14 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
             explicitNulls = true
             ignoreUnknownKeys = true
             encodeDefaults = false
-            serializersModule = SerializersModule {
-                polymorphic(Any::class){
-                    subclass(Unknown::class)
-                }
-            }
-            if(KtorHttpClient.getSerializersModules().isEmpty().not()){
-                serializersModule += KtorHttpClient.getSerializersModules().reduce { acc, serializersModule -> acc + serializersModule }
+
+            if (KtorHttpClient.getSerializersModules().isEmpty().not()) {
+                serializersModule +=
+                    KtorHttpClient.getSerializersModules().reduce {
+                            acc,
+                            serializersModule ->
+                        acc + serializersModule
+                    }
             }
         }
 
@@ -92,13 +92,13 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobRequestWithSession, out R
             explicitNulls = false
             encodeDefaults = true
             ignoreUnknownKeys = true
-            serializersModule = SerializersModule {
-                polymorphic(Any::class){
-                    subclass(Unknown::class)
-                }
-            }
-            if(KtorHttpClient.getSerializersModules().isEmpty().not()){
-                serializersModule += KtorHttpClient.getSerializersModules().reduce { acc, serializersModule -> acc + serializersModule }
+            if (KtorHttpClient.getSerializersModules().isEmpty().not()) {
+                serializersModule +=
+                    KtorHttpClient.getSerializersModules().reduce {
+                            acc,
+                            serializersModule ->
+                        acc + serializersModule
+                    }
             }
         }
 

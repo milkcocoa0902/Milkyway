@@ -5,8 +5,6 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
-import com.milkcocoa.info.milkyway.models.aturi.AtUri
-import com.milkcocoa.info.milkyway.models.Record
 import com.milkcocoa.info.milkyway.models.did.DidDoc
 import kotlinx.serialization.Serializable
 
@@ -25,7 +23,7 @@ class DescribeRepo(val domain: Domain) :
         /**
          * The handle or DID of the repo.
          */
-        val repo: String,
+        val repo: String
     ) : AtProtocolRequest
 
     @Serializable

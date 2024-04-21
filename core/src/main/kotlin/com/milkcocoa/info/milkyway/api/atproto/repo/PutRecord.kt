@@ -2,7 +2,6 @@ package com.milkcocoa.info.milkyway.api.atproto.repo
 
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
-import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
@@ -54,5 +53,5 @@ class PutRecord(val domain: Domain) :
     data class PutRecordResponse(
         val uri: AtUri,
         val cid: String
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

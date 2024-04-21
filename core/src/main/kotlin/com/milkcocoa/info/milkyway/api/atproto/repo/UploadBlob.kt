@@ -29,5 +29,5 @@ class UploadBlob(val domain: Domain) :
     @Serializable
     data class UploadBlobResponse(
         val blob: BlobObject
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

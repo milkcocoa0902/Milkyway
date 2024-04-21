@@ -4,7 +4,6 @@ object AtProtoActions {
     // com.atproto.server
     val CreateSession = Action("com.atproto.server.createSession")
 
-
     // com.atproto.repo
     val ApplyWrites = Action("com.atproto.repo.applyWrites")
     val CreateRecord = Action("com.atproto.repo.createRecord")
@@ -16,6 +15,4 @@ object AtProtoActions {
     val ListRecords = Action("com.atproto.repo.listRecords")
     val PutRecord = Action("com.atproto.repo.putRecord")
     val UploadBlob = Action("com.atproto.repo.uploadBlob")
-
-
 }

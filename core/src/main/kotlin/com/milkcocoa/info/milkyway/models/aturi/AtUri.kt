@@ -11,18 +11,23 @@ import kotlinx.serialization.encoding.Encoder
 @Serializable(with = AtUri.Companion.AtUriSerializer::class)
 data class AtUri(
     val uri: String
-){
+) {
     companion object {
+        @Suppress("ktlint:standard:max-line-length")
         private val didRegexPattern = "did:[a-z]+:[a-zA-Z0-9._:%-]*[a-zA-Z0-9._-]"
+
+        @Suppress("ktlint:standard:max-line-length")
         private val handleRegexPattern = "([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"
+
+        @Suppress("ktlint:standard:max-line-length")
         private val NSIDRegex = "[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(\\.[a-zA-Z]([a-zA-Z]{0,61}[a-zA-Z])?)"
+
+        @Suppress("ktlint:standard:max-line-length")
         private val RecordKeyRegex = "[A-Za-z0-9.-_:~]{1,512}"
 
         val AtUriRegex = Regex("^at://(($didRegexPattern)|($handleRegexPattern))(/$NSIDRegex(/$RecordKeyRegex)?)?$")
 
-
-
-        object AtUriSerializer: KSerializer<AtUri> {
+        object AtUriSerializer : KSerializer<AtUri> {
             override val descriptor: SerialDescriptor
                 get() = PrimitiveSerialDescriptor("ATUri", PrimitiveKind.STRING)
 
@@ -30,11 +35,15 @@ data class AtUri(
                 return AtUri(decoder.decodeString())
             }
 
-            override fun serialize(encoder: Encoder, value: AtUri) {
+            override fun serialize(
+                encoder: Encoder,
+                value: AtUri
+            ) {
                 encoder.encodeString(value.uri)
             }
         }
     }
+
     val did: String by lazy {
         uri.substringAfter("at://")
             .split("/")
@@ -55,7 +64,6 @@ data class AtUri(
             .getOrNull(1)?.let {
                 NSIDRegex.toRegex().find(it)?.groups?.firstOrNull()?.value ?: ""
             } ?: ""
-
     }
     val rkey: String by lazy {
         uri.substringAfter("at://")

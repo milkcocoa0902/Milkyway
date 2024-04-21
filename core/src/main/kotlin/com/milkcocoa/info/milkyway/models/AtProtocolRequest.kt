@@ -9,6 +9,6 @@ interface AtProtocolRequestWithSession : AtProtocolRequest {
     val accessJwt: String
 }
 
-interface AtProtocolBlobRequestWithSession: AtProtocolRequestWithSession{
+interface AtProtocolBlobRequestWithSession : AtProtocolRequestWithSession {
     val binary: ByteArray
 }
