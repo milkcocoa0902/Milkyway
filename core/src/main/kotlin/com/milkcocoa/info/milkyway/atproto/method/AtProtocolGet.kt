@@ -4,6 +4,7 @@ import com.milkcocoa.info.milkyway.atproto.action.Action
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import io.ktor.client.call.*
@@ -18,6 +19,8 @@ import kotlinx.serialization.json.Json
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.properties.Properties
 import kotlinx.serialization.serializer
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.reflect.KClass
 
 abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
@@ -26,23 +29,7 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
     private val requestClass: KClass<I>,
     private val responseClazz: KClass<R>
 ) : AtProtocolMethod<I, R> {
-    @OptIn(ExperimentalSerializationApi::class)
-    val json =
-        Json {
-            classDiscriminator = "\$type"
-            explicitNulls = true
-            ignoreUnknownKeys = true
-            if (KtorHttpClient.getSerializersModules().isEmpty().not()) {
-                serializersModule +=
-                    KtorHttpClient.getSerializersModules().reduce {
-                            acc,
-                            serializersModule ->
-                        acc + serializersModule
-                    }
-            }
-        }
-
-    @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class)
+    @OptIn(InternalSerializationApi::class, ExperimentalSerializationApi::class, ExperimentalEncodingApi::class)
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
             return@withContext KtorHttpClient.instance().get(
@@ -53,7 +40,11 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
                         Properties.encodeToMap(requestClass.serializer(), request).filterNot {
                             it.key == "accessJwt"
                         }
-                    } else {
+                    } else if (request is AtProtocolRequestWithAdmin) {
+                        Properties.encodeToMap(requestClass.serializer(), request).filterNot {
+                            it.key == "adminPassword"
+                        }
+                    }  else {
                         Properties.encodeToMap(requestClass.serializer(), request)
                     }
 
@@ -70,11 +61,21 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
                 }
 
                 headers {
-                    (request as? AtProtocolRequestWithSession)?.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
-                            accessJwt ->
-                        header(HttpHeaders.Authorization, "Bearer $accessJwt")
+                    if(request is AtProtocolRequestWithSession){
+                        request.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
+                                accessJwt ->
+                            header(HttpHeaders.Authorization, "Bearer $accessJwt")
+                        }
+                    }else if(request is AtProtocolRequestWithAdmin){
+                        headers {
+                            header(
+                                HttpHeaders.Authorization,
+                                "Basic ${Base64.encode("admin:${request.adminPassword}".toByteArray())}"
+                            )
+                        }
                     }
                 }
+
                 contentType(ContentType.Application.Json)
             }.let {
                 println(it.bodyAsText())

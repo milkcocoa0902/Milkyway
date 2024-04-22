@@ -5,6 +5,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolBlobRequestWithSession
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.AtProtocolUnit
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
@@ -23,6 +24,8 @@ import kotlinx.serialization.json.JsonTransformingSerializer
 import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.modules.plus
 import kotlinx.serialization.serializer
+import kotlin.io.encoding.Base64
+import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.reflect.KClass
 
 abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>(
@@ -31,25 +34,7 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
     private val requestClass: KClass<I>,
     private val responseClazz: KClass<R>
 ) : AtProtocolMethod<I, R> {
-    @OptIn(ExperimentalSerializationApi::class)
-    val json =
-        Json {
-            classDiscriminator = "\$type"
-            explicitNulls = true
-            ignoreUnknownKeys = true
-            encodeDefaults = false
-
-            if (KtorHttpClient.getSerializersModules().isEmpty().not()) {
-                serializersModule +=
-                    KtorHttpClient.getSerializersModules().reduce {
-                            acc,
-                            serializersModule ->
-                        acc + serializersModule
-                    }
-            }
-        }
-
-    @OptIn(InternalSerializationApi::class)
+    @OptIn(InternalSerializationApi::class, ExperimentalEncodingApi::class)
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
             return@withContext KtorHttpClient.instance().post(
@@ -64,12 +49,26 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
                                 return JsonObject(element.jsonObject.filterKeys { it.equals("accessJwt").not() })
                             }
                         }
-
                     headers {
-                        (request as? AtProtocolRequestWithSession)?.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
+                        request.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
                                 accessJwt ->
                             header(HttpHeaders.Authorization, "Bearer $accessJwt")
                         }
+                    }
+                    setBody(json.encodeToString(s, request).apply { println(this) })
+                } else if(request is AtProtocolRequestWithAdmin){
+                    @OptIn(InternalSerializationApi::class)
+                    val s =
+                        object : JsonTransformingSerializer<I>(requestClass.serializer()) {
+                            override fun transformDeserialize(element: JsonElement): JsonElement {
+                                return JsonObject(element.jsonObject.filterKeys { it.equals("accessJwt").not() })
+                            }
+                        }
+                    headers {
+                        header(
+                            HttpHeaders.Authorization,
+                            "Basic ${Base64.encode("admin:${request.adminPassword}".toByteArray())}"
+                        )
                     }
                     setBody(json.encodeToString(s, request).apply { println(this) })
                 } else {
@@ -102,22 +101,6 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobRequestWithSession, out R
     private val domain: Domain,
     private val responseClazz: KClass<R>
 ) : AtProtocolMethod<I, R> {
-    @OptIn(ExperimentalSerializationApi::class)
-    val json =
-        Json {
-            explicitNulls = false
-            encodeDefaults = true
-            ignoreUnknownKeys = true
-            if (KtorHttpClient.getSerializersModules().isEmpty().not()) {
-                serializersModule +=
-                    KtorHttpClient.getSerializersModules().reduce {
-                            acc,
-                            serializersModule ->
-                        acc + serializersModule
-                    }
-            }
-        }
-
     @OptIn(InternalSerializationApi::class)
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
