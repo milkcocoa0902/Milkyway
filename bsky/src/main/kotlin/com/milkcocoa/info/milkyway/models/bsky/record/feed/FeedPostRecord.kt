@@ -1,7 +1,7 @@
 package com.milkcocoa.info.milkyway.models.bsky.record.feed
 
 import com.milkcocoa.info.milkyway.models.atproto.label.defs.SelfLabels
-import com.milkcocoa.info.milkyway.models.atproto.repo.StringRef
+import com.milkcocoa.info.milkyway.models.atproto.repo.StrongRef
 import com.milkcocoa.info.milkyway.models.bsky.embed.Embed
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
@@ -47,7 +47,7 @@ data class FeedPostRecord(
 
     @Serializable
     data class ReplyRef(
-        val root: StringRef,
-        val parent: StringRef
+        val root: StrongRef,
+        val parent: StrongRef
     )
 }

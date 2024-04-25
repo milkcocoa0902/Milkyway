@@ -1,6 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.record.feed
 
-import com.milkcocoa.info.milkyway.models.atproto.repo.StringRef
+import com.milkcocoa.info.milkyway.models.atproto.repo.StrongRef
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
@@ -14,7 +14,7 @@ import java.time.LocalDateTime
 @SerialName("app.bsky.feed.like")
 @Serializable
 data class LikeRecord(
-    val subject: StringRef,
+    val subject: StrongRef,
     /**
      * Client-declared timestamp when this post was originally created.
      */
