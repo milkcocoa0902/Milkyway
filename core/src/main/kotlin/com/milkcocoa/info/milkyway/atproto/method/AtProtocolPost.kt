@@ -15,7 +15,6 @@ import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonElement
@@ -56,12 +55,14 @@ abstract class AtProtocolPost<in I : AtProtocolRequest, out R : AtProtocolModel>
                         }
                     }
                     setBody(json.encodeToString(s, request).apply { println(this) })
-                } else if(request is AtProtocolRequestWithAdmin){
+                } else if (request is AtProtocolRequestWithAdmin) {
                     @OptIn(InternalSerializationApi::class)
                     val s =
                         object : JsonTransformingSerializer<I>(requestClass.serializer()) {
                             override fun transformDeserialize(element: JsonElement): JsonElement {
-                                return JsonObject(element.jsonObject.filterKeys { it.equals("accessJwt").not() })
+                                return JsonObject(
+                                    element.jsonObject.filterKeys { it.equals("adminPassword").not() }
+                                )
                             }
                         }
                     headers {

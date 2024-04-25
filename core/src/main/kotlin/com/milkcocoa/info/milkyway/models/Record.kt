@@ -7,5 +7,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 abstract class Record<T : SerializableEnum> {
     @SerialName("\$type")
-    abstract val type: T
+    abstract val type: T?
 }
+
+@Serializable
+class AnyRecord(override val type: SerializableEnum? = null) : Record<SerializableEnum>()

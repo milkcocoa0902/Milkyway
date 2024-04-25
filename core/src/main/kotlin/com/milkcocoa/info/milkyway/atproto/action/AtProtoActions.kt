@@ -1,6 +1,20 @@
 package com.milkcocoa.info.milkyway.atproto.action
 
 object AtProtoActions {
+    // com.atproto.admin
+    val AdminDeleteAccount = Action("com.atproto.admin.deleteAccount")
+    val AdminDisableAccountInvites = Action("com.atproto.disableAccountInvites")
+    val AdminDisableInviteCodes = Action("com.atproto.disableInviteCodes")
+    val AdminEnableAccountInvites = Action("com.atproto.enableAccountInvites")
+    val AdminGetAccountInfo = Action("com.atproto.getAccountInfo")
+    val AdminGetInviteCodes = Action("com.atproto.getInviteCodes")
+    val AdminGetSubjectStatus = Action("com.atproto.getSubjectStatus")
+    val AdminSendEmail = Action("com.atproto.sendEmail")
+    val AdminUpdateAccountEmail = Action("com.atproto.updateAccountEmail")
+    val AdminUpdateAccountHandle = Action("com.atproto.updateAccountHandle")
+    val AdminUpdateAccountPassword = Action("com.atproto.updateAccountPassword")
+    val AdminUpdateSubjectStatus = Action("com.atproto.updateSubjectStatus")
+
     // com.atproto.server
     val ActivateAccount = Action("com.atproto.server.activateAccount")
     val CheckAccountStatus = Action("com.atproto.server.checkAccountStatus")

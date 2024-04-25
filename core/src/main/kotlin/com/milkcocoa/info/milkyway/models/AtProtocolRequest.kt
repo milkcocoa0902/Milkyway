@@ -4,7 +4,7 @@ import kotlinx.serialization.Transient
 
 interface AtProtocolRequest
 
-interface AtProtocolRequestWithAdmin: AtProtocolRequest{
+interface AtProtocolRequestWithAdmin : AtProtocolRequest {
     @Transient
     val adminPassword: String
 }

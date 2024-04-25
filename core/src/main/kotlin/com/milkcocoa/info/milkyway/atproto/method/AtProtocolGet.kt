@@ -44,7 +44,7 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
                         Properties.encodeToMap(requestClass.serializer(), request).filterNot {
                             it.key == "adminPassword"
                         }
-                    }  else {
+                    } else {
                         Properties.encodeToMap(requestClass.serializer(), request)
                     }
 
@@ -61,12 +61,12 @@ abstract class AtProtocolGet<in I : AtProtocolRequest, out R : AtProtocolModel>(
                 }
 
                 headers {
-                    if(request is AtProtocolRequestWithSession){
+                    if (request is AtProtocolRequestWithSession) {
                         request.accessJwt.takeIf { it.isNullOrBlank().not() }?.let {
                                 accessJwt ->
                             header(HttpHeaders.Authorization, "Bearer $accessJwt")
                         }
-                    }else if(request is AtProtocolRequestWithAdmin){
+                    } else if (request is AtProtocolRequestWithAdmin) {
                         headers {
                             header(
                                 HttpHeaders.Authorization,

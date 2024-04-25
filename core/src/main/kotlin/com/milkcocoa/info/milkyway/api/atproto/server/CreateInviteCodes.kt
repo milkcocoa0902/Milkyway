@@ -5,7 +5,6 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
 import com.milkcocoa.info.milkyway.models.atproto.server.defs.AccountCodes
 import kotlinx.serialization.Serializable
 
