@@ -22,13 +22,9 @@ class GetUnreadCount(val domain: Domain) :
     @Serializable
     data class GetUnreadCountRequest(
         override val accessJwt: String,
-        @Serializable(with = SeenAtSerializer::class)
+        @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolRequestWithSession {
-        companion object {
-            object SeenAtSerializer : DateTimeSerializer("seenAt")
-        }
-    }
+    ) : AtProtocolRequestWithSession
 
     @Serializable
     data class GetUnreadCountResponse(

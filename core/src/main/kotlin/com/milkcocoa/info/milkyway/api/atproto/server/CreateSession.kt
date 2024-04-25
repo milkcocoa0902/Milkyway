@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 class CreateSession(val domain: Domain) :
     AtProtocolPost<CreateSession.CreateSessionRequest, CreateSession.CreateSessionResponse>(
-        AtProtoActions.ATPROTO_CREATE_SESSION,
+        AtProtoActions.CreateSession,
         domain,
         CreateSessionRequest::class,
         CreateSessionResponse::class
@@ -24,10 +24,11 @@ class CreateSession(val domain: Domain) :
     @Serializable
     data class CreateSessionResponse(
         val did: String,
-        val didDoc: DidDoc,
+        val didDoc: DidDoc? = null,
         val handle: String,
-        val email: String,
-        val emailConfirmed: Boolean,
+        val email: String? = null,
+        val emailConfirmed: Boolean? = null,
+        val emailAuthFactor: Boolean? = null,
         val accessJwt: String,
         val refreshJwt: String
     ) : AtProtocolModel

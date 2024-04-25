@@ -32,12 +32,12 @@ class SearchPosts(val domain: Domain) :
         /**
          * Filter results for posts after the indicated datetime (inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYYY-MM-DD).
          */
-        @Serializable(with = SinceSerializer::class)
+        @Serializable(with = DateTimeSerializer::class)
         val since: LocalDateTime? = null,
         /**
          * Filter results for posts before the indicated datetime (not inclusive). Expected to use 'sortAt' timestamp, which may not match 'createdAt'. Can be a datetime, or just an ISO date (YYY-MM-DD).
          */
-        @Serializable(with = UntilSerializer::class)
+        @Serializable(with = DateTimeSerializer::class)
         val until: LocalDateTime? = null,
         /**
          * Filter to posts which mention the given account. Handles are resolved to DID before query-time. Only matches rich-text facet mentions.
@@ -73,12 +73,6 @@ class SearchPosts(val domain: Domain) :
 
             @SerialName("latest")
             Latest
-        }
-
-        companion object {
-            object SinceSerializer : DateTimeSerializer("since")
-
-            object UntilSerializer : DateTimeSerializer("until")
         }
     }
 

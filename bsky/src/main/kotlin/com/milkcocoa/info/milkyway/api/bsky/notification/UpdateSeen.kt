@@ -20,11 +20,7 @@ class UpdateSeen(val domain: Domain) :
     @Serializable
     data class UpdateSeenRequest(
         override val accessJwt: String,
-        @Serializable(with = SeenAtSerializer::class)
+        @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolRequestWithSession {
-        companion object {
-            object SeenAtSerializer : DateTimeSerializer("seenAt")
-        }
-    }
+    ) : AtProtocolRequestWithSession
 }

@@ -14,10 +14,6 @@ data class ListViewBasic(
     val avatar: String = "",
     val labels: List<Label> = emptyList(),
     val viewer: ListViewerState? = null,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime? = null
-) {
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
-}
+)

@@ -25,23 +25,15 @@ class ListNotifications(val domain: Domain) :
         override val accessJwt: String,
         val limit: Int = 50,
         val cursor: String? = null,
-        @Serializable(with = SeenAtSerializer::class)
+        @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolRequestWithSession {
-        companion object {
-            object SeenAtSerializer : DateTimeSerializer("seenAt")
-        }
-    }
+    ) : AtProtocolRequestWithSession
 
     @Serializable
     data class ListNotificationsResponse(
         val cursor: String? = null,
         val notifications: List<Notification>,
-        @Serializable(with = SeenAtSerializer::class)
+        @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolModel {
-        companion object {
-            object SeenAtSerializer : DateTimeSerializer("seenAt")
-        }
-    }
+    ) : AtProtocolModel
 }

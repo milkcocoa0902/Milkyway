@@ -16,11 +16,7 @@ data class Notification(
     val reasonSubject: String? = null,
     val record: BskyRecord,
     val isRead: Boolean,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime,
     val labels: List<Label> = emptyList()
-) {
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
-}
+)

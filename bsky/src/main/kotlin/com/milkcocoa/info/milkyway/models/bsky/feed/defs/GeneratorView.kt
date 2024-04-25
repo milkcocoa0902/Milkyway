@@ -22,13 +22,9 @@ data class GeneratorView(
     val likeCount: Int? = null,
     val labels: List<Label>? = emptyList(),
     val viewer: ViewerState? = null,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime
 ) : EmbedView() {
     override val type: EmbedViewType
         get() = EmbedViewType.GeneratorView
-
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
 }

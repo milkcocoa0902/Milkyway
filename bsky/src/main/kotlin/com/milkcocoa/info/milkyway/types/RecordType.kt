@@ -17,11 +17,11 @@ enum class RecordType(override val identifier: String) : SerializableEnum {
     ListItemRecord("app.bsky.graph.list.item"),
     ProfileRecord("app.bsky.actor.profile"),
     LabelerServiceRecord("app.bsky.labeler.service"),
-    UnknownEmbed("unknown")
+    UnknownRecord("unknown")
     ;
 
     companion object {
-        fun getByIdentifier(identifier: String?) = entries.find { it.identifier == identifier } ?: UnknownEmbed
+        fun getByIdentifier(identifier: String?) = entries.find { it.identifier == identifier } ?: UnknownRecord
 
         object Serializer : SerializableEnum.Companion.SerializableEnumSerializer<RecordType>(RecordType::class)
     }

@@ -20,7 +20,7 @@ data class PostView(
     val replyCount: Int?,
     val repostCount: Int?,
     val likeCount: Int?,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime,
     val viewer: ViewerState? = null,
     val labels: List<Label>? = emptyList(),
@@ -28,8 +28,4 @@ data class PostView(
 ) : Post() {
     override val type: PostType
         get() = PostType.Post
-
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
 }

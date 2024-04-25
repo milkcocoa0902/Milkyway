@@ -9,17 +9,17 @@ import kotlinx.serialization.encoding.Encoder
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
-open class DateTimeSerializer(private val serialName: String) : KSerializer<LocalDateTime> {
-    override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor(serialName, PrimitiveKind.STRING)
+open class DateTimeSerializer : KSerializer<LocalDateTime> {
+    override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): LocalDateTime {
-        return LocalDateTime.parse(
-            decoder.decodeString(),
-            DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss[.SSS]'Z'")
+        return ZonedDateTime.parse(
+            decoder.decodeString().replace("+0000", "Z"),
+            DateTimeFormatter.ISO_OFFSET_DATE_TIME
         )
-            .atZone(ZoneOffset.UTC)
             .withZoneSameInstant(ZoneId.systemDefault())
             .toLocalDateTime()
     }
@@ -32,7 +32,7 @@ open class DateTimeSerializer(private val serialName: String) : KSerializer<Loca
             .withZoneSameInstant(ZoneOffset.UTC)
             .toLocalDateTime()
             .also {
-                encoder.encodeString(it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm:ss[.SSS]'Z'")))
+                encoder.encodeString(it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")))
             }
     }
 }

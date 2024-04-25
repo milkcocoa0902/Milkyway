@@ -17,12 +17,8 @@ data class ProfileView(
     val description: String? = null,
     val avatar: String? = null,
     val associated: Associated? = null,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime? = null,
     val viewer: ViewerState? = null,
     val labels: List<Label> = emptyList()
-) {
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
-}
+)

@@ -9,13 +9,9 @@ import java.time.LocalDateTime
 @Serializable
 data class ReasonRepost(
     val by: ProfileViewBasic,
-    @Serializable(with = IndexedAtSerializer::class)
+    @Serializable(with = DateTimeSerializer::class)
     val indexedAt: LocalDateTime
 ) : Reason() {
     override val type: FeedReasonType
         get() = FeedReasonType.FeedReasonRepost
-
-    companion object {
-        object IndexedAtSerializer : DateTimeSerializer("indexedAt")
-    }
 }
