@@ -14,7 +14,7 @@ import kotlinx.serialization.Serializable
  */
 class GetInviteCodes(val domain: Domain) :
     AtProtocolGet<GetInviteCodes.GetInviteCodesRequest, GetInviteCodes.GetInviteCodesResponse>(
-        AtProtoActions.AdminGetAccountInfo,
+        AtProtoActions.AdminGetInviteCodes,
         domain,
         GetInviteCodesRequest::class,
         GetInviteCodesResponse::class

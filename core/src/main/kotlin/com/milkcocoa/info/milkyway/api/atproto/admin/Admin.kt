@@ -31,4 +31,7 @@ class Admin(val domain: Domain) {
 
     suspend fun updateAccountPassword(request: UpdateAccountPassword.UpdateAccountPasswordRequest) =
         UpdateAccountPassword(domain).execute(request)
+
+    suspend fun updateSubjectStatus(request: UpdateSubjectStatus.UpdateSubjectStatusRequest) =
+        UpdateSubjectStatus(domain).execute(request)
 }
