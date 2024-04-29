@@ -11,7 +11,7 @@ abstract class AtProtoDependencyResolver {
     protected val lock by lazy { ReentrantLock() }
 
     init {
-        if(init.not()){
+        if (init.not()) {
             lock.withLock {
                 if (init.not()) {
                     init = true

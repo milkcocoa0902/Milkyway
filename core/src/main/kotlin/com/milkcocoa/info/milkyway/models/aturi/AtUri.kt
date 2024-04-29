@@ -16,10 +16,12 @@ import kotlinx.serialization.encoding.Encoder
 data class AtUri(
     val uri: String
 ) {
-
     companion object {
         @Suppress("ktlint:standard:max-line-length")
-        val AtUriRegex = Regex("^at://((${Did.DID_REGEX_PATTERN})|(${Handle.HANDLE_REGEX_PATTERN}))(/${NSID.NSID_REGEX_PATTERN}(/${RecordKey.RECORD_KEY_REGEX_PATTERN})?)?$")
+        val AtUriRegex =
+            Regex(
+                "^at://((${Did.DID_REGEX_PATTERN})|(${Handle.HANDLE_REGEX_PATTERN}))(/${NSID.NSID_REGEX_PATTERN}(/${RecordKey.RECORD_KEY_REGEX_PATTERN})?)?$"
+            )
 
         object AtUriSerializer : KSerializer<AtUri> {
             override val descriptor: SerialDescriptor
@@ -70,7 +72,9 @@ data class AtUri(
             uri.substringAfter("at://")
                 .split("/")
                 .getOrNull(2)?.let {
-                    RECORD_KEY_REGEX_PATTERN.toRegex().find(it)?.groups?.firstOrNull()?.value?.let { RecordKey(value = it) }
+                    RECORD_KEY_REGEX_PATTERN.toRegex().find(
+                        it
+                    )?.groups?.firstOrNull()?.value?.let { RecordKey(value = it) }
                 }
         }.getOrNull()
     }

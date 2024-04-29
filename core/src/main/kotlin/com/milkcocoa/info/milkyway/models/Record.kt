@@ -6,12 +6,12 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-abstract class Record<T : SerializableEnum>: AtProtoDependencyResolver() {
+abstract class Record<T : SerializableEnum> : AtProtoDependencyResolver() {
     @SerialName("\$type")
     abstract val type: T?
 }
 
 @Serializable
-class AnyRecord(override val type: SerializableEnum? = null) : Record<SerializableEnum>(){
+class AnyRecord(override val type: SerializableEnum? = null) : Record<SerializableEnum>() {
     override fun installDependencies() { }
 }
