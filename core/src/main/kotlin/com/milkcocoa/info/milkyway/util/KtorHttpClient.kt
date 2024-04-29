@@ -5,7 +5,7 @@ import io.ktor.client.engine.cio.*
 import kotlinx.serialization.modules.SerializersModule
 
 object KtorHttpClient {
-    private var serializerModules = emptyList<SerializersModule>()
+    private var serializerModules = emptySet<SerializersModule>()
 
     fun addSerializersModule(module: SerializersModule) {
         serializerModules = serializerModules + module

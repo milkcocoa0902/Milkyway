@@ -60,4 +60,7 @@ object AtProtoActions {
     val SignPlcOperation = Action("com.atproto.identity.signPlcOperation")
     val SubmitPlcOperation = Action("com.atproto.identity.submitPlcOperation")
     val UpdateHandle = Action("com.atproto.update.updateHandle")
+
+    // com.atproto.moderation
+    val CreateReport = Action("com.atproto.moderation.createReport")
 }

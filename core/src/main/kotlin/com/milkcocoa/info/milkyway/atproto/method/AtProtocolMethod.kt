@@ -27,13 +27,12 @@ interface AtProtocolMethod<in I : AtProtocolRequest, out R : AtProtocolModel> {
                             defaultDeserializer { AnyRecord.serializer() }
                         }
                     }
-                if (KtorHttpClient.getSerializersModules().isEmpty().not()) {
-                    serializersModule +=
-                        KtorHttpClient.getSerializersModules().reduce {
-                                acc,
-                                serializersModule ->
-                            acc + serializersModule
-                        }
-                }
+                KtorHttpClient.getSerializersModules()
+                    .takeIf { it.isNotEmpty() }
+                    ?.let { serializerModules ->
+                        serializerModules.reduce { a, b -> a + b }
+                    }?.run {
+                        serializersModule += this
+                    }
             }
 }
