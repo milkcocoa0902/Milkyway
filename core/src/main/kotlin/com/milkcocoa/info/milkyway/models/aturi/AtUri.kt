@@ -1,5 +1,9 @@
 package com.milkcocoa.info.milkyway.models.aturi
 
+import com.milkcocoa.info.milkyway.models.aturi.Did.Companion.DID_REGEX_PATTERN
+import com.milkcocoa.info.milkyway.models.aturi.Handle.Companion.HANDLE_REGEX_PATTERN
+import com.milkcocoa.info.milkyway.models.aturi.NSID.Companion.NSID_REGEX_PATTERN
+import com.milkcocoa.info.milkyway.models.aturi.RecordKey.Companion.RECORD_KEY_REGEX_PATTERN
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.descriptors.PrimitiveKind
@@ -12,20 +16,10 @@ import kotlinx.serialization.encoding.Encoder
 data class AtUri(
     val uri: String
 ) {
+
     companion object {
         @Suppress("ktlint:standard:max-line-length")
-        private val didRegexPattern = "did:[a-z]+:[a-zA-Z0-9._:%-]*[a-zA-Z0-9._-]"
-
-        @Suppress("ktlint:standard:max-line-length")
-        private val handleRegexPattern = "([a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\\.)+[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?"
-
-        @Suppress("ktlint:standard:max-line-length")
-        private val NSIDRegex = "[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(\\.[a-zA-Z]([a-zA-Z]{0,61}[a-zA-Z])?)"
-
-        @Suppress("ktlint:standard:max-line-length")
-        private val RecordKeyRegex = "[A-Za-z0-9.-_:~]{1,512}"
-
-        val AtUriRegex = Regex("^at://(($didRegexPattern)|($handleRegexPattern))(/$NSIDRegex(/$RecordKeyRegex)?)?$")
+        val AtUriRegex = Regex("^at://((${Did.DID_REGEX_PATTERN})|(${Handle.HANDLE_REGEX_PATTERN}))(/${NSID.NSID_REGEX_PATTERN}(/${RecordKey.RECORD_KEY_REGEX_PATTERN})?)?$")
 
         object AtUriSerializer : KSerializer<AtUri> {
             override val descriptor: SerialDescriptor
@@ -44,33 +38,41 @@ data class AtUri(
         }
     }
 
-    val did: String by lazy {
-        uri.substringAfter("at://")
-            .split("/")
-            .firstOrNull()?.let {
-                didRegexPattern.toRegex().find(it)?.groups?.firstOrNull()?.value
-            } ?: ""
+    val did: Did? by lazy {
+        kotlin.runCatching {
+            uri.substringAfter("at://")
+                .split("/")
+                .firstOrNull()?.let {
+                    DID_REGEX_PATTERN.toRegex().find(it)?.groups?.firstOrNull()?.value?.let { Did(value = it) }
+                }
+        }.getOrNull()
     }
-    val handle: String by lazy {
-        uri.substringAfter("at://")
-            .split("/")
-            .firstOrNull()?.let {
-                handleRegexPattern.toRegex().find(it)?.groups?.firstOrNull()?.value
-            } ?: ""
+    val handle: Handle? by lazy {
+        kotlin.runCatching {
+            uri.substringAfter("at://")
+                .split("/")
+                .firstOrNull()?.let {
+                    HANDLE_REGEX_PATTERN.toRegex().find(it)?.groups?.firstOrNull()?.value?.let { Handle(value = it) }
+                }
+        }.getOrNull()
     }
-    val collection: String by lazy {
-        uri.substringAfter("at://")
-            .split("/")
-            .getOrNull(1)?.let {
-                NSIDRegex.toRegex().find(it)?.groups?.firstOrNull()?.value ?: ""
-            } ?: ""
+    val collection: NSID? by lazy {
+        kotlin.runCatching {
+            uri.substringAfter("at://")
+                .split("/")
+                .getOrNull(1)?.let {
+                    NSID_REGEX_PATTERN.toRegex().find(it)?.groups?.firstOrNull()?.value?.let { NSID(value = it) }
+                }
+        }.getOrNull()
     }
-    val rkey: String by lazy {
-        uri.substringAfter("at://")
-            .split("/")
-            .getOrNull(2)?.let {
-                RecordKeyRegex.toRegex().find(it)?.groups?.firstOrNull()?.value ?: ""
-            } ?: ""
+    val rkey: RecordKey? by lazy {
+        kotlin.runCatching {
+            uri.substringAfter("at://")
+                .split("/")
+                .getOrNull(2)?.let {
+                    RECORD_KEY_REGEX_PATTERN.toRegex().find(it)?.groups?.firstOrNull()?.value?.let { RecordKey(value = it) }
+                }
+        }.getOrNull()
     }
 
     init {

@@ -8,27 +8,24 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-@Serializable(with = Did.Companion.DidSerializer::class)
-data class Did(
+@Serializable(with = RecordKey.Companion.RecordKeySerializer::class)
+data class RecordKey(
     val value: String
-) : ATIdentifier() {
-    override val type: IdentifierType
-        get() = IdentifierType.Did
-
+) {
     companion object {
-        const val DID_REGEX_PATTERN = "did:[a-z]+:[a-zA-Z0-9._:%-]*[a-zA-Z0-9._-]"
+        const val RECORD_KEY_REGEX_PATTERN = "[A-Za-z0-9.-_:~]{1,512}"
 
-        object DidSerializer : KSerializer<Did> {
+        object RecordKeySerializer : KSerializer<RecordKey> {
             override val descriptor: SerialDescriptor
-                get() = PrimitiveSerialDescriptor("Did", PrimitiveKind.STRING)
+                get() = PrimitiveSerialDescriptor("RecordKey", PrimitiveKind.STRING)
 
-            override fun deserialize(decoder: Decoder): Did {
-                return Did(decoder.decodeString())
+            override fun deserialize(decoder: Decoder): RecordKey {
+                return RecordKey(decoder.decodeString())
             }
 
             override fun serialize(
                 encoder: Encoder,
-                value: Did
+                value: RecordKey
             ) {
                 encoder.encodeString(value.value)
             }
@@ -36,6 +33,6 @@ data class Did(
     }
 
     init {
-        DID_REGEX_PATTERN.toRegex().matchEntire(value) ?: error("")
+        RECORD_KEY_REGEX_PATTERN.toRegex().matchEntire(value) ?: error("Invalid value $value")
     }
 }

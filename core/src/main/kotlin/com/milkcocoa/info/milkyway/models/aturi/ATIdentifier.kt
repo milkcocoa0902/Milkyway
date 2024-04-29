@@ -3,6 +3,12 @@ package com.milkcocoa.info.milkyway.models.aturi
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class ATIdentifier(
-    val identifier: String
-)
+sealed class ATIdentifier {
+    @Serializable
+    enum class IdentifierType {
+        Handle,
+        Did
+    }
+
+    abstract val type: IdentifierType
+}

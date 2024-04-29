@@ -8,27 +8,25 @@ import kotlinx.serialization.descriptors.SerialDescriptor
 import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
-@Serializable(with = Did.Companion.DidSerializer::class)
-data class Did(
+@Serializable(with = NSID.Companion.NSIDSerializer::class)
+data class NSID(
     val value: String
-) : ATIdentifier() {
-    override val type: IdentifierType
-        get() = IdentifierType.Did
-
+) {
     companion object {
-        const val DID_REGEX_PATTERN = "did:[a-z]+:[a-zA-Z0-9._:%-]*[a-zA-Z0-9._-]"
+        @Suppress("ktlint:standard:max-line-length")
+        const val NSID_REGEX_PATTERN = "[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+(\\.[a-zA-Z]([a-zA-Z]{0,61}[a-zA-Z])?)"
 
-        object DidSerializer : KSerializer<Did> {
+        object NSIDSerializer : KSerializer<NSID> {
             override val descriptor: SerialDescriptor
-                get() = PrimitiveSerialDescriptor("Did", PrimitiveKind.STRING)
+                get() = PrimitiveSerialDescriptor("NSID", PrimitiveKind.STRING)
 
-            override fun deserialize(decoder: Decoder): Did {
-                return Did(decoder.decodeString())
+            override fun deserialize(decoder: Decoder): NSID {
+                return NSID(decoder.decodeString())
             }
 
             override fun serialize(
                 encoder: Encoder,
-                value: Did
+                value: NSID
             ) {
                 encoder.encodeString(value.value)
             }
@@ -36,6 +34,6 @@ data class Did(
     }
 
     init {
-        DID_REGEX_PATTERN.toRegex().matchEntire(value) ?: error("")
+        NSID_REGEX_PATTERN.toRegex().matchEntire(value) ?: error("")
     }
 }
