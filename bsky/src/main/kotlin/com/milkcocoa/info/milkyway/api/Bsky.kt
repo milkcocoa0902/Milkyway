@@ -11,7 +11,7 @@ import com.milkcocoa.info.milkyway.models.bsky.embed.Embed
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 
-class Bsky(private val domain: Domain) {
+class Bsky(private val domain: Domain){
     fun feed() = Feed(domain)
 
     fun actor() = Actor(domain)
@@ -24,8 +24,3 @@ class Bsky(private val domain: Domain) {
 }
 
 fun Milkyway.bsky() = Bsky(domain)
-
-fun Milkyway.installBskyDependencies() {
-    KtorHttpClient.addSerializersModule(BskyRecord.serializerModule)
-    KtorHttpClient.addSerializersModule(Embed.serializerModule)
-}

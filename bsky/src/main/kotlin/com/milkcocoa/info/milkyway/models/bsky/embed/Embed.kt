@@ -1,14 +1,20 @@
 package com.milkcocoa.info.milkyway.models.bsky.embed
 
+import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
+import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord.Companion
 import com.milkcocoa.info.milkyway.types.EmbedType
+import com.milkcocoa.info.milkyway.util.AtProtoDependencyResolver
+import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.withLock
 
 @Serializable
-abstract class Embed {
+abstract class Embed: AtProtoDependencyResolver() {
     @SerialName("\$type")
     abstract val type: EmbedType
 
@@ -24,6 +30,10 @@ abstract class Embed {
                     defaultDeserializer { Unknown.serializer() }
                 }
             }
+    }
+
+    override fun installDependencies() {
+        KtorHttpClient.addSerializersModule(BskyRecord.serializerModule)
     }
 }
 
