@@ -44,16 +44,16 @@ data class Operation(
      * signature of the operation in base64url encoding
      */
     val sig: String
-){
+) {
     @Serializable
     data class Services(
         @SerialName("atproto_pds")
         val pds: PDS
-    ){
+    ) {
         @Serializable
         data class PDS(
             val type: String,
-            val endpoint: String,
+            val endpoint: String
         )
     }
 

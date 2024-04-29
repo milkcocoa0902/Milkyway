@@ -11,13 +11,14 @@ class DidDoc(
     val alsoKnownAs: List<String>,
     val verificationMethod: List<VerificationMethod>,
     val service: List<Service>
-){
+) {
     @Serializable
     data class Service(
         val id: String,
         val type: String,
         val serviceEndpoint: String
     )
+
     @Serializable
     data class VerificationMethod(
         val id: String,

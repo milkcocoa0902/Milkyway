@@ -12,7 +12,10 @@ import kotlinx.serialization.Serializable
  * Describe the credentials that should be included in the DID doc of an account that is migrating to this service.
  */
 class GetRecommendedDidCredentials(val domain: Domain) :
-    AtProtocolGet<GetRecommendedDidCredentials.GetRecommendedDidCredentialsRequest, GetRecommendedDidCredentials.GetRecommendedDidCredentialsResponse>(
+    AtProtocolGet<
+        GetRecommendedDidCredentials.GetRecommendedDidCredentialsRequest,
+        GetRecommendedDidCredentials.GetRecommendedDidCredentialsResponse
+    >(
         AtProtoActions.GetRecommendedDidCredentials,
         domain,
         GetRecommendedDidCredentialsRequest::class,
@@ -20,7 +23,7 @@ class GetRecommendedDidCredentials(val domain: Domain) :
     ) {
     @Serializable
     data class GetRecommendedDidCredentialsRequest(
-        override val accessJwt: String,
+        override val accessJwt: String
     ) : AtProtocolRequestWithSession
 
     @Serializable
@@ -29,5 +32,5 @@ class GetRecommendedDidCredentials(val domain: Domain) :
         val alsoKnownAs: List<String> = emptyList(),
         val verificationMethods: Operation.VerificationMethods? = null,
         val services: Operation.Services? = null
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }

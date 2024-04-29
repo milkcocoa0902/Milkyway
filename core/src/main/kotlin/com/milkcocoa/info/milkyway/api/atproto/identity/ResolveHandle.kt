@@ -5,7 +5,6 @@ import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
-import com.milkcocoa.info.milkyway.models.did.Operation
 import kotlinx.serialization.Serializable
 
 /**
@@ -30,5 +29,5 @@ class ResolveHandle(val domain: Domain) :
     @Serializable
     data class ResolveHandleResponse(
         val did: String
-    ): AtProtocolModel
+    ) : AtProtocolModel
 }
