@@ -13,12 +13,16 @@ import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 open class DateTimeSerializer : KSerializer<LocalDateTime> {
+    companion object {
+        val FORMATTER = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+    }
+
     override val descriptor: SerialDescriptor get() = PrimitiveSerialDescriptor("LocalDateTime", PrimitiveKind.STRING)
 
     override fun deserialize(decoder: Decoder): LocalDateTime {
         return ZonedDateTime.parse(
             decoder.decodeString().replace("+0000", "Z"),
-            DateTimeFormatter.ISO_OFFSET_DATE_TIME
+            FORMATTER
         )
             .withZoneSameInstant(ZoneId.systemDefault())
             .toLocalDateTime()
@@ -32,7 +36,7 @@ open class DateTimeSerializer : KSerializer<LocalDateTime> {
             .withZoneSameInstant(ZoneOffset.UTC)
             .toLocalDateTime()
             .also {
-                encoder.encodeString(it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")))
+                encoder.encodeString(it.format(FORMATTER))
             }
     }
 }

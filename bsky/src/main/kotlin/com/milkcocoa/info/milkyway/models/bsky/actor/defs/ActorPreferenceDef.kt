@@ -24,6 +24,7 @@ abstract class ActorPreferenceDef {
                 ActorPreferenceType.ThreadViewPref -> ThreadViewPref.serializer()
                 ActorPreferenceType.InterestsPref -> InterestsPref.serializer()
                 ActorPreferenceType.MutedWordsPref -> MutedWordsPref.serializer()
+                ActorPreferenceType.HiddenPostsPref -> HiddenPostsPref.serializer()
                 else -> Unknown.serializer()
             }
         }

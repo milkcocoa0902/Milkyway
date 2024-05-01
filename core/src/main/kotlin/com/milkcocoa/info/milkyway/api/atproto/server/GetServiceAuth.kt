@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
 
 /**
@@ -24,7 +25,7 @@ class GetServiceAuth(val domain: Domain) :
          * The DID of the service that the token will be used to authenticate with
          */
         val aud: String
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetServiceAuthResponse(

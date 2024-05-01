@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.repo
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolBlobPost
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolBlobRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolBlobPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.entity.BlobObject
 import kotlinx.serialization.Serializable
 
@@ -24,7 +25,7 @@ class UploadBlob(val domain: Domain) :
     data class UploadBlobRequest(
         override val accessJwt: String,
         override val binary: ByteArray
-    ) : AtProtocolBlobRequestWithSession
+    ) : AtProtocolBlobPostRequestModel, RequireUserSession
 
     @Serializable
     data class UploadBlobResponse(

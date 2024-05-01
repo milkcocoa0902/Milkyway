@@ -1,5 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.graph.defs
 
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import com.milkcocoa.info.milkyway.models.bsky.graph.Relation
 import com.milkcocoa.info.milkyway.types.RelationshipType
 import kotlinx.serialization.Serializable
@@ -9,7 +10,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class Relationship(
-    val did: String,
+    val did: Did,
     /**
      * if the actor follows this DID, this is the AT-URI of the follow record
      */

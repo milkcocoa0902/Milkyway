@@ -3,8 +3,10 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,7 +20,7 @@ class DescribeServer(val domain: Domain) :
         DescribeServerResponse::class
     ) {
     @Serializable
-    class DescribeServerRequest : AtProtocolRequest
+    class DescribeServerRequest : AtProtocolRequest, AtProtocolGetRequestModel
 
     @Serializable
     data class DescribeServerResponse(
@@ -27,7 +29,7 @@ class DescribeServer(val domain: Domain) :
         val availableUserDomains: List<String>,
         val links: Links? = null,
         val contact: Contact? = null,
-        val did: String
+        val did: Did
     ) : AtProtocolModel {
         @Serializable
         data class Links(

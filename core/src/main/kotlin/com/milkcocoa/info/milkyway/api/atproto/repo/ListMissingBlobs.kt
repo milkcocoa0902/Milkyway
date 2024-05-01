@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.repo
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.atproto.repo.RecordBlob
 import kotlinx.serialization.Serializable
 
@@ -23,7 +24,7 @@ class ListMissingBlobs(val domain: Domain) :
         override val accessJwt: String,
         val limit: Int = 500,
         val cursor: String? = null
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class ListMissingBlobsResponse(

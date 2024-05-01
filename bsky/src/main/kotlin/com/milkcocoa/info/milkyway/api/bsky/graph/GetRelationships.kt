@@ -3,8 +3,10 @@ package com.milkcocoa.info.milkyway.api.bsky.graph
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.Relationship
 import kotlinx.serialization.Serializable
 
@@ -24,12 +26,12 @@ class GetRelationships(val domain: Domain) :
         /**
          * Primary account requesting relationships for.
          */
-        val actor: String,
+        val actor: ATIdentifier,
         /**
          * List of 'other' accounts to be related back to the primary.
          */
-        val others: List<String>
-    ) : AtProtocolRequest
+        val others: List<ATIdentifier>
+    ) : AtProtocolRequest, AtProtocolGetRequestModel
 
     @Serializable
     data class GetRelationshipsResponse(

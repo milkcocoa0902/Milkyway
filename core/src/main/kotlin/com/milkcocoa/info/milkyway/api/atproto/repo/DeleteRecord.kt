@@ -3,7 +3,10 @@ package com.milkcocoa.info.milkyway.api.atproto.repo
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.NSID
+import com.milkcocoa.info.milkyway.models.aturi.RecordKey
 import kotlinx.serialization.Serializable
 
 /**
@@ -25,11 +28,11 @@ class DeleteRecord(val domain: Domain) :
         /**
          * The NSID of the record collection.
          */
-        val collection: String,
+        val collection: NSID,
         /**
          * The Record Key.
          */
-        val rkey: String? = null,
+        val rkey: RecordKey? = null,
         /**
          * Compare and swap with the previous record by CID.
          */
@@ -38,5 +41,5 @@ class DeleteRecord(val domain: Domain) :
          * Compare and swap with the previous commit by CID.
          */
         val swapCommit: String? = null
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 }

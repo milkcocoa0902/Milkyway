@@ -3,9 +3,11 @@ package com.milkcocoa.info.milkyway.api.atproto.repo
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.atproto.repo.WrappedRecord
+import com.milkcocoa.info.milkyway.models.aturi.NSID
 import kotlinx.serialization.Serializable
 
 /**
@@ -27,7 +29,7 @@ class ListRecords(val domain: Domain) :
         /**
          * The NSID of the record type.
          */
-        val collection: String,
+        val collection: NSID,
         /**
          * The number of records to return.
          */
@@ -37,7 +39,7 @@ class ListRecords(val domain: Domain) :
          */
         val cursor: String? = null,
         val reverse: Boolean? = null
-    ) : AtProtocolRequest
+    ) : AtProtocolRequest, AtProtocolGetRequestModel
 
     @Serializable
     data class ListRecordsResponse(

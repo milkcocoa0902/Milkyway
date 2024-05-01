@@ -14,6 +14,7 @@ import com.milkcocoa.info.milkyway.models.bsky.record.graph.ListItemRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.graph.ListRecord
 import com.milkcocoa.info.milkyway.models.bsky.record.labeler.ServiceRecord
 import com.milkcocoa.info.milkyway.types.RecordType
+import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.modules.PolymorphicModuleBuilder
 import kotlinx.serialization.modules.SerializersModule
@@ -49,6 +50,10 @@ open class BskyRecord() : Record<RecordType>() {
                         register()
                     }
                 }
+    }
+
+    override fun installDependencies() {
+        KtorHttpClient.addSerializersModule(serializerModule)
     }
 }
 

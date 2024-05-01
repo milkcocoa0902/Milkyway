@@ -4,7 +4,9 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
 
 /**
@@ -25,8 +27,8 @@ class ReserveSigningKey(val domain: Domain) :
         /**
          * The DID to reserve a key for.
          */
-        val did: String
-    ) : AtProtocolRequest
+        val did: Did
+    ) : AtProtocolRequest, AtProtocolPostRequestModel
 
     @Serializable
     data class ReserveSigningKeyResponse(

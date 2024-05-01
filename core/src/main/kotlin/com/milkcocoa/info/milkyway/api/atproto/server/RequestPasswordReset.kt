@@ -3,6 +3,7 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import kotlinx.serialization.Serializable
 
@@ -18,5 +19,5 @@ class RequestPasswordReset(val domain: Domain) :
     @Serializable
     data class RequestPasswordResetRequest(
         val email: String
-    ) : AtProtocolRequest
+    ) : AtProtocolRequest, AtProtocolPostRequestModel
 }

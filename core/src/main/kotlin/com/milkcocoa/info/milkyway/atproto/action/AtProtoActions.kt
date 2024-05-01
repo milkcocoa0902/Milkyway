@@ -53,4 +53,14 @@ object AtProtoActions {
     val ListRecords = Action("com.atproto.repo.listRecords")
     val PutRecord = Action("com.atproto.repo.putRecord")
     val UploadBlob = Action("com.atproto.repo.uploadBlob")
+
+    val GetRecommendedDidCredentials = Action("com.atproto.identity.getRecommendedDidCredentials")
+    val RequestPlcOperationSignature = Action("com.atproto.identity.requestPlcOperationSignature")
+    val ResolveHandle = Action("com.atproto.identity.resolveHandle")
+    val SignPlcOperation = Action("com.atproto.identity.signPlcOperation")
+    val SubmitPlcOperation = Action("com.atproto.identity.submitPlcOperation")
+    val UpdateHandle = Action("com.atproto.update.updateHandle")
+
+    // com.atproto.moderation
+    val CreateReport = Action("com.atproto.moderation.createReport")
 }

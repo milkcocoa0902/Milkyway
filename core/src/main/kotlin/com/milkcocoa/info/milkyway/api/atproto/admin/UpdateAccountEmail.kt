@@ -3,7 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.admin
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireAdminSession
+import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import kotlinx.serialization.Serializable
 
 /**
@@ -21,7 +23,7 @@ class UpdateAccountEmail(val domain: Domain) :
         /**
          * The handle or DID of the repo.
          */
-        val account: String,
+        val account: ATIdentifier,
         val email: String
-    ) : AtProtocolRequestWithAdmin
+    ) : RequireAdminSession, AtProtocolPostRequestModel
 }

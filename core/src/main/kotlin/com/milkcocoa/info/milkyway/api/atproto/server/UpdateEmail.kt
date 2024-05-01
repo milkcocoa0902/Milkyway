@@ -3,7 +3,8 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
 
 /**
@@ -23,5 +24,5 @@ class UpdateEmail(val domain: Domain) :
          * Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.
          */
         val token: String? = null
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 }

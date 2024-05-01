@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class MutedWordsPref(
-    val items: List<MutedWordTarget>
+    val items: List<MutedWord>
 ) : ActorPreferenceDef() {
     override val type: ActorPreferenceType
         get() = ActorPreferenceType.MutedWordsPref

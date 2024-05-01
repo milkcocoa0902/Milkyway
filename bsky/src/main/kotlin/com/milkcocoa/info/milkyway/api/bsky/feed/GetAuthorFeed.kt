@@ -3,8 +3,10 @@ package com.milkcocoa.info.milkyway.api.bsky.feed
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.FeedViewPost
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -18,11 +20,11 @@ class GetAuthorFeed(val domain: Domain) :
     ) {
     @Serializable
     data class GetAuthorFeedRequest(
-        val actor: String,
+        val actor: ATIdentifier,
         val limit: Int = 50,
         val cursor: String = "",
         val filter: AuthorFeedFilter = AuthorFeedFilter.FilterPostsWithReplies
-    ) : AtProtocolRequest {
+    ) : AtProtocolRequest, AtProtocolGetRequestModel {
         @Serializable
         enum class AuthorFeedFilter {
             @SerialName("posts_with_replies")

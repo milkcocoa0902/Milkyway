@@ -4,16 +4,20 @@ import kotlinx.serialization.Transient
 
 interface AtProtocolRequest
 
-interface AtProtocolRequestWithAdmin : AtProtocolRequest {
+interface RequireAdminSession : AtProtocolRequest {
     @Transient
     val adminPassword: String
 }
 
-interface AtProtocolRequestWithSession : AtProtocolRequest {
+interface RequireUserSession : AtProtocolRequest {
     @Transient
     val accessJwt: String
 }
 
-interface AtProtocolBlobRequestWithSession : AtProtocolRequestWithSession {
+interface AtProtocolGetRequestModel : AtProtocolRequest
+
+interface AtProtocolPostRequestModel : AtProtocolRequest
+
+interface AtProtocolBlobPostRequestModel : AtProtocolPostRequestModel {
     val binary: ByteArray
 }

@@ -7,9 +7,6 @@ import com.milkcocoa.info.milkyway.api.bsky.graph.Graph
 import com.milkcocoa.info.milkyway.api.bsky.labeler.Labeler
 import com.milkcocoa.info.milkyway.api.bsky.notification.Notification
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.bsky.embed.Embed
-import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
-import com.milkcocoa.info.milkyway.util.KtorHttpClient
 
 class Bsky(private val domain: Domain) {
     fun feed() = Feed(domain)
@@ -24,8 +21,3 @@ class Bsky(private val domain: Domain) {
 }
 
 fun Milkyway.bsky() = Bsky(domain)
-
-fun Milkyway.installBskyDependencies() {
-    KtorHttpClient.addSerializersModule(BskyRecord.serializerModule)
-    KtorHttpClient.addSerializersModule(Embed.serializerModule)
-}
