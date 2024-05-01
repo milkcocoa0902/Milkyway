@@ -12,9 +12,6 @@ import kotlinx.serialization.encoding.Encoder
 data class Did(
     val value: String
 ) : ATIdentifier() {
-    override val type: IdentifierType
-        get() = IdentifierType.Did
-
     companion object {
         const val DID_REGEX_PATTERN = "did:[a-z]+:[a-zA-Z0-9._:%-]*[a-zA-Z0-9._-]"
 

@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.bsky.notification
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.notification.Notification
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
@@ -27,7 +28,7 @@ class ListNotifications(val domain: Domain) :
         val cursor: String? = null,
         @Serializable(with = DateTimeSerializer::class)
         val seenAt: LocalDateTime
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class ListNotificationsResponse(

@@ -4,7 +4,8 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.did.Operation
 import kotlinx.serialization.Serializable
 
@@ -29,7 +30,7 @@ class SignPlcOperation(val domain: Domain) :
         val alsoKnownAs: List<String> = emptyList(),
         val verificationMethods: Operation.VerificationMethods? = null,
         val services: Operation.Services? = null
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 
     @Serializable
     data class SignPlcOperationResponse(

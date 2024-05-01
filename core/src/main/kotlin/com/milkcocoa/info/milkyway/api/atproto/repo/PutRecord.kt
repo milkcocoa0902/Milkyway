@@ -4,9 +4,12 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.Record
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
+import com.milkcocoa.info.milkyway.models.aturi.NSID
+import com.milkcocoa.info.milkyway.models.aturi.RecordKey
 import kotlinx.serialization.Serializable
 
 /**
@@ -29,11 +32,11 @@ class PutRecord(val domain: Domain) :
         /**
          * The NSID of the record collection.
          */
-        val collection: String,
+        val collection: NSID,
         /**
          * The Record Key.
          */
-        val rkey: String? = null,
+        val rkey: RecordKey? = null,
         /**
          * Can be set to 'false' to skip Lexicon schema validation of record data.
          */
@@ -47,7 +50,7 @@ class PutRecord(val domain: Domain) :
          * Compare and swap with the previous commit by CID.
          */
         val swapCommit: String? = null
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 
     @Serializable
     data class PutRecordResponse(

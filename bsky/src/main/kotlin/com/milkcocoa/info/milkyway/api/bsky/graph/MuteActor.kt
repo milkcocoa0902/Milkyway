@@ -3,7 +3,9 @@ package com.milkcocoa.info.milkyway.api.bsky.graph
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,6 +20,6 @@ class MuteActor(val domain: Domain) :
     @Serializable
     data class MuteActorRequest(
         override val accessJwt: String,
-        val actor: String
-    ) : AtProtocolRequestWithSession
+        val actor: ATIdentifier
+    ) : RequireUserSession, AtProtocolPostRequestModel
 }

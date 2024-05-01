@@ -2,6 +2,8 @@ package com.milkcocoa.info.milkyway.models.bsky.actor
 
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.atproto.label.defs.Label
+import com.milkcocoa.info.milkyway.models.aturi.Did
+import com.milkcocoa.info.milkyway.models.aturi.Handle
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
@@ -12,8 +14,8 @@ import java.time.LocalDateTime
 
 @Serializable
 data class ActorProfileViewDetails(
-    val did: String,
-    val handle: String,
+    val did: Did,
+    val handle: Handle,
     val displayName: String? = null,
     val description: String? = null,
     val avatar: String? = null,

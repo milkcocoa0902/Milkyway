@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.identity
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.did.Operation
 import kotlinx.serialization.Serializable
 
@@ -24,7 +25,7 @@ class GetRecommendedDidCredentials(val domain: Domain) :
     @Serializable
     data class GetRecommendedDidCredentialsRequest(
         override val accessJwt: String
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetRecommendedDidCredentialsResponse(

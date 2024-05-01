@@ -3,8 +3,11 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.Did
+import com.milkcocoa.info.milkyway.models.aturi.Handle
 import com.milkcocoa.info.milkyway.models.did.DidDoc
 import kotlinx.serialization.Serializable
 
@@ -21,12 +24,12 @@ class GetSession(val domain: Domain) :
     @Serializable
     data class GetSessionRequest(
         override val accessJwt: String
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetSessionResponse(
-        val handle: String,
-        val did: String,
+        val handle: Handle,
+        val did: Did,
         val email: String? = null,
         val emailConfirmed: Boolean? = null,
         val emailAuthFactor: Boolean? = null,

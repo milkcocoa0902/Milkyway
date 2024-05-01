@@ -3,8 +3,10 @@ package com.milkcocoa.info.milkyway.api.bsky.graph
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
 
@@ -24,8 +26,8 @@ class GetSuggestedFollowsByActor(val domain: Domain) :
     @Serializable
     data class GetSuggestedFollowsByActorRequest(
         override val accessJwt: String,
-        val actor: String
-    ) : AtProtocolRequestWithSession
+        val actor: ATIdentifier
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetSuggestedFoloowsByActorResponse(

@@ -1,6 +1,7 @@
 package com.milkcocoa.info.milkyway.models.bsky.record.feed
 
 import com.milkcocoa.info.milkyway.models.atproto.label.defs.SelfLabels
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
 import com.milkcocoa.info.milkyway.models.entity.BlobObject
@@ -13,7 +14,7 @@ import java.time.LocalDateTime
 @SerialName("app.bsky.feed.generator")
 @Serializable
 data class GeneratorRecord(
-    val did: String,
+    val did: Did,
     val displayName: String,
     val description: String? = null,
     val descriptionFacets: List<Facet>? = null,

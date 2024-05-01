@@ -3,7 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.admin
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireAdminSession
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,10 +20,10 @@ class DisableAccountInvites(val domain: Domain) :
     @Serializable
     data class DisableAccountInvitesRequest(
         override val adminPassword: String,
-        val account: String,
+        val account: Did,
         /**
          * Optional reason for disabled invites.
          */
         val note: String? = null
-    ) : AtProtocolRequestWithAdmin
+    ) : RequireAdminSession, AtProtocolPostRequestModel
 }

@@ -1,9 +1,13 @@
 package com.milkcocoa.info.milkyway.models.bsky.actor.defs
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class MutedWordTarget(
-    val value: String,
-    val targets: List<String>
-)
+enum class MutedWordTarget {
+    @SerialName("content")
+    Content,
+
+    @SerialName("tag")
+    Tag
+}

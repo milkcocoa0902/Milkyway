@@ -4,7 +4,10 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.aturi.Did
+import com.milkcocoa.info.milkyway.models.aturi.Handle
 import com.milkcocoa.info.milkyway.models.did.DidDoc
 import kotlinx.serialization.Serializable
 
@@ -19,13 +22,13 @@ class CreateSession(val domain: Domain) :
     data class CreateSessionRequest(
         val identifier: String,
         val password: String
-    ) : AtProtocolRequest
+    ) : AtProtocolRequest, AtProtocolPostRequestModel
 
     @Serializable
     data class CreateSessionResponse(
-        val did: String,
+        val did: Did,
         val didDoc: DidDoc? = null,
-        val handle: String,
+        val handle: Handle,
         val email: String? = null,
         val emailConfirmed: Boolean? = null,
         val emailAuthFactor: Boolean? = null,

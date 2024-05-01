@@ -3,8 +3,11 @@ package com.milkcocoa.info.milkyway.api.atproto.identity
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.Did
+import com.milkcocoa.info.milkyway.models.aturi.Handle
 import kotlinx.serialization.Serializable
 
 /**
@@ -23,11 +26,11 @@ class ResolveHandle(val domain: Domain) :
         /**
          * The handle to resolve.
          */
-        val handle: String
-    ) : AtProtocolRequestWithSession
+        val handle: Handle
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class ResolveHandleResponse(
-        val did: String
+        val did: Did
     ) : AtProtocolModel
 }

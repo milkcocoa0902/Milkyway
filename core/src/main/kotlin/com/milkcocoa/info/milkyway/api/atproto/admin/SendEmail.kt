@@ -4,7 +4,9 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireAdminSession
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
 
 /**
@@ -20,15 +22,15 @@ class SendEmail(val domain: Domain) :
     @Serializable
     data class SendEmailRequest(
         override val adminPassword: String,
-        val recipientDid: String,
+        val recipientDid: Did,
         val content: String,
         val subject: String? = null,
-        val senderDid: String,
+        val senderDid: Did,
         /**
          * Additional comment by the sender that won't be used in the email itself but helpful to provide more context for moderators/reviewers
          */
         val comment: String? = null
-    ) : AtProtocolRequestWithAdmin
+    ) : RequireAdminSession, AtProtocolPostRequestModel
 
     @Serializable
     data class SendEmailResponse(

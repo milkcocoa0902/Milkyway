@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.atproto.server.defs.AppPassword
 import kotlinx.serialization.Serializable
 
@@ -21,7 +22,7 @@ class ListAppPasswords(val domain: Domain) :
     @Serializable
     data class ListAppPasswordsRequest(
         override val accessJwt: String
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class ListAppPasswordsResponse(

@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.atproto.server.defs.InviteCode
 import kotlinx.serialization.Serializable
 
@@ -29,7 +30,7 @@ class GetAccountInviteCodes(val domain: Domain) :
          * Controls whether any new 'earned' but not 'created' invites should be created.
          */
         val createAvailable: Boolean = true
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetAccountInviteCodesResponse(

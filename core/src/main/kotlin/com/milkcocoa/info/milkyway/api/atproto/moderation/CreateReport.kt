@@ -4,8 +4,9 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.Reference
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.atproto.moderation.defs.ReasonType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
@@ -24,7 +25,7 @@ class CreateReport(domain: Domain) :
         val reasonType: ReasonType,
         val reason: String,
         val subject: Reference
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 
     @Serializable
     data class CreateReportResponse(

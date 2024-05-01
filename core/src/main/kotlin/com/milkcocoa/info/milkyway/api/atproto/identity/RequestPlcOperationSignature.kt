@@ -3,7 +3,8 @@ package com.milkcocoa.info.milkyway.api.atproto.identity
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
 
 /**
@@ -18,5 +19,5 @@ class RequestPlcOperationSignature(val domain: Domain) :
     @Serializable
     data class RequestPlcOperationSignatureRequest(
         override val accessJwt: String
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 }

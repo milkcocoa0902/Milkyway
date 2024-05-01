@@ -19,8 +19,8 @@ interface AtProtocolMethod<in I : AtProtocolRequest, out R : AtProtocolModel> {
         get() =
             Json {
                 explicitNulls = false
-                encodeDefaults = true
                 ignoreUnknownKeys = true
+                useArrayPolymorphism = true
                 serializersModule +=
                     SerializersModule {
                         polymorphic(Record::class) {

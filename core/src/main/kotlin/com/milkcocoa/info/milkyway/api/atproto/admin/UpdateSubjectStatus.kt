@@ -4,8 +4,9 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.Reference
+import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.atproto.admin.def.StatusAttr
 import kotlinx.serialization.Serializable
 
@@ -24,7 +25,7 @@ class UpdateSubjectStatus(val domain: Domain) :
         override val adminPassword: String,
         val subject: Reference,
         val takedown: StatusAttr? = null
-    ) : AtProtocolRequestWithAdmin
+    ) : RequireAdminSession, AtProtocolPostRequestModel
 
     @Serializable
     data class UpdateSubjectStatusResponse(

@@ -4,7 +4,8 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
@@ -26,7 +27,7 @@ class CreateAppPassword(val domain: Domain) :
          * A short name for the App Password, to help distinguish them.
          */
         val name: String
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 
     @Serializable
     data class CreateAppPasswordResponse(

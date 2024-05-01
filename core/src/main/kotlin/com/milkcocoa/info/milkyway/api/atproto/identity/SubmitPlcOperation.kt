@@ -3,7 +3,8 @@ package com.milkcocoa.info.milkyway.api.atproto.identity
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolUnitPost
 import com.milkcocoa.info.milkyway.domain.Domain
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.did.Operation
 import kotlinx.serialization.Serializable
 
@@ -22,5 +23,5 @@ class SubmitPlcOperation(val domain: Domain) :
     data class SubmitPlcOperationRequest(
         override val accessJwt: String,
         val operation: Operation
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 }

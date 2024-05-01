@@ -4,7 +4,10 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.Did
+import com.milkcocoa.info.milkyway.models.aturi.Handle
 import com.milkcocoa.info.milkyway.models.did.DidDoc
 import kotlinx.serialization.Serializable
 
@@ -24,14 +27,14 @@ class RefreshSession(val domain: Domain) :
          * refreshToken
          */
         override val accessJwt: String
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolPostRequestModel
 
     @Serializable
     data class RefreshSessionResponse(
         val accessJwt: String,
         val refreshJwt: String,
-        val handle: String,
-        val did: String,
+        val handle: Handle,
+        val did: Did,
         val didDoc: DidDoc? = null
     ) : AtProtocolModel
 }

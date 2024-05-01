@@ -3,11 +3,13 @@ package com.milkcocoa.info.milkyway.api.atproto.admin
 import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
 import com.milkcocoa.info.milkyway.models.Reference
+import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.atproto.admin.def.StatusAttr
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
 
 /**
@@ -23,10 +25,10 @@ class GetSubjectStatus(val domain: Domain) :
     @Serializable
     data class GetSubjectStatusRequest(
         override val adminPassword: String,
-        val did: String? = null,
+        val did: Did? = null,
         val uri: AtUri? = null,
         val blob: String? = null
-    ) : AtProtocolRequestWithAdmin
+    ) : RequireAdminSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetSubjectStatusResponse(

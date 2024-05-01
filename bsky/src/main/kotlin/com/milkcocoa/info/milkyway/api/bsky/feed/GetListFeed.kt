@@ -3,8 +3,10 @@ package com.milkcocoa.info.milkyway.api.bsky.feed
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
+import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.FeedViewPost
 import kotlinx.serialization.Serializable
 
@@ -17,10 +19,10 @@ class GetListFeed(val domain: Domain) :
     ) {
     @Serializable
     data class GetListFeedRequest(
-        val list: List<String>,
+        val list: List<AtUri>,
         val limit: Int = 50,
         val cursor: String = ""
-    ) : AtProtocolRequest
+    ) : AtProtocolRequest, AtProtocolGetRequestModel
 
     @Serializable
     data class GetListFeedResponse(

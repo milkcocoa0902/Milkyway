@@ -1,13 +1,17 @@
 package com.milkcocoa.info.milkyway.models.did
 
+import kotlinx.serialization.EncodeDefault
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
+@OptIn(ExperimentalSerializationApi::class)
 data class Operation(
     /**
      * with fixed value plc_operation
      */
+    @EncodeDefault(mode = EncodeDefault.Mode.ALWAYS)
     val type: String = "plc_operation",
     /**
      * priority-ordered list of public keys in did:key encoding.

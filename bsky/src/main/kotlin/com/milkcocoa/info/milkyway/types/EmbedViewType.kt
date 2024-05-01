@@ -9,7 +9,6 @@ enum class EmbedViewType(override val identifier: String) : SerializableEnum {
     EmbedImagesView("app.bsky.embed.images#view"),
     EmbedRecordView("app.bsky.embed.record#view"),
     EmbedRecordWithMediaView("app.bsky.embed.recordWithMedia#view"),
-    GeneratorView("app.bsky.feed.defs#generatorView"),
     UnknownEmbed("unknown")
     ;
 

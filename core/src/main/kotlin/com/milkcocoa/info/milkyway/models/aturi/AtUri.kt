@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.models.aturi.NSID.Companion.NSID_REGEX_PATTER
 import com.milkcocoa.info.milkyway.models.aturi.RecordKey.Companion.RECORD_KEY_REGEX_PATTERN
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import kotlinx.serialization.descriptors.PrimitiveKind
 import kotlinx.serialization.descriptors.PrimitiveSerialDescriptor
 import kotlinx.serialization.descriptors.SerialDescriptor
@@ -40,6 +41,7 @@ data class AtUri(
         }
     }
 
+    @Transient
     val did: Did? by lazy {
         kotlin.runCatching {
             uri.substringAfter("at://")
@@ -49,6 +51,8 @@ data class AtUri(
                 }
         }.getOrNull()
     }
+
+    @Transient
     val handle: Handle? by lazy {
         kotlin.runCatching {
             uri.substringAfter("at://")
@@ -58,6 +62,8 @@ data class AtUri(
                 }
         }.getOrNull()
     }
+
+    @Transient
     val collection: NSID? by lazy {
         kotlin.runCatching {
             uri.substringAfter("at://")
@@ -67,6 +73,8 @@ data class AtUri(
                 }
         }.getOrNull()
     }
+
+    @Transient
     val rkey: RecordKey? by lazy {
         kotlin.runCatching {
             uri.substringAfter("at://")

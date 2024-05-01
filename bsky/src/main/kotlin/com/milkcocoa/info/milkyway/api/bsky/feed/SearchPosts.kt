@@ -3,8 +3,9 @@ package com.milkcocoa.info.milkyway.api.bsky.feed
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.SerialName
@@ -65,14 +66,14 @@ class SearchPosts(val domain: Domain) :
         val tag: List<String>? = null,
         val limit: Int = 25,
         val cursor: String = ""
-    ) : AtProtocolRequestWithSession {
+    ) : RequireUserSession, AtProtocolGetRequestModel {
         @Serializable
-        enum class SortedBy {
+        enum class SortedBy(val value: String) {
             @SerialName("top")
-            Top,
+            Top("top"),
 
             @SerialName("latest")
-            Latest
+            Latest("latest")
         }
     }
 

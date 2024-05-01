@@ -3,8 +3,10 @@ package com.milkcocoa.info.milkyway.api.bsky.graph
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListItemView
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
@@ -19,10 +21,10 @@ class GetList(val domain: Domain) :
     @Serializable
     data class GetListRequest(
         override val accessJwt: String,
-        val list: String,
+        val list: AtUri,
         val limit: Int = 50,
         val cursor: String = ""
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetListResponse(

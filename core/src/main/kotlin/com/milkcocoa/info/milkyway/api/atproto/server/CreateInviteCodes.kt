@@ -4,7 +4,8 @@ import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolPost
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithAdmin
+import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
+import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.atproto.server.defs.AccountCodes
 import kotlinx.serialization.Serializable
 
@@ -24,7 +25,7 @@ class CreateInviteCodes(val domain: Domain) :
         val codeCount: Int = 1,
         val useCount: Int,
         val forAccounts: List<String> = emptyList()
-    ) : AtProtocolRequestWithAdmin
+    ) : RequireAdminSession, AtProtocolPostRequestModel
 
     @Serializable
     data class CreateInviteCodesResponse(

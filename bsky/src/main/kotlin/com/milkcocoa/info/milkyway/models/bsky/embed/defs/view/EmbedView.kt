@@ -2,7 +2,6 @@ package com.milkcocoa.info.milkyway.models.bsky.embed.defs.view
 
 import com.milkcocoa.info.milkyway.models.bsky.embed.defs.viewRecord.RecordView
 import com.milkcocoa.info.milkyway.models.bsky.embed.defs.viewRecord.RecordWithMediaView
-import com.milkcocoa.info.milkyway.models.bsky.feed.defs.GeneratorView
 import com.milkcocoa.info.milkyway.types.EmbedViewType
 import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
 import kotlinx.serialization.DeserializationStrategy
@@ -23,7 +22,6 @@ abstract class EmbedView {
                 EmbedViewType.EmbedImagesView -> ImageView.serializer()
                 EmbedViewType.EmbedRecordView -> RecordView.serializer()
                 EmbedViewType.EmbedRecordWithMediaView -> RecordWithMediaView.serializer()
-                EmbedViewType.GeneratorView -> GeneratorView.serializer()
                 else -> Unknown.serializer()
             }
         }

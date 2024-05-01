@@ -3,8 +3,10 @@ package com.milkcocoa.info.milkyway.api.bsky.labeler
 import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
 import com.milkcocoa.info.milkyway.bsky.action.BskyActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
-import com.milkcocoa.info.milkyway.models.AtProtocolRequestWithSession
+import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.Did
 import com.milkcocoa.info.milkyway.models.bsky.labeler.Labeler
 import kotlinx.serialization.Serializable
 
@@ -21,9 +23,9 @@ class GetServices(val domain: Domain) :
     @Serializable
     data class GetServicesRequest(
         override val accessJwt: String,
-        val dids: List<String>,
+        val dids: List<Did>,
         val detailed: Boolean = false
-    ) : AtProtocolRequestWithSession
+    ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetServicesResponse(
