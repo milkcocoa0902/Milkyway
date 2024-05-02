@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetSuggestions(val domain: Domain) :
     AtProtocolGet<GetSuggestions.GetSuggestionsRequest, GetSuggestions.GetSuggestionsResponse>(
@@ -18,7 +19,8 @@ class GetSuggestions(val domain: Domain) :
     ) {
     @Serializable
     data class GetSuggestionsRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val limit: Int = 50,
         val cursor: String = ""
     ) : RequireUserSession, AtProtocolGetRequestModel

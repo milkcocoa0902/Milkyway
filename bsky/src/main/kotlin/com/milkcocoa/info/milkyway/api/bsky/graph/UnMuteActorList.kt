@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Unmutes the specified list of accounts. Requires auth.
@@ -19,7 +20,8 @@ class UnMuteActorList(val domain: Domain) :
     ) {
     @Serializable
     data class UnMuteActorListRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val list: AtUri
     ) : RequireUserSession, AtProtocolPostRequestModel
 }

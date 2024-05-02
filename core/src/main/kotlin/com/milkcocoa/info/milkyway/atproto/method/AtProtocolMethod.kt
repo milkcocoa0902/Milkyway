@@ -18,9 +18,9 @@ interface AtProtocolMethod<in I : AtProtocolRequest, out R : AtProtocolModel> {
     val json: Json
         get() =
             Json {
+                classDiscriminator = "\$type"
                 explicitNulls = false
                 ignoreUnknownKeys = true
-                useArrayPolymorphism = true
                 serializersModule +=
                     SerializersModule {
                         polymorphic(Record::class) {

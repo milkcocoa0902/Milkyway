@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import com.milkcocoa.info.milkyway.models.aturi.Handle
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Resolves a handle (domain name) to a DID.
@@ -22,7 +23,8 @@ class ResolveHandle(val domain: Domain) :
     ) {
     @Serializable
     data class ResolveHandleRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * The handle to resolve.
          */

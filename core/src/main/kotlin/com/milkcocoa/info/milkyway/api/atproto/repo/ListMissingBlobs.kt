@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.atproto.repo.RecordBlob
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Returns a list of missing blobs for the requesting account. Intended to be used in the account migration flow.
@@ -21,7 +22,8 @@ class ListMissingBlobs(val domain: Domain) :
     ) {
     @Serializable
     data class ListMissingBlobsRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val limit: Int = 500,
         val cursor: String? = null
     ) : RequireUserSession, AtProtocolGetRequestModel

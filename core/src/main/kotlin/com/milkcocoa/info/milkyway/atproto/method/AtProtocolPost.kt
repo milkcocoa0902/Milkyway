@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolBlobPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolUnit
+import com.milkcocoa.info.milkyway.models.RefreshUserSession
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
@@ -16,10 +17,6 @@ import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.InternalSerializationApi
-import kotlinx.serialization.json.JsonElement
-import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.JsonTransformingSerializer
-import kotlinx.serialization.json.jsonObject
 import kotlinx.serialization.serializer
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
@@ -37,16 +34,6 @@ abstract class AtProtocolPost<in I : AtProtocolPostRequestModel, out R : AtProto
             return@withContext KtorHttpClient.instance().post(
                 urlString = "${domain.url}/xrpc/${action.action}"
             ) {
-                val s =
-                    object : JsonTransformingSerializer<I>(requestClass.serializer()) {
-                        override fun transformDeserialize(element: JsonElement): JsonElement {
-                            return JsonObject(
-                                element.jsonObject.filterKeys {
-                                    it.equals("accessJwt").not() and it.equals("adminPassword").not()
-                                }
-                            )
-                        }
-                    }
                 when (request) {
                     is RequireUserSession -> {
                         headers {
@@ -55,7 +42,7 @@ abstract class AtProtocolPost<in I : AtProtocolPostRequestModel, out R : AtProto
                                 header(HttpHeaders.Authorization, "Bearer $accessJwt")
                             }
                         }
-                        setBody(json.encodeToString(s, request).apply { println(this) })
+                        setBody(json.encodeToString(requestClass.serializer(), request))
                     }
                     is RequireAdminSession -> {
                         headers {
@@ -64,15 +51,22 @@ abstract class AtProtocolPost<in I : AtProtocolPostRequestModel, out R : AtProto
                                 "Basic ${Base64.encode("admin:${request.adminPassword}".toByteArray())}"
                             )
                         }
-                        setBody(json.encodeToString(s, request).apply { println(this) })
+                        setBody(json.encodeToString(requestClass.serializer(), request))
                     }
-                    else -> { }
+                    is RefreshUserSession -> {
+                        headers {
+                            header(HttpHeaders.Authorization, "Bearer ${request.refreshJwt}")
+                        }
+                    }
+                    else -> {
+                        headers {
+                            setBody(json.encodeToString(requestClass.serializer(), request))
+                        }
+                    }
                 }
 
                 contentType(ContentType.Application.Json)
-                setBody(json.encodeToString(s, request).apply { println(this) })
             }.let {
-                println(it.bodyAsText())
                 json.decodeFromString(
                     responseClazz.serializer(),
                     it.body()
@@ -123,7 +117,6 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobPostRequestModel, out R :
                 contentType(ContentType.Any)
                 setBody(request.binary)
             }.let {
-                println(it.bodyAsText())
                 json.decodeFromString(
                     responseClazz.serializer(),
                     it.body()

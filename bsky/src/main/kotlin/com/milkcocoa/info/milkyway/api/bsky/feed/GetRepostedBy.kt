@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetRepostedBy(val domain: Domain) :
     AtProtocolGet<GetRepostedBy.GetRepostedByRequest, GetRepostedBy.GetRepostedByResponse>(
@@ -19,7 +20,8 @@ class GetRepostedBy(val domain: Domain) :
     ) {
     @Serializable
     data class GetRepostedByRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val uri: AtUri,
         val cid: String,
         val limit: Int = 50,

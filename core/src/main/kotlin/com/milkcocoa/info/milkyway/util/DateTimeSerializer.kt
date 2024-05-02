@@ -22,7 +22,7 @@ open class DateTimeSerializer : KSerializer<LocalDateTime> {
     override fun deserialize(decoder: Decoder): LocalDateTime {
         return ZonedDateTime.parse(
             decoder.decodeString().replace("+0000", "Z"),
-            FORMATTER
+            DateTimeFormatter.ISO_OFFSET_DATE_TIME
         )
             .withZoneSameInstant(ZoneId.systemDefault())
             .toLocalDateTime()
@@ -36,7 +36,7 @@ open class DateTimeSerializer : KSerializer<LocalDateTime> {
             .withZoneSameInstant(ZoneOffset.UTC)
             .toLocalDateTime()
             .also {
-                encoder.encodeString(it.format(FORMATTER))
+                encoder.encodeString(it.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")))
             }
     }
 }

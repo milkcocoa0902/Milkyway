@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Request an email with a code to in order to request a signed PLC operation. Requires Auth.
@@ -18,6 +19,7 @@ class RequestPlcOperationSignature(val domain: Domain) :
     ) {
     @Serializable
     data class RequestPlcOperationSignatureRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolPostRequestModel
 }

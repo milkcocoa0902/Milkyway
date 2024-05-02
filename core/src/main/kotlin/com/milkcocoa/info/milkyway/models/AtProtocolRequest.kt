@@ -14,6 +14,11 @@ interface RequireUserSession : AtProtocolRequest {
     val accessJwt: String
 }
 
+interface RefreshUserSession : AtProtocolRequest {
+    @Transient
+    val refreshJwt: String
+}
+
 interface AtProtocolGetRequestModel : AtProtocolRequest
 
 interface AtProtocolPostRequestModel : AtProtocolRequest

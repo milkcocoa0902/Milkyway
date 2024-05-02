@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.defs.ActorPreferenceDef
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class PutPreferences(val domain: Domain) :
     AtProtocolUnitPost<PutPreferences.PutPreferencesRequest>(
@@ -16,7 +17,8 @@ class PutPreferences(val domain: Domain) :
     ) {
     @Serializable
     data class PutPreferencesRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val preferences: List<ActorPreferenceDef>
     ) : RequireUserSession, AtProtocolPostRequestModel
 }

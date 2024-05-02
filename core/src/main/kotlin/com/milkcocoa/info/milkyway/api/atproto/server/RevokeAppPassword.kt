@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Revoke an App Password by name.
@@ -18,7 +19,8 @@ class RevokeAppPassword(val domain: Domain) :
     ) {
     @Serializable
     data class RevokeAppPasswordRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val name: String
     ) : RequireUserSession, AtProtocolPostRequestModel
 }

@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.FeedViewPost
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetTimeLine(val domain: Domain) : AtProtocolGet<GetTimeLine.GetTimelineRequest, GetTimeLine.GetTimelineResponse>(
     action = BskyActions.GetTimeLine,
@@ -17,7 +18,8 @@ class GetTimeLine(val domain: Domain) : AtProtocolGet<GetTimeLine.GetTimelineReq
 ) {
     @Serializable
     data class GetTimelineRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val cursor: String,
         val limit: Int
     ) : RequireUserSession, AtProtocolGetRequestModel

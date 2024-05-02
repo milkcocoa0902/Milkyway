@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import com.milkcocoa.info.milkyway.models.aturi.Handle
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Administrative action to update an account's handle.
@@ -20,7 +21,8 @@ class UpdateAccountHandle(val domain: Domain) :
     ) {
     @Serializable
     data class UpdateAccountHandleRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val did: Did,
         val handle: Handle
     ) : RequireAdminSession, AtProtocolPostRequestModel

@@ -58,8 +58,6 @@ abstract class AtProtocolGet<in I : AtProtocolGetRequestModel, out R : AtProtoco
                         }
                 }
 
-                println(json.encodeToString(requestClass.serializer(), request))
-
                 when (request) {
                     is RequireUserSession -> {
                         headers {
@@ -79,13 +77,7 @@ abstract class AtProtocolGet<in I : AtProtocolGetRequestModel, out R : AtProtoco
                     }
                     else -> { }
                 }
-//                parameters {
-//                    request.toMap().forEach{
-//                        parameter(it.key, it.value)
-//                    }
-//                }
             }.let {
-                println(it.bodyAsText())
                 json.decodeFromString(
                     responseClazz.serializer(),
                     it.body()

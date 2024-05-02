@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Returns the status of an account, especially as pertaining to import or recovery.
@@ -22,7 +23,8 @@ class CheckAccountStatus(val domain: Domain) :
     ) {
     @Serializable
     data class CheckAccountStatusRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable

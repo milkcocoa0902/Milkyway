@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Administrative action to update an account's email.
@@ -19,7 +20,8 @@ class UpdateAccountEmail(val domain: Domain) :
     ) {
     @Serializable
     data class UpdateAccountEmailRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         /**
          * The handle or DID of the repo.
          */

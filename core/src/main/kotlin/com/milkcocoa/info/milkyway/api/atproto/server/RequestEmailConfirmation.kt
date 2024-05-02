@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Request an email with a code to confirm ownership of email.
@@ -18,6 +19,7 @@ class RequestEmailConfirmation(val domain: Domain) :
     ) {
     @Serializable
     data class RequestEmailConfirmationRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolPostRequestModel
 }

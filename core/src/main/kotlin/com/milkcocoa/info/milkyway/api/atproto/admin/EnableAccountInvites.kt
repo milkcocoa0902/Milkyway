@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Re-enable an account's ability to receive invite codes.
@@ -19,7 +20,8 @@ class EnableAccountInvites(val domain: Domain) :
     ) {
     @Serializable
     data class EnableAccountInvitesRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val account: Did,
         /**
          * Optional reason for enabled invites.

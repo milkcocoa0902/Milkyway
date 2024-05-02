@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.NSID
 import com.milkcocoa.info.milkyway.models.aturi.RecordKey
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Delete a repository record, or ensure it doesn't exist. Requires auth, implemented by PDS.
@@ -20,7 +21,8 @@ class DeleteRecord(val domain: Domain) :
     ) {
     @Serializable
     data class DeleteRecordRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * The handle or DID of the repo (aka, current account).
          */

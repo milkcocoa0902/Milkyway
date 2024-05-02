@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.graph.defs.ListView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Enumerates the lists created by a specified account (actor).
@@ -21,7 +22,8 @@ class GetLists(val domain: Domain) :
     ) {
     @Serializable
     data class GetListsRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * The account (actor) to enumerate lists from.
          */
