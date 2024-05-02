@@ -72,7 +72,6 @@ abstract class AtProtocolPost<in I : AtProtocolPostRequestModel, out R : AtProto
                 contentType(ContentType.Application.Json)
                 setBody(json.encodeToString(s, request).apply { println(this) })
             }.let {
-                println(it.bodyAsText())
                 json.decodeFromString(
                     responseClazz.serializer(),
                     it.body()
@@ -123,7 +122,6 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobPostRequestModel, out R :
                 contentType(ContentType.Any)
                 setBody(request.binary)
             }.let {
-                println(it.bodyAsText())
                 json.decodeFromString(
                     responseClazz.serializer(),
                     it.body()
