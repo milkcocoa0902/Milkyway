@@ -23,13 +23,11 @@ sealed class ATIdentifier() {
 
     object AtIdentifierSerializer : JsonContentPolymorphicSerializer<ATIdentifier>(ATIdentifier::class) {
         override fun selectDeserializer(element: JsonElement): DeserializationStrategy<ATIdentifier> {
-            if (Did.DID_REGEX_PATTERN.toRegex().matchEntire(element.jsonPrimitive.content) != null)
-                {
-                    return Did.serializer()
-                } else if (Handle.HANDLE_REGEX_PATTERN.toRegex().matchEntire(element.jsonPrimitive.content) != null)
-                {
-                    return Handle.serializer()
-                } else {
+            if (Did.DID_REGEX_PATTERN.toRegex().matchEntire(element.jsonPrimitive.content) != null) {
+                return Did.serializer()
+            } else if (Handle.HANDLE_REGEX_PATTERN.toRegex().matchEntire(element.jsonPrimitive.content) != null) {
+                return Handle.serializer()
+            } else {
                 throw SerializationException("Unsupported element type ${element.jsonPrimitive.content}")
             }
         }

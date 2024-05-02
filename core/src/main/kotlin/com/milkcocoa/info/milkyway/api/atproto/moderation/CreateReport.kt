@@ -10,6 +10,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.atproto.moderation.defs.ReasonType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 class CreateReport(domain: Domain) :
@@ -21,7 +22,8 @@ class CreateReport(domain: Domain) :
     ) {
     @Serializable
     data class CreateReportRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val reasonType: ReasonType,
         val reason: String,
         val subject: Reference

@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Confirm an email using a token from com.atproto.server.requestEmailConfirmation.
@@ -18,7 +19,8 @@ class ConfirmEmail(val domain: Domain) :
     ) {
     @Serializable
     data class ConfirmEmailRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val email: String,
         val token: String
     ) : RequireUserSession, AtProtocolPostRequestModel

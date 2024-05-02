@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Enumerates accounts that the requesting account (actor) currently has muted. Requires auth.
@@ -21,7 +22,8 @@ class GetMutes(val domain: Domain) :
     ) {
     @Serializable
     data class GetMutesRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val limit: Int = 50,
         val cursor: String? = null
     ) : RequireUserSession, AtProtocolGetRequestModel

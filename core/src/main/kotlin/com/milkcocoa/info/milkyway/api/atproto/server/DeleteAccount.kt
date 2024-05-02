@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Delete an actor's account with a token and password.
@@ -20,7 +21,8 @@ class DeleteAccount(val domain: Domain) :
     ) {
     @Serializable
     data class DeleteAccountRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val did: Did,
         val password: String,
         val token: String

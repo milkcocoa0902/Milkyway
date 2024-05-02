@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import com.milkcocoa.info.milkyway.models.bsky.labeler.Labeler
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Get information about a list of labeler services.
@@ -22,7 +23,8 @@ class GetServices(val domain: Domain) :
     ) {
     @Serializable
     data class GetServicesRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val dids: List<Did>,
         val detailed: Boolean = false
     ) : RequireUserSession, AtProtocolGetRequestModel

@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.entity.BlobObject
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Upload a new blob, to be referenced from a repository record.
@@ -23,7 +24,8 @@ class UploadBlob(val domain: Domain) :
     ) {
     @Serializable
     data class UploadBlobRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         override val binary: ByteArray
     ) : AtProtocolBlobPostRequestModel, RequireUserSession
 

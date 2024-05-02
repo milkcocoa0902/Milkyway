@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.did.Operation
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Signs a PLC operation to update some value(s) in the requesting DID's document.
@@ -21,7 +22,8 @@ class SignPlcOperation(val domain: Domain) :
     ) {
     @Serializable
     data class SignPlcOperationRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * A token received through com.atproto.identity.requestPlcOperationSignature
          */

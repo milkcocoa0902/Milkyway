@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 /**
@@ -22,7 +23,8 @@ class DeactivateAccount(val domain: Domain) :
     ) {
     @Serializable
     data class DeactivateAccountRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         @Serializable(with = DateTimeSerializer::class)
         val deleteAfter: LocalDateTime
     ) : RequireUserSession, AtProtocolPostRequestModel

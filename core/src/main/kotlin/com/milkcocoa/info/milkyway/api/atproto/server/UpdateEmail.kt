@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Update an account's email.
@@ -18,7 +19,8 @@ class UpdateEmail(val domain: Domain) :
     ) {
     @Serializable
     data class UpdateEmailRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val email: String,
         /**
          * Requires a token from com.atproto.sever.requestEmailUpdate if the account's email has been confirmed.

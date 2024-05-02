@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 /**
@@ -22,7 +23,8 @@ class CreateAppPassword(val domain: Domain) :
     ) {
     @Serializable
     data class CreateAppPasswordRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * A short name for the App Password, to help distinguish them.
          */

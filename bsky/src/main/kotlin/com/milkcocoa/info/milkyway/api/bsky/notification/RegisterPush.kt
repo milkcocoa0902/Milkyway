@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Register to receive push notifications, via a specified service, for the requesting account. Requires auth.
@@ -20,7 +21,8 @@ class RegisterPush(val domain: Domain) :
     ) {
     @Serializable
     data class RegisterPushRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val serviceDid: Did,
         val token: String,
         val platform: Platform,

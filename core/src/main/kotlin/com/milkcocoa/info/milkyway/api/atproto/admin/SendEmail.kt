@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Send email to a user's account email address.
@@ -21,7 +22,8 @@ class SendEmail(val domain: Domain) :
     ) {
     @Serializable
     data class SendEmailRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val recipientDid: Did,
         val content: String,
         val subject: String? = null,

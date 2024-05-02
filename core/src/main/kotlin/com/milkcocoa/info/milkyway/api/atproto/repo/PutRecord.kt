@@ -11,6 +11,7 @@ import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.aturi.NSID
 import com.milkcocoa.info.milkyway.models.aturi.RecordKey
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Write a repository record, creating or updating it as needed. Requires auth, implemented by PDS.
@@ -24,7 +25,8 @@ class PutRecord(val domain: Domain) :
     ) {
     @Serializable
     data class PutRecordRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * The handle or DID of the repo (aka, current account).
          */

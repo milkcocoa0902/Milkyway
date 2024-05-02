@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import com.milkcocoa.info.milkyway.models.bsky.actor.ProfileView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Enumerates follows similar to a given account (actor). Expected use is to recommend additional accounts immediately after following one account.
@@ -25,7 +26,8 @@ class GetSuggestedFollowsByActor(val domain: Domain) :
     ) {
     @Serializable
     data class GetSuggestedFollowsByActorRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val actor: ATIdentifier
     ) : RequireUserSession, AtProtocolGetRequestModel
 

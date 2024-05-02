@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.Handle
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Updates the current account's handle.
@@ -21,7 +22,8 @@ class UpdateHandle(val domain: Domain) :
     ) {
     @Serializable
     data class UpdateHandleRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * The new handle.
          */

@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.actor.defs.ActorPreferenceDef
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetPreferences(val domain: Domain) :
     AtProtocolGet<GetPreferences.GetPreferencesRequest, GetPreferences.GetPreferencesResponse>(
@@ -18,7 +19,8 @@ class GetPreferences(val domain: Domain) :
     ) {
     @Serializable
     data class GetPreferencesRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable

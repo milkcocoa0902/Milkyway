@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Request a token in order to update email.
@@ -20,7 +21,8 @@ class RequestEmailUpdate(val domain: Domain) :
     ) {
     @Serializable
     data class RequestEmailUpdateRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolPostRequestModel
 
     @Serializable

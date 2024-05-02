@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.bsky.notification.Notification
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 /**
@@ -23,7 +24,8 @@ class ListNotifications(val domain: Domain) :
     ) {
     @Serializable
     data class ListNotificationsRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val limit: Int = 50,
         val cursor: String? = null,
         @Serializable(with = DateTimeSerializer::class)

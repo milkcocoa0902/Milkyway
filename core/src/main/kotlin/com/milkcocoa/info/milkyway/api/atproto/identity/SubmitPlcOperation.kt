@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.did.Operation
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Validates a PLC operation to ensure that it doesn't violate a service's constraints
@@ -21,7 +22,8 @@ class SubmitPlcOperation(val domain: Domain) :
     ) {
     @Serializable
     data class SubmitPlcOperationRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val operation: Operation
     ) : RequireUserSession, AtProtocolPostRequestModel
 }

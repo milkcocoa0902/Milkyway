@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetPosts(val domain: Domain) :
     AtProtocolGet<GetPosts.GetPostsRequest, GetPosts.GetPostsResponse>(
@@ -19,7 +20,8 @@ class GetPosts(val domain: Domain) :
     ) {
     @Serializable
     data class GetPostsRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val uris: List<AtUri>
     ) : RequireUserSession, AtProtocolGetRequestModel
 

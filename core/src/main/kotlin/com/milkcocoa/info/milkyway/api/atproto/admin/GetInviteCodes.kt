@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.atproto.server.defs.InviteCode
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Get details about an account.
@@ -22,7 +23,8 @@ class GetInviteCodes(val domain: Domain) :
     ) {
     @Serializable
     data class GetInviteCodesRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val sort: InviteCodeSortOrder = InviteCodeSortOrder.Recent,
         val limit: Int = 100,
         val cursor: String? = null

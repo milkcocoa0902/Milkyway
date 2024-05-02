@@ -10,6 +10,7 @@ import com.milkcocoa.info.milkyway.models.aturi.Did
 import com.milkcocoa.info.milkyway.models.aturi.Handle
 import com.milkcocoa.info.milkyway.models.did.DidDoc
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Get information about the current auth session. Requires auth.
@@ -23,7 +24,8 @@ class GetSession(val domain: Domain) :
     ) {
     @Serializable
     data class GetSessionRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable

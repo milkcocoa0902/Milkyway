@@ -10,6 +10,7 @@ import com.milkcocoa.info.milkyway.models.bsky.feed.defs.PostView
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 import java.time.LocalDateTime
 
 class SearchPosts(val domain: Domain) :
@@ -21,7 +22,8 @@ class SearchPosts(val domain: Domain) :
     ) {
     @Serializable
     data class SearchPostsRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * Search query string; syntax, phrase, boolean, and faceting is unspecified, but Lucene query syntax is recommended.
          */

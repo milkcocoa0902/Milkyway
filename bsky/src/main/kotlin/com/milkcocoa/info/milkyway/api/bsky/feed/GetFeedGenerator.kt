@@ -9,6 +9,7 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.bsky.feed.defs.GeneratorView
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetFeedGenerator(val domain: Domain) :
     AtProtocolGet<GetFeedGenerator.GetFeedGeneratorRequest, GetFeedGenerator.GetFeedGeneratorResponse>(
@@ -19,7 +20,8 @@ class GetFeedGenerator(val domain: Domain) :
     ) {
     @Serializable
     data class GetFeedGeneratorRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val feed: AtUri
     ) : RequireUserSession, AtProtocolGetRequestModel
 

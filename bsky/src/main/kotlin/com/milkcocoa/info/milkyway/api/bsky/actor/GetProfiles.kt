@@ -10,6 +10,7 @@ import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import com.milkcocoa.info.milkyway.models.aturi.AtIdentifierListSerializer
 import com.milkcocoa.info.milkyway.models.bsky.actor.ActorProfileViewDetails
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 class GetProfiles(val domain: Domain) : AtProtocolGet<GetProfiles.GetProfilesRequest, GetProfiles.GetProfilesResponse>(
     action = BskyActions.GetProfiles,
@@ -19,7 +20,8 @@ class GetProfiles(val domain: Domain) : AtProtocolGet<GetProfiles.GetProfilesReq
 ) {
     @Serializable
     data class GetProfilesRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         @Serializable(with = AtIdentifierListSerializer::class)
         val actors: List<ATIdentifier>
     ) : RequireUserSession, AtProtocolGetRequestModel

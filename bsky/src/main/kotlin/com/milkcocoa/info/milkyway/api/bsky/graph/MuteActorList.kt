@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Creates a mute relationship for the specified list of accounts. Mutes are private in Bluesky. Requires auth.
@@ -19,7 +20,8 @@ class MuteActorList(val domain: Domain) :
     ) {
     @Serializable
     data class MuteActorListRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         val list: AtUri
     ) : RequireUserSession, AtProtocolPostRequestModel
 }

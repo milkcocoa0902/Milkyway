@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.atproto.admin.def.AccountView
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Get details about an account.
@@ -21,7 +22,8 @@ class GetAccountInfo(val domain: Domain) :
     ) {
     @Serializable
     data class GetAccountInfoRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val did: Did
     ) : RequireAdminSession, AtProtocolGetRequestModel
 }

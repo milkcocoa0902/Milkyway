@@ -11,6 +11,7 @@ import com.milkcocoa.info.milkyway.models.atproto.admin.def.StatusAttr
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.aturi.Did
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Get the service-specific admin status of a subject (account, record, or blob).
@@ -24,7 +25,8 @@ class GetSubjectStatus(val domain: Domain) :
     ) {
     @Serializable
     data class GetSubjectStatusRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val did: Did? = null,
         val uri: AtUri? = null,
         val blob: String? = null

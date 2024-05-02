@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Get a signed token on behalf of the requesting DID for the requested service.
@@ -20,7 +21,8 @@ class GetServiceAuth(val domain: Domain) :
     ) {
     @Serializable
     data class GetServiceAuthRequest(
-        override val accessJwt: String,
+        @Transient
+        override val accessJwt: String = "",
         /**
          * The DID of the service that the token will be used to authenticate with
          */

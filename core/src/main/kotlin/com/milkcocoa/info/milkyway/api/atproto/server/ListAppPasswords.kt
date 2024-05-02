@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.atproto.server.defs.AppPassword
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * List all App Passwords.
@@ -21,7 +22,8 @@ class ListAppPasswords(val domain: Domain) :
     ) {
     @Serializable
     data class ListAppPasswordsRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable

@@ -8,6 +8,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.models.did.Operation
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Describe the credentials that should be included in the DID doc of an account that is migrating to this service.
@@ -24,7 +25,8 @@ class GetRecommendedDidCredentials(val domain: Domain) :
     ) {
     @Serializable
     data class GetRecommendedDidCredentialsRequest(
-        override val accessJwt: String
+        @Transient
+        override val accessJwt: String = ""
     ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable

@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Create an invite code.
@@ -20,7 +21,8 @@ class CreateInviteCode(val domain: Domain) :
     ) {
     @Serializable
     data class CreateInviteCodeRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val useCount: Int,
         val forAccount: String? = null
     ) : RequireAdminSession, AtProtocolPostRequestModel

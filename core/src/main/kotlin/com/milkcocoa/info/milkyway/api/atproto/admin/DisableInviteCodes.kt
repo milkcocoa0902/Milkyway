@@ -6,6 +6,7 @@ import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.Transient
 
 /**
  * Disable some set of codes and/or all codes associated with a set of users.
@@ -18,7 +19,8 @@ class DisableInviteCodes(val domain: Domain) :
     ) {
     @Serializable
     data class DisableInviteCodesRequest(
-        override val adminPassword: String,
+        @Transient
+        override val adminPassword: String = "",
         val codes: List<String> = emptyList(),
         val accounts: List<String> = emptyList()
     ) : RequireAdminSession, AtProtocolPostRequestModel
