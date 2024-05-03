@@ -6,17 +6,17 @@ import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.error.AtProtocolError
+import com.milkcocoa.info.milkyway.models.error.AtProtocolException
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.properties.Properties
-import kotlinx.serialization.properties.encodeToMap
 import kotlinx.serialization.serializer
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.ExperimentalEncodingApi
@@ -77,11 +77,24 @@ abstract class AtProtocolGet<in I : AtProtocolGetRequestModel, out R : AtProtoco
                     }
                     else -> { }
                 }
-            }.let {
-                json.decodeFromString(
-                    responseClazz.serializer(),
-                    it.body()
-                )
+            }.let { response ->
+                kotlin.runCatching{
+                    json.decodeFromString(
+                        responseClazz.serializer(),
+                        response.body()
+                    )
+                }.getOrElse{
+                    throw AtProtocolException(
+                        action = action,
+                        error = kotlin.runCatching{
+                            json.decodeFromString(
+                                AtProtocolError.serializer(),
+                                response.body()
+                            )
+                        }.getOrNull(),
+                        wrapped = it
+                    )
+                }
             }
         }
     }
