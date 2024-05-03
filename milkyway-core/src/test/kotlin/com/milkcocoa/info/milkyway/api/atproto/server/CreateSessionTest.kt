@@ -3,7 +3,7 @@ package com.milkcocoa.info.milkyway.api.atproto.server
 import com.milkcocoa.info.milkyway.Milkyway
 import com.milkcocoa.info.milkyway.domain.Domain
 import kotlinx.coroutines.runBlocking
-import kotlin.test.Test
+import org.junit.jupiter.api.Test
 
 class CreateSessionTest {
     @Test

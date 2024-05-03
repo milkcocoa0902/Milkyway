@@ -17,7 +17,22 @@ if you want to access Bluesky resources, you also need this module.
 
 
 ## Installation  
-TBD
+
+```kts
+repositories {
+    mavenCentral()
+}
+```
+
+
+```kts
+implementation("io.github.milkcocoa0902:milkyway-core:0.0.3")
+
+// Bluesky extension
+implementation("io.github.milkcocoa0902:milkyway-bsky:0.0.3")
+```
+
+
 
 ## Usage
 
