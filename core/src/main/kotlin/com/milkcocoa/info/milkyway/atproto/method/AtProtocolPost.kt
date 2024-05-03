@@ -3,6 +3,8 @@ package com.milkcocoa.info.milkyway.atproto.method
 import com.milkcocoa.info.milkyway.atproto.action.Action
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolBlobPostRequestModel
+import com.milkcocoa.info.milkyway.models.error.AtProtocolError
+import com.milkcocoa.info.milkyway.models.error.AtProtocolException
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolUnit
@@ -12,7 +14,6 @@ import com.milkcocoa.info.milkyway.models.RequireUserSession
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -66,11 +67,24 @@ abstract class AtProtocolPost<in I : AtProtocolPostRequestModel, out R : AtProto
                 }
 
                 contentType(ContentType.Application.Json)
-            }.let {
-                json.decodeFromString(
-                    responseClazz.serializer(),
-                    it.body()
-                )
+            }.let { response ->
+                kotlin.runCatching{
+                    json.decodeFromString(
+                        responseClazz.serializer(),
+                        response.body()
+                    )
+                }.getOrElse{
+                    throw AtProtocolException(
+                        action = action,
+                        error = kotlin.runCatching{
+                            json.decodeFromString(
+                                AtProtocolError.serializer(),
+                                response.body()
+                            )
+                        }.getOrNull(),
+                        wrapped = it
+                    )
+                }
             }
         }
     }
@@ -116,11 +130,24 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobPostRequestModel, out R :
                 }
                 contentType(ContentType.Any)
                 setBody(request.binary)
-            }.let {
-                json.decodeFromString(
-                    responseClazz.serializer(),
-                    it.body()
-                )
+            }.let { response ->
+                kotlin.runCatching{
+                    json.decodeFromString(
+                        responseClazz.serializer(),
+                        response.body()
+                    )
+                }.getOrElse{
+                    throw AtProtocolException(
+                        action = action,
+                        error = kotlin.runCatching{
+                            json.decodeFromString(
+                                AtProtocolError.serializer(),
+                                response.body()
+                            )
+                        }.getOrNull(),
+                        wrapped = it
+                    )
+                }
             }
         }
     }

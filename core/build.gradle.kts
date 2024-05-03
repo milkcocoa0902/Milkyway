@@ -14,6 +14,13 @@ kotlin {
     jvmToolchain(11)
 }
 
+tasks.test {
+    useJUnitPlatform()
+    testLogging {
+        events("passed", "skipped", "failed")
+    }
+}
+
 dependencies {
     implementation(libs.ktor.core)
     implementation(libs.ktor.cio)
@@ -21,5 +28,6 @@ dependencies {
     implementation(libs.serialization.core)
     implementation(libs.serialization.json)
     implementation(libs.serialization.properties)
-    testImplementation(libs.kotlin.test)
+    testImplementation(platform("org.junit:junit-bom:5.10.2"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
 }
