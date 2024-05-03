@@ -13,7 +13,7 @@ data class RecordKey(
     val value: String
 ) {
     companion object {
-        const val RECORD_KEY_REGEX_PATTERN = "[A-Za-z0-9.-_:~]{1,512}"
+        const val RECORD_KEY_REGEX_PATTERN = "[A-Za-z0-9._:~-]{1,512}"
 
         object RecordKeySerializer : KSerializer<RecordKey> {
             override val descriptor: SerialDescriptor
@@ -34,5 +34,8 @@ data class RecordKey(
 
     init {
         RECORD_KEY_REGEX_PATTERN.toRegex().matchEntire(value) ?: error("Invalid value $value")
+        if(value == "." || value == ".."){
+            error("Invalid value $value")
+        }
     }
 }
