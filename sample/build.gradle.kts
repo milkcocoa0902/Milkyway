@@ -15,6 +15,6 @@ kotlin {
 }
 
 dependencies {
-    implementation(project(":core"))
-    implementation(project(":bsky"))
+    implementation(project(":milkyway-core"))
+    implementation(project(":milkyway-bsky"))
 }

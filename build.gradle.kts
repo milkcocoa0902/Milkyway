@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm") version "1.9.23" apply false
     kotlin("plugin.serialization") version "1.9.23" apply false
+    `maven-publish`
+    id("cl.franciscosolis.sonatype-central-upload") version "1.0.3" apply false
 }
 
 allprojects {
