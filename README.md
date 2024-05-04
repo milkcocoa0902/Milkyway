@@ -36,6 +36,58 @@ implementation("io.github.milkcocoa0902:milkyway-bsky:0.0.3")
 
 ## Usage
 
+### 💩 Add bsky serialization strategy(experimental) 💩
+if you use `milkyway-bsky`, one of action which shown below is needed.
+
+#### 1. notify dependencies(explicitly)
+telling the bsky serializersModules to `bsky-core`'s serializer.
+
+```kotlin
+Milkyway.installBskyDependencies()
+```
+
+#### 2. notify dependencies(implicitly)
+when call bsky extension, same as above code will run inside constructor.
+
+```kotlin
+Milkyway.bsky()
+```
+
+#### 3. add hint when call create / list / putRecord
+when you call getRecord which record of bluesky before telling the dependency to Milkyway, it fails because milkyway dont know subclass of `Record` which implemented in `milkyway-bsky`.  
+so you have to tell the hint.  
+in below case, `FeedPostRecord` registered as `Record` subclass.  
+as a result, when API returns it, you can get it.(but if not, you cannot get. only affect as a hint)
+
+```kotlin
+client.atProtocol()
+    .repo()
+    .getRecord<FeedPostRecord>(
+        request = GetRecord.GetRecordRequest(
+            collection = uri.collection!!,
+            repo = uri.did?.value!!,
+            rkey = uri.rkey!!
+        )
+)
+```
+
+after it, you dont need to call with type. because `FeedPostRecord` was registered.
+```kotlin
+client.atProtocol()
+    .repo()
+    .getRecord(
+        request = GetRecord.GetRecordRequest(
+            collection = uri.collection!!,
+            repo = uri.did?.value!!,
+            rkey = uri.rkey!!
+        )
+)
+```
+
+
+
+
+
 ### Get App Instance
 Milkyway provides all of api via client.  
 so first, you need to get client.
