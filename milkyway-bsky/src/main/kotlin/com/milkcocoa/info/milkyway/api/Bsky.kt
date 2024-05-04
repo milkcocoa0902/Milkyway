@@ -26,8 +26,10 @@ import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import kotlinx.serialization.modules.SerializersModule
 import kotlinx.serialization.modules.polymorphic
 import kotlinx.serialization.modules.subclass
+import java.util.concurrent.locks.ReentrantLock
+import kotlin.concurrent.withLock
 
-class Bsky(private val domain: Domain) : AtProtoDependencyResolver() {
+class Bsky(private val domain: Domain) : AtProtoDependencyResolver {
     fun feed() = Feed(domain)
 
     fun actor() = Actor(domain)
@@ -57,9 +59,34 @@ class Bsky(private val domain: Domain) : AtProtoDependencyResolver() {
                         subclass(ServiceRecord::class)
                     }
                 }
+
+        private var installed: Boolean = false
+        private val lock by lazy { ReentrantLock() }
+
+        public fun markAsInstalled() {
+            if (installed.not()) {
+                lock.withLock {
+                    if (installed.not()) {
+                        installed = true
+                    }
+                }
+            }
+        }
+    }
+
+    init {
+        if (installed.not()) {
+            lock.withLock {
+                if (installed.not()) {
+                    installed = true
+                    installDependencies()
+                }
+            }
+        }
     }
 
     override fun installDependencies() {
+        Embed.markAsInstalled()
         KtorHttpClient.addSerializersModule(serializerModule)
         KtorHttpClient.addSerializersModule(Embed.serializerModule)
     }
@@ -68,6 +95,8 @@ class Bsky(private val domain: Domain) : AtProtoDependencyResolver() {
 fun Milkyway.bsky() = Bsky(domain)
 
 fun Milkyway.Companion.installBskyDependencies() {
+    Bsky.markAsInstalled()
+    Embed.markAsInstalled()
     KtorHttpClient.addSerializersModule(Bsky.serializerModule)
     KtorHttpClient.addSerializersModule(Embed.serializerModule)
 }
