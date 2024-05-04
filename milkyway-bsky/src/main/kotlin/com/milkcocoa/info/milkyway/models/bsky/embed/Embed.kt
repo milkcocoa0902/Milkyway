@@ -1,8 +1,6 @@
 package com.milkcocoa.info.milkyway.models.bsky.embed
 
-import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.types.EmbedType
-import com.milkcocoa.info.milkyway.types.RecordType
 import com.milkcocoa.info.milkyway.util.AtProtoDependencyResolver
 import com.milkcocoa.info.milkyway.util.JsonElementUtil.type
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
@@ -33,9 +31,9 @@ abstract class Embed : AtProtoDependencyResolver() {
                 }
             }
 
-        object EmbedDeserializer: JsonContentPolymorphicSerializer<Embed>(Embed::class) {
+        object EmbedDeserializer : JsonContentPolymorphicSerializer<Embed>(Embed::class) {
             override fun selectDeserializer(element: JsonElement): DeserializationStrategy<Embed> {
-                return when(EmbedType.getByIdentifier(element.type)){
+                return when (EmbedType.getByIdentifier(element.type)) {
                     EmbedType.EmbedImages -> ImageEmbed.serializer()
                     EmbedType.EmbedExternal -> ExternalEmbed.serializer()
                     EmbedType.EmbedRecord -> RecordEmbed.serializer()
