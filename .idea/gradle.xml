@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/milkyway-bsky" />
             <option value="$PROJECT_DIR$/milkyway-core" />
+            <option value="$PROJECT_DIR$/milkyway-stream" />
             <option value="$PROJECT_DIR$/sample" />
           </set>
         </option>
