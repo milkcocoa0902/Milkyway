@@ -66,3 +66,8 @@ class Bsky(private val domain: Domain) : AtProtoDependencyResolver() {
 }
 
 fun Milkyway.bsky() = Bsky(domain)
+
+fun Milkyway.Companion.installBskyDependencies() {
+    KtorHttpClient.addSerializersModule(Bsky.serializerModule)
+    KtorHttpClient.addSerializersModule(Embed.serializerModule)
+}
