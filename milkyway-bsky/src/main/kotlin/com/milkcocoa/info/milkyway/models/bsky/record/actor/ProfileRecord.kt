@@ -1,9 +1,9 @@
 package com.milkcocoa.info.milkyway.models.bsky.record.actor
 
+import com.milkcocoa.info.milkyway.models.Record
 import com.milkcocoa.info.milkyway.models.atproto.label.defs.SelfLabels
-import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.models.entity.BlobObject
-import com.milkcocoa.info.milkyway.types.RecordType
+import com.milkcocoa.info.milkyway.types.BskyRecordType
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -30,7 +30,7 @@ data class ProfileRecord(
      * Self-label values, specific to the Bluesky application, on the overall account.
      */
     val labels: SelfLabels
-) : BskyRecord() {
-    override val type: RecordType
-        get() = RecordType.ProfileRecord
+) : Record<BskyRecordType> {
+    override val type: BskyRecordType
+        get() = BskyRecordType.ProfileRecord
 }

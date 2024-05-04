@@ -3,8 +3,8 @@ package com.milkcocoa.info.milkyway.types
 import com.milkcocoa.info.milkyway.util.SerializableEnum
 import kotlinx.serialization.Serializable
 
-@Serializable(with = RecordType.Companion.Serializer::class)
-enum class RecordType(override val identifier: String) : SerializableEnum {
+@Serializable(with = BskyRecordType.Companion.Serializer::class)
+enum class BskyRecordType(override val identifier: String) : SerializableEnum {
     FeedPostRecord("app.bsky.feed.post"),
     ThreadGateRecord("app.bsky.feed.threadgate"),
     LikeRecord("app.bsky.feed.like"),
@@ -23,6 +23,6 @@ enum class RecordType(override val identifier: String) : SerializableEnum {
     companion object {
         fun getByIdentifier(identifier: String?) = entries.find { it.identifier == identifier } ?: UnknownRecord
 
-        object Serializer : SerializableEnum.Companion.SerializableEnumSerializer<RecordType>(RecordType::class)
+        object Serializer : SerializableEnum.Companion.SerializableEnumSerializer<BskyRecordType>(BskyRecordType::class)
     }
 }

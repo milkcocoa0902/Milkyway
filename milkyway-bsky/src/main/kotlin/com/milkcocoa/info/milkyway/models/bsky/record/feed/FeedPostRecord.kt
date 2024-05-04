@@ -1,18 +1,18 @@
 package com.milkcocoa.info.milkyway.models.bsky.record.feed
 
+import com.milkcocoa.info.milkyway.models.Record
 import com.milkcocoa.info.milkyway.models.atproto.label.defs.SelfLabels
 import com.milkcocoa.info.milkyway.models.atproto.repo.StrongRef
 import com.milkcocoa.info.milkyway.models.bsky.embed.Embed
-import com.milkcocoa.info.milkyway.models.bsky.record.BskyRecord
 import com.milkcocoa.info.milkyway.models.bsky.richtext.Facet
-import com.milkcocoa.info.milkyway.types.RecordType
+import com.milkcocoa.info.milkyway.types.BskyRecordType
 import com.milkcocoa.info.milkyway.util.DateTimeSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
-@SerialName("app.bsky.feed.post")
 @Serializable
+@SerialName("app.bsky.feed.post")
 data class FeedPostRecord(
     /**
      * The primary post content. May be an empty string, if there are embeds
@@ -41,9 +41,9 @@ data class FeedPostRecord(
      */
     @Serializable(with = DateTimeSerializer::class)
     val createdAt: LocalDateTime
-) : BskyRecord() {
-    override val type: RecordType
-        get() = RecordType.FeedPostRecord
+) : Record<BskyRecordType> {
+    override val type: BskyRecordType
+        get() = BskyRecordType.FeedPostRecord
 
     @Serializable
     data class ReplyRef(
