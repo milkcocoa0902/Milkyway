@@ -3,14 +3,14 @@ package com.milkcocoa.info.milkyway.atproto.method
 import com.milkcocoa.info.milkyway.atproto.action.Action
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolBlobPostRequestModel
-import com.milkcocoa.info.milkyway.models.error.AtProtocolError
-import com.milkcocoa.info.milkyway.models.error.AtProtocolException
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolUnit
 import com.milkcocoa.info.milkyway.models.RefreshUserSession
 import com.milkcocoa.info.milkyway.models.RequireAdminSession
 import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.error.AtProtocolError
+import com.milkcocoa.info.milkyway.models.error.AtProtocolException
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import io.ktor.client.call.*
 import io.ktor.client.request.*
@@ -33,7 +33,7 @@ abstract class AtProtocolPost<in I : AtProtocolPostRequestModel, out R : AtProto
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
             return@withContext KtorHttpClient.instance().post(
-                urlString = "${domain.url}/xrpc/${action.action}"
+                urlString = "${domain.asHttps}/xrpc/${action.action}"
             ) {
                 when (request) {
                     is RequireUserSession -> {
@@ -68,20 +68,21 @@ abstract class AtProtocolPost<in I : AtProtocolPostRequestModel, out R : AtProto
 
                 contentType(ContentType.Application.Json)
             }.let { response ->
-                kotlin.runCatching{
+                kotlin.runCatching {
                     json.decodeFromString(
                         responseClazz.serializer(),
                         response.body()
                     )
-                }.getOrElse{
+                }.getOrElse {
                     throw AtProtocolException(
                         action = action,
-                        error = kotlin.runCatching{
-                            json.decodeFromString(
-                                AtProtocolError.serializer(),
-                                response.body()
-                            )
-                        }.getOrNull(),
+                        error =
+                            kotlin.runCatching {
+                                json.decodeFromString(
+                                    AtProtocolError.serializer(),
+                                    response.body()
+                                )
+                            }.getOrNull(),
                         wrapped = it
                     )
                 }
@@ -110,7 +111,7 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobPostRequestModel, out R :
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
             return@withContext KtorHttpClient.instance().post(
-                urlString = "${domain.url}/xrpc/${action.action}"
+                urlString = "${domain.asHttps}/xrpc/${action.action}"
             ) {
                 headers {
                     when (request) {
@@ -131,20 +132,21 @@ abstract class AtProtocolBlobPost<in I : AtProtocolBlobPostRequestModel, out R :
                 contentType(ContentType.Any)
                 setBody(request.binary)
             }.let { response ->
-                kotlin.runCatching{
+                kotlin.runCatching {
                     json.decodeFromString(
                         responseClazz.serializer(),
                         response.body()
                     )
-                }.getOrElse{
+                }.getOrElse {
                     throw AtProtocolException(
                         action = action,
-                        error = kotlin.runCatching{
-                            json.decodeFromString(
-                                AtProtocolError.serializer(),
-                                response.body()
-                            )
-                        }.getOrNull(),
+                        error =
+                            kotlin.runCatching {
+                                json.decodeFromString(
+                                    AtProtocolError.serializer(),
+                                    response.body()
+                                )
+                            }.getOrNull(),
                         wrapped = it
                     )
                 }
