@@ -35,7 +35,6 @@ dependencies {
     implementation(libs.serialization.json)
     implementation(libs.serialization.cbor)
     implementation(libs.serialization.properties)
-    implementation("io.ktor:ktor-client-cio-jvm:2.3.9")
     testImplementation(libs.kotlin.test)
 
     api(project(":milkyway-core"))
