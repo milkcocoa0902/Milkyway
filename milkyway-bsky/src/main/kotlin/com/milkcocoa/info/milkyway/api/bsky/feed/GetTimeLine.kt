@@ -20,12 +20,13 @@ class GetTimeLine(val domain: Domain) : AtProtocolGet<GetTimeLine.GetTimelineReq
     data class GetTimelineRequest(
         @Transient
         override val accessJwt: String = "",
-        val cursor: String,
-        val limit: Int
+        val cursor: String = "",
+        val limit: Int = 50
     ) : RequireUserSession, AtProtocolGetRequestModel
 
     @Serializable
     data class GetTimelineResponse(
+        val cursor: String = "",
         val feed: List<FeedViewPost>
     ) : AtProtocolModel
 }
