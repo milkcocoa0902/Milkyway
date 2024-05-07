@@ -32,7 +32,7 @@ abstract class AtProtocolGet<in I : AtProtocolGetRequestModel, out R : AtProtoco
     override suspend fun execute(request: I): R {
         return withContext(Dispatchers.IO) {
             return@withContext KtorHttpClient.instance().get(
-                urlString = "${domain.url}/xrpc/${action.action}"
+                urlString = "${domain.asHttps}/xrpc/${action.action}"
             ) {
                 parameters {
                     Properties.encodeToMap(requestClass.serializer(), request).filterKeys {
@@ -78,20 +78,21 @@ abstract class AtProtocolGet<in I : AtProtocolGetRequestModel, out R : AtProtoco
                     else -> { }
                 }
             }.let { response ->
-                kotlin.runCatching{
+                kotlin.runCatching {
                     json.decodeFromString(
                         responseClazz.serializer(),
                         response.body()
                     )
-                }.getOrElse{
+                }.getOrElse {
                     throw AtProtocolException(
                         action = action,
-                        error = kotlin.runCatching{
-                            json.decodeFromString(
-                                AtProtocolError.serializer(),
-                                response.body()
-                            )
-                        }.getOrNull(),
+                        error =
+                            kotlin.runCatching {
+                                json.decodeFromString(
+                                    AtProtocolError.serializer(),
+                                    response.body()
+                                )
+                            }.getOrNull(),
                         wrapped = it
                     )
                 }
