@@ -27,6 +27,6 @@ class GetPosts(val domain: Domain) :
 
     @Serializable
     data class GetPostsResponse(
-        val feeds: List<PostView>
+        val posts: List<PostView>
     ) : AtProtocolModel
 }
