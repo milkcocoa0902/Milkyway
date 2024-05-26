@@ -34,7 +34,7 @@ class DeleteRecord(val domain: Domain) :
         /**
          * The Record Key.
          */
-        val rkey: RecordKey? = null,
+        val rkey: RecordKey,
         /**
          * Compare and swap with the previous record by CID.
          */
