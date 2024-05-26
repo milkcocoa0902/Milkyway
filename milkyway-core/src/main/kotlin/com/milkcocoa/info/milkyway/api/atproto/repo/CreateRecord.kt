@@ -7,6 +7,7 @@ import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolPostRequestModel
 import com.milkcocoa.info.milkyway.models.Record
 import com.milkcocoa.info.milkyway.models.RequireUserSession
+import com.milkcocoa.info.milkyway.models.aturi.ATIdentifier
 import com.milkcocoa.info.milkyway.models.aturi.AtUri
 import com.milkcocoa.info.milkyway.models.aturi.NSID
 import com.milkcocoa.info.milkyway.models.aturi.RecordKey
@@ -30,7 +31,7 @@ class CreateRecord(val domain: Domain) :
         /**
          * The handle or DID of the repo (aka, current account).
          */
-        val repo: String,
+        val repo: ATIdentifier,
         /**
          * The NSID of the record collection.
          */
