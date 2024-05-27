@@ -7,8 +7,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ThreadViewPost(
     val post: PostView,
-    val parent: Post,
-    val replies: List<Post>
+    val parent: Post? = null,
+    val replies: List<Post> = emptyList()
 ) : Post() {
     override val type: PostType
         get() = PostType.ThreadViewPost
