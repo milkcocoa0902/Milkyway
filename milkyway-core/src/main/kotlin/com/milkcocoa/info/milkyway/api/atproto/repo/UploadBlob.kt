@@ -1,8 +1,8 @@
 package com.milkcocoa.info.milkyway.api.atproto.repo
 
-import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
-import com.milkcocoa.info.milkyway.atproto.method.AtProtocolBlobPost
+import com.milkcocoa.info.milkyway.action.AtProtoActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.http.AtProtocolBlobPost
 import com.milkcocoa.info.milkyway.models.AtProtocolBlobPostRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireUserSession

@@ -12,7 +12,7 @@ class AtProtocol(private val domain: Domain) {
 
     fun repo() = Repo(domain)
 
-    fun admin() = Admin(domain)
+    fun admin() = com.milkcocoa.info.milkyway.api.atproto.admin.Admin(domain)
 
     fun identity() = Identity(domain)
 

@@ -1,4 +1,4 @@
-package com.milkcocoa.info.milkyway.atproto.action
+package com.milkcocoa.info.milkyway.action
 
 object AtProtoActions {
     // com.atproto.admin

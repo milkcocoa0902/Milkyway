@@ -1,6 +1,6 @@
-package com.milkcocoa.info.milkyway.atproto.method
+package com.milkcocoa.info.milkyway.http
 
-import com.milkcocoa.info.milkyway.atproto.action.Action
+import com.milkcocoa.info.milkyway.action.Action
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel

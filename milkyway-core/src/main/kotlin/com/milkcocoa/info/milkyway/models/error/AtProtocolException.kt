@@ -1,6 +1,6 @@
 package com.milkcocoa.info.milkyway.models.error
 
-import com.milkcocoa.info.milkyway.atproto.action.Action
+import com.milkcocoa.info.milkyway.action.Action
 
 class AtProtocolException(
     val action: Action,

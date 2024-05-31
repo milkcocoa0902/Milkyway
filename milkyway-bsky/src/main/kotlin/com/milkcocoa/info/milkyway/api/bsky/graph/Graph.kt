@@ -27,7 +27,10 @@ class Graph(val domain: Domain) {
 
     suspend fun muteActor(request: MuteActor.MuteActorRequest) = MuteActor(domain).execute(request)
 
-    suspend fun muteActorList(request: MuteActorList.MuteActorListRequest) = MuteActorList(domain).execute(request)
+    suspend fun muteActorList(request: MuteActorList.MuteActorListRequest) =
+        MuteActorList(
+            domain
+        ).execute(request)
 
     suspend fun unMuteActor(request: UnMuteActor.UnMuteActorRequest) = UnMuteActor(domain).execute(request)
 

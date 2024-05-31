@@ -1,8 +1,8 @@
 package com.milkcocoa.info.milkyway.api.atproto.admin
 
-import com.milkcocoa.info.milkyway.atproto.action.AtProtoActions
-import com.milkcocoa.info.milkyway.atproto.method.AtProtocolGet
+import com.milkcocoa.info.milkyway.action.AtProtoActions
 import com.milkcocoa.info.milkyway.domain.Domain
+import com.milkcocoa.info.milkyway.http.AtProtocolGet
 import com.milkcocoa.info.milkyway.models.AtProtocolGetRequestModel
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.RequireAdminSession

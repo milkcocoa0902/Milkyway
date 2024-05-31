@@ -1,9 +1,11 @@
-package com.milkcocoa.info.milkyway.atproto.method
+package com.milkcocoa.info.milkyway.http
 
 import com.milkcocoa.info.milkyway.models.AnyRecord
 import com.milkcocoa.info.milkyway.models.AtProtocolModel
 import com.milkcocoa.info.milkyway.models.AtProtocolRequest
 import com.milkcocoa.info.milkyway.models.Record
+import com.milkcocoa.info.milkyway.models.entity.BlobBase
+import com.milkcocoa.info.milkyway.models.entity.LegacyBlobObject
 import com.milkcocoa.info.milkyway.util.KtorHttpClient
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
@@ -25,6 +27,10 @@ interface AtProtocolMethod<in I : AtProtocolRequest, out R : AtProtocolModel> {
                     SerializersModule {
                         polymorphic(Record::class) {
                             defaultDeserializer { AnyRecord.serializer() }
+                        }
+
+                        polymorphic(BlobBase::class) {
+                            defaultDeserializer { LegacyBlobObject.serializer() }
                         }
                     }
                 KtorHttpClient.getSerializersModules()
