@@ -1,8 +1,8 @@
 package io.github.milkcocoa0902
 
 import com.milkcocoa.info.milkyway.Milkyway
+import com.milkcocoa.info.milkyway.action.Action
 import com.milkcocoa.info.milkyway.api.installBskyDependencies
-import com.milkcocoa.info.milkyway.atproto.action.Action
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.domain.OfficialDomain
 import com.milkcocoa.info.milkyway.models.Record

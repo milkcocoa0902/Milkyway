@@ -1,8 +1,8 @@
 package io.github.milkcocoa0902.com.milkcocoa.info.milkyway.stream
 
 import com.milkcocoa.info.milkyway.Milkyway
+import com.milkcocoa.info.milkyway.action.Action
 import com.milkcocoa.info.milkyway.api.atproto.repo.GetRecord
-import com.milkcocoa.info.milkyway.atproto.action.Action
 import com.milkcocoa.info.milkyway.domain.Domain
 import com.milkcocoa.info.milkyway.models.AnyRecord
 import com.milkcocoa.info.milkyway.models.Record

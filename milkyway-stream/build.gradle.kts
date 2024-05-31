@@ -37,7 +37,8 @@ dependencies {
     implementation(libs.serialization.properties)
     testImplementation(libs.kotlin.test)
 
-    api(project(":milkyway-core"))
+    implementation(project(":milkyway-core"))
+    implementation(project(":milkyway-bsky"))
 }
 
 java {
