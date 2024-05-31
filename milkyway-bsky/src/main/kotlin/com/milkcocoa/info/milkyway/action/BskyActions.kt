@@ -1,6 +1,4 @@
-package com.milkcocoa.info.milkyway.bsky.action
-
-import com.milkcocoa.info.milkyway.atproto.action.Action
+package com.milkcocoa.info.milkyway.action
 
 object BskyActions {
     val GetProfile = Action("app.bsky.actor.getProfile")
