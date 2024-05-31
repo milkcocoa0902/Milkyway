@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization") version "1.9.23"
-//    id("com.vanniktech.maven.publish") version "0.28.0"
     `maven-publish`
     id("cl.franciscosolis.sonatype-central-upload") version "1.0.3"
 }
@@ -54,46 +53,6 @@ val DEVELOPER_ID: String by project
 val DEVELOPER_NAME: String by project
 val DEVELOPER_EMAIL: String by project
 val REPOSITORY_URL: String by project
-
-// mavenPublishing {
-//    configure(
-//        KotlinJvm(
-//            javadocJar = JavadocJar.Javadoc(), // JavadocJar.Dokka("dokkaHtml"),
-//            sourcesJar = true
-//        )
-//    )
-//    publishToMavenCentral(SonatypeHost.CENTRAL_PORTAL)
-//    signAllPublications()
-//    coordinates(
-//        groupId = group.toString(),
-//        artifactId = name,
-//        version = version.toString()
-//    )
-//
-//    pom {
-//        name.set(project.name)
-//        description.set(CORE_LIBRARY_DESCRIPTION)
-//        inceptionYear.set("2024")
-//        url.set(PROJECT_URL)
-//        licenses {
-//            license {
-//                name.set(LICENSE_TYPE)
-//                url.set(LICENSE_URL)
-//                distribution.set(LICENSE_DISTRIBUTION)
-//            }
-//        }
-//        developers {
-//            developer {
-//                id.set(DEVELOPER_ID)
-//                name.set(DEVELOPER_NAME)
-//                email.set(DEVELOPER_EMAIL)
-//            }
-//        }
-//        scm {
-//            url.set(REPOSITORY_URL)
-//        }
-//    }
-// }
 
 java {
     withSourcesJar()

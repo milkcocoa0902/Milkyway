@@ -5,6 +5,7 @@ plugins {
     kotlin("plugin.serialization") version "1.9.23" apply false
     `maven-publish`
     id("cl.franciscosolis.sonatype-central-upload") version "1.0.3" apply false
+    jacoco
 }
 
 allprojects {
@@ -65,3 +66,82 @@ tasks.register<JavaExec>("ktlintFormat") {
         "!**/build/**"
     )
 }
+
+jacoco {
+    toolVersion = "0.8.9"
+//    reportsDirectory = layout.buildDirectory.dir("jacocoReport")
+}
+
+subprojects {
+    withoutSampleProject {
+        apply(plugin = "jacoco")
+
+        jacoco {
+            toolVersion = "0.8.9"
+            reportsDirectory = layout.buildDirectory.dir("jacocoReport")
+        }
+        tasks.withType<Test> {
+            finalizedBy("jacocoTestReport")
+        }
+
+        tasks.withType<JacocoReport> {
+            dependsOn(tasks.withType<Test>())
+            reports {
+                xml.required.set(true)
+                csv.required.set(false)
+                html.outputLocation.set(layout.buildDirectory.dir("jacocoHtml"))
+            }
+        }
+    }
+}
+
+tasks.register<JacocoReport>("jacocoRootReport") {
+    dependsOn(subprojects.withoutSampleProject().map { it.tasks.named("test") })
+
+    additionalSourceDirs.setFrom(
+        files(
+            subprojects
+                .withoutSampleProject()
+                .flatMap { it.the<SourceSetContainer>()["main"].allSource.srcDirs }
+        )
+    )
+    sourceDirectories.setFrom(
+        files(
+            subprojects
+                .withoutSampleProject()
+                .flatMap { it.the<SourceSetContainer>()["main"].allSource.srcDirs }
+        )
+    )
+
+    classDirectories.setFrom(
+        files(
+            subprojects
+                .withoutSampleProject()
+                .flatMap { it.the<SourceSetContainer>()["main"].output.classesDirs }
+        )
+    )
+    executionData.setFrom(
+        files(
+            subprojects
+                .withoutSampleProject()
+                .flatMap {
+                    it.tasks.withType<JacocoReport>().flatMap { it.executionData.files }
+                }
+        )
+    )
+
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.outputLocation.set(layout.buildDirectory.dir("jacocoRootReportHtml"))
+    }
+}
+
+fun MutableSet<Project>.withoutSampleProject() = filter { it.name == "sample" }
+
+fun Project.withoutSampleProject(action: Action<in Project>) =
+    run {
+        if (name != "sample") {
+            action(this)
+        }
+    }
