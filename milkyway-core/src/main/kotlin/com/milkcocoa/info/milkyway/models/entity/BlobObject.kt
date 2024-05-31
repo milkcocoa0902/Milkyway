@@ -16,6 +16,7 @@ data class BlobObject(
     val mimeType: String,
     val size: Int
 ) : BlobBase() {
+    @SerialName("\$type")
     override val type: String
         get() = "blob"
 
@@ -24,4 +25,14 @@ data class BlobObject(
         @SerialName("\$link")
         val link: String
     )
+}
+
+@Serializable
+@SerialName("legacy_blob")
+data class LegacyBlobObject(
+    val cid: String,
+    val mimeType: String
+) : BlobBase() {
+    override val type: String
+        get() = "legacy_blob"
 }
