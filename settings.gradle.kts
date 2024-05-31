@@ -5,3 +5,4 @@ rootProject.name = "Milkyway"
 include("milkyway-core")
 include("milkyway-bsky")
 include("sample")
+include("milkyway-stream")
